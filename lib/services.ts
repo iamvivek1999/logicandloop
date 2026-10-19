@@ -278,3 +278,43 @@ export const services: Service[] = [
     stack: ["n8n", "Make", "Zapier", "Google Apps Script", "Node.js"],
     timeline: "1–4 weeks",
     engagement: "Fixed quote, optional monthly care",
+    faqs: [
+      { q: "Do we need to change our tools?", a: "Usually not. We connect what you already use." },
+      { q: "What if an automation breaks?", a: "Every flow alerts us and you when a step fails, and our care plan covers fixes." },
+    ],
+    related: ["whatsapp-payments", "ai-agents-chatbots", "custom-erp-crm"],
+  },
+  {
+    slug: "whatsapp-payments",
+    name: "WhatsApp API & payments",
+    group: "automate",
+    short: "WhatsApp Business API, Razorpay, Stripe, SMS and maps.",
+    intro:
+      "Your customers live on WhatsApp and pay by UPI. We set up the official WhatsApp Business API, payment gateways and messaging so confirmations, reminders and receipts go out on their own.",
+    deliverables: [
+      "WhatsApp Business API setup and template approval",
+      "Automated confirmations, reminders and broadcasts",
+      "Razorpay, Stripe or Cashfree checkout and payment links",
+      "Webhooks that update your CRM or database on payment",
+      "Refunds, invoices and reconciliation reports",
+    ],
+    stack: ["WhatsApp Cloud API", "Razorpay", "Stripe", "Cashfree", "MSG91", "Google Maps"],
+    timeline: "1–3 weeks",
+    engagement: "Fixed quote",
+    faqs: [
+      { q: "Will our number get banned?", a: "We use the official API with approved templates and opt-ins, which is how you avoid bans." },
+      { q: "Can customers pay inside WhatsApp?", a: "Yes. We send payment links or use WhatsApp Pay where it's available for your business." },
+    ],
+    related: ["ai-agents-chatbots", "workflow-automation", "mobile-apps"],
+  },
+  {
+    slug: "cloud-devops",
+    name: "Cloud & DevOps",
+    group: "automate",
+    short: "Cloud setup, CI/CD, monitoring and cost control.",
+    intro:
+      "Deploys that need one person and a prayer, surprise cloud bills, no backups. We set up your infrastructure so releases are routine, outages are rare and costs are predictable.",
+    deliverables: [
+      "Cloud accounts set up properly, in your name",
+      "Automated build, test and deploy pipelines",
+      "Backups, monitoring, uptime alerts and logs",
