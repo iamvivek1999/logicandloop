@@ -38,3 +38,28 @@ export default function Nav() {
         <button
           className="nav__toggle"
           aria-expanded={open}
+          aria-controls="nav-links"
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <span />
+          <span />
+        </button>
+        <nav id="nav-links" className={`nav__links${open ? " is-open" : ""}`} aria-label="Main">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} aria-current={isCurrent(l.href) ? "page" : undefined} onClick={() => setOpen(false)}>
+              {l.label}
+            </Link>
+          ))}
+          <a
+            className="btn btn--primary btn--sm"
+            href={bookingHref}
+            {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}
+          >
+            Book a call
+          </a>
+        </nav>
+      </div>
+    </header>
+  );
+}
