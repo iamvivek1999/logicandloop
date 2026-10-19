@@ -38,3 +38,43 @@ const plans = [
     who: "For teams whose data can't leave their own infrastructure.",
     items: ["Licence to run the harness on your cloud or servers", "Your own model keys", "Deployment and hardening support", "Annual licence with updates"],
     cta: "Request details",
+  },
+];
+
+const faqs = [
+  { q: "Is this a chatbot?", a: "No. A chatbot waits for questions. Loop OS agents run defined jobs on your tools, on a schedule or when triggered, and report back." },
+  { q: "Is our data used to train AI models?", a: "No. Loop OS uses API terms where your data isn't used for training, and the self-hosted licence keeps everything on your infrastructure." },
+  { q: "When can we start?", a: "Loop OS is in early access. We're onboarding a small number of teams and building the first workflows alongside them." },
+];
+
+export default function LoopOS() {
+  return (
+    <>
+      <section className="p-hero ink">
+        <div className="wrap p-hero__grid">
+          <div>
+            <ol className="crumbs" aria-label="Breadcrumb" style={{ color: "var(--on-ink-muted)" }}>
+              <li><Link href="/">Home</Link></li>
+              <li>Products</li>
+              <li aria-current="page">Loop OS</li>
+            </ol>
+            <p className="status status--soon" style={{ marginBottom: 18 }}>Early access</p>
+            <h1 className="display" style={{ fontSize: "var(--step-4)" }}>Your own crew of AI agents, licensed.</h1>
+            <p className="lead" style={{ marginTop: 24 }}>
+              Loop OS gives your team agents with real jobs, plus the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.
+            </p>
+            <div className="hero__cta" style={{ marginTop: 32 }}>
+              <Link className="btn btn--light" href="/contact?topic=loop-os">Join early access</Link>
+              <a className="btn btn--ghost-light" href="#licences">See licence options</a>
+            </div>
+          </div>
+          <LoopStage />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 className="h2">The agents are the easy part. The harness is the product.</h2>
+            <p className="lead">
+              Anyone can open a chat window. Loop OS is the layer that makes agents dependable at work: defined jobs, real connections, limits and a record of everything they do.
