@@ -158,3 +158,43 @@ function Rig({ children, reduced }: { children: React.ReactNode; reduced: boolea
     t.current += dt;
     const swayY = Math.sin(t.current * 0.35) * 0.55;
     const swayX = 0.42 + Math.sin(t.current * 0.23) * 0.12;
+    g.current.rotation.y += (swayY + pointer.x * 0.25 - g.current.rotation.y) * 0.05;
+    g.current.rotation.x += (swayX - pointer.y * 0.15 - g.current.rotation.x) * 0.05;
+  });
+  return <group ref={g} rotation={[0.42, -0.3, 0]}>{children}</group>;
+}
+
+export default function HeroScene({
+  active,
+  reduced,
+  coarse,
+  onHover,
+}: {
+  active: boolean;
+  reduced: boolean;
+  coarse: boolean;
+  onHover: (r: Ring) => void;
+}) {
+  const [hovered, setHoveredState] = useState<Ring>(null);
+  const setHovered = (r: Ring) => {
+    setHoveredState(r);
+    onHover(r);
+  };
+
+  return (
+    <Canvas
+      dpr={[1, 2]}
+      camera={{ position: [0, 1.2, 12.5], fov: 35 }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      frameloop={active ? "always" : "never"}
+      aria-hidden="true"
+    >
+      <Rig reduced={reduced}>
+        <InfinityLoop hovered={hovered} setHovered={setHovered} reduced={reduced} />
+      </Rig>
+      <gridHelper args={[18, 36, "#B5C0D1", "#D3DAE4"]} position={[0, -2.9, 0]} />
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        enableRotate={!coarse}
+        minPolarAngle={Math.PI * 0.3}
