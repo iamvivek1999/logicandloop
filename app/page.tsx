@@ -38,3 +38,43 @@ export default function Home() {
       </section>
 
       {/* SERVICES */}
+      <section className="section section--rule" id="services" aria-labelledby="svc-h">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 id="svc-h" className="h2">Everything a product needs, from first sketch to long after launch.</h2>
+            <p className="lead">
+              Pick one service or hand us the whole thing. Every engagement starts with a fixed scope and a fixed quote.
+            </p>
+          </div>
+          <div className="svc-rows">
+            {groups.map((g) => (
+              <div className="svc-row" key={g.id}>
+                <div className="svc-row__head">
+                  <h3 className="h3">{g.name}</h3>
+                  <p>{g.blurb}</p>
+                </div>
+                <ul className="chips">
+                  {servicesIn(g.id).map((s) => (
+                    <li key={s.slug}>
+                      <Link className="chip" href={`/services/${s.slug}`}>
+                        {s.name}
+                        <Arrow />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRODUCTS */}
+      <section className="section ink" id="products" aria-labelledby="prod-h">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 id="prod-h" className="h2">Two products of our own.</h2>
+            <p className="lead">
+              Built from the work we kept doing for clients, so you can switch them on in weeks instead of building from scratch.
+            </p>
+          </div>
