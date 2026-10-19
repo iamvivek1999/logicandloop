@@ -118,3 +118,43 @@ export default function ContactForm() {
           <label htmlFor="company">Company <span className="opt">(optional)</span></label>
           <input id="company" name="company" autoComplete="organization" />
         </div>
+        <div className="field">
+          <label htmlFor="budget">Budget <span className="opt">(optional)</span></label>
+          <select id="budget" name="budget" defaultValue="">
+            <option value="">Choose a range</option>
+            {budgets.map((b) => <option key={b}>{b}</option>)}
+          </select>
+        </div>
+      </div>
+      <div className="field">
+        <label htmlFor="topic">What do you need?</label>
+        <select id="topic" name="topic" value={topic} onChange={(e) => setTopic(e.target.value)}>
+          {groups.map((g) => (
+            <optgroup key={g.id} label={g.name}>
+              {servicesIn(g.id).map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+            </optgroup>
+          ))}
+          <optgroup label="Products and other">
+            {extraTopics.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
+          </optgroup>
+        </select>
+      </div>
+      <div className="field">
+        <label htmlFor="message">Tell us about the project</label>
+        <textarea id="message" name="message" rows={5} placeholder="What are you building, who is it for, and when do you need it?" aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-err" : undefined} onInput={() => clear("message")} />
+        {errors.message && <span id="message-err" className="field__err">{errors.message}</span>}
+      </div>
+      <input type="text" name="_honey" className="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+      {state === "failed" && (
+        <p className="form__status form__status--err" role="alert">
+          The message didn't go through. Try again, or email us at <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      )}
+      <button className="btn btn--primary btn--block" type="submit" disabled={state === "sending"}>
+        {state === "sending" ? (<><span className="spinner" aria-hidden="true" /> Sending</>) : "Send message"}
+      </button>
+      <p className="form__note">We reply {site.replyPromise}. Your details are only used to answer this enquiry.</p>
+    </form>
+  );
+}
+
