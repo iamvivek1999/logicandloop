@@ -38,3 +38,43 @@ function Core() {
         <meshBasicMaterial color="#2340FF" />
       </mesh>
     </group>
+  );
+}
+
+type Labels = React.RefObject<(HTMLSpanElement | null)[]>;
+
+function Crew({ reduced, onPick, labels }: { reduced: boolean; onPick: (i: number | null) => void; labels: Labels }) {
+  const t = useRef(0);
+  const [hover, setHover] = useState<number | null>(null);
+  const nodeRefs = useRef<THREE.Group[]>([]);
+  const pulseRefs = useRef<THREE.Mesh[]>([]);
+  const lineRefs = useRef<any[]>([]);
+  const phase = useMemo(() => agents.map((_, i) => i / agents.length), []);
+
+  const orbitPts = useMemo(() => {
+    const pts: THREE.Vector3[] = [];
+    for (let k = 0; k <= 128; k++) {
+      const a = (k / 128) * Math.PI * 2;
+      pts.push(new THREE.Vector3(Math.cos(a) * ORBIT, 0, Math.sin(a) * ORBIT).applyAxisAngle(new THREE.Vector3(1, 0, 0), TILT));
+    }
+    return pts;
+  }, []);
+
+  const tmp = useMemo(() => new THREE.Vector3(), []);
+  useFrame(({ camera, size }, dt) => {
+    if (!reduced && hover === null) t.current += dt * 0.12;
+    agents.forEach((_, i) => {
+      const p = pos(i, t.current);
+      nodeRefs.current[i]?.position.copy(p);
+      const line = lineRefs.current[i];
+      if (line?.geometry?.setPositions) line.geometry.setPositions([0, 0, 0, p.x, p.y, p.z]);
+      // pulses travel from agent to core, then back
+      phase[i] = (phase[i] + dt * (reduced ? 0 : 0.35)) % 1;
+      const f = phase[i] < 0.5 ? 1 - phase[i] * 2 : (phase[i] - 0.5) * 2;
+      pulseRefs.current[i]?.position.copy(p.clone().multiplyScalar(0.18 + f * 0.82));
+      // project the agent's position to screen space for its HTML label
+      const el = labels.current?.[i];
+      const node = nodeRefs.current[i];
+      if (el && node) {
+        node.getWorldPosition(tmp).project(camera);
+        const x = ((tmp.x + 1) / 2) * size.width;
