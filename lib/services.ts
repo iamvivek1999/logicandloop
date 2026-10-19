@@ -118,3 +118,43 @@ export const services: Service[] = [
     related: ["web-apps-saas", "cloud-devops", "legacy-modernisation"],
   },
   {
+    slug: "custom-erp-crm",
+    name: "Custom ERP & CRM",
+    group: "build",
+    short: "Business systems shaped around how you actually work.",
+    intro:
+      "When off-the-shelf software forces your team into spreadsheets on the side, we build the system around your process instead: projects, inventory, billing, approvals, sales pipelines and the reports you actually read.",
+    deliverables: [
+      "Process mapping workshop with the people who'll use it",
+      "Modules for your workflows: sales, projects, inventory, billing, HR",
+      "Role-based permissions and approval chains",
+      "Dashboards and exports for owners and finance",
+      "Data migration from spreadsheets or your old system",
+      "Training for your team",
+    ],
+    stack: ["React", "Next.js", "PostgreSQL", "Supabase", "Row-level security"],
+    timeline: "10–20 weeks, released module by module",
+    engagement: "Fixed quote per module",
+    faqs: [
+      { q: "Why not just use Zoho or Salesforce?", a: "Often you should, and we'll say so. Custom pays off when your process is your advantage, or when licence costs per seat get heavy." },
+      { q: "Can it serve several companies or branches?", a: "Yes. We build multi-tenant systems where each branch or client company only ever sees its own data." },
+    ],
+    related: ["data-dashboards", "legacy-modernisation", "workflow-automation"],
+  },
+  {
+    slug: "mvp-for-startups",
+    name: "MVPs for startups",
+    group: "build",
+    short: "From idea to a launched product in fixed weeks.",
+    intro:
+      "You have an idea and a deadline. We cut it to the smallest version real users will pay for, build it in a fixed number of weeks, and launch it with analytics so you learn from day one.",
+    deliverables: [
+      "Scoping sprint: users, core flow and what to leave out",
+      "Clickable prototype to test with real users",
+      "Launched web or mobile MVP with payments if needed",
+      "Analytics and feedback loop set up from launch",
+      "Investor-ready demo and technical write-up",
+    ],
+    stack: ["Next.js", "React Native", "Supabase", "Stripe / Razorpay", "PostHog"],
+    timeline: "6–10 weeks",
+    engagement: "Fixed price, fixed timeline",
