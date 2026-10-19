@@ -78,3 +78,35 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <ul className="chips">
                   {related.map((r) => (
                     <li key={r!.slug}><Link className="chip" href={`/services/${r!.slug}`}>{r!.name}</Link></li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            <nav className="pager" aria-label="More services">
+              <Link href={`/services/${prev.slug}`}><small>Previous service</small><strong>{prev.name}</strong></Link>
+              <Link href={`/services/${next.slug}`}><small>Next service</small><strong>{next.name}</strong></Link>
+            </nav>
+          </div>
+
+          <aside className="sheet" aria-label="Service summary">
+            <dl>
+              <div><dt>Typical timeline</dt><dd>{s.timeline}</dd></div>
+              <div><dt>How we charge</dt><dd>{s.engagement}</dd></div>
+              <div>
+                <dt>Usual stack</dt>
+                <dd className="sheet__stack">{s.stack.map((t) => <span key={t}>{t}</span>)}</dd>
+              </div>
+            </dl>
+            <div className="sheet__actions">
+              <Link className="btn btn--primary btn--block" href={`/contact?topic=${s.slug}`}>Get a fixed quote</Link>
+              <a className="btn btn--outline btn--block" href={bookingHref} {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}>Book a 30-minute call</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <CtaBand topic={s.slug} />
+    </>
+  );
+}
