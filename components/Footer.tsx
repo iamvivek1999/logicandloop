@@ -38,3 +38,20 @@ export default function Footer() {
               <li><Link href="/#process">How we work</Link></li>
             </ul>
           </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+              <li><a href={whatsappHref()} target="_blank" rel="noopener">WhatsApp</a></li>
+              <li><Link href="/contact">Project enquiry</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer__base">
+          <span>© {year} Logic &amp; Loop. All rights reserved.</span>
+          <span>Based in India, working with clients everywhere.</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
