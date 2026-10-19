@@ -158,3 +158,43 @@ export const services: Service[] = [
     stack: ["Next.js", "React Native", "Supabase", "Stripe / Razorpay", "PostHog"],
     timeline: "6–10 weeks",
     engagement: "Fixed price, fixed timeline",
+    faqs: [
+      { q: "Do you take equity?", a: "No. We work for a fixed fee so you keep your cap table clean." },
+      { q: "What happens after launch?", a: "You can keep us on a monthly plan to iterate, or hand over to your own hires with full docs." },
+    ],
+    related: ["ui-ux-design", "web-apps-saas", "fractional-cto"],
+  },
+
+  // ---------------------------------------------------------------- AI & data
+  {
+    slug: "ai-agents-chatbots",
+    name: "AI agents & chatbots",
+    group: "ai",
+    short: "Agents that answer, qualify, book and follow up.",
+    intro:
+      "Agents that work on WhatsApp, web chat, email or voice. They answer from your own documents, qualify enquiries, book appointments and hand the warm ones to a human, so nothing waits until Monday.",
+    deliverables: [
+      "Agent design: what it may say, do and never do",
+      "Knowledge base built from your approved documents",
+      "Channels: WhatsApp, website chat, email, Instagram",
+      "Actions: booking, CRM updates, payment links, reminders",
+      "Human hand-off with alerts and escalation",
+      "Weekly report on conversations and outcomes",
+    ],
+    stack: ["Claude", "OpenAI", "LangGraph", "WhatsApp Cloud API", "Supabase pgvector"],
+    timeline: "3–6 weeks to go live",
+    engagement: "Setup fee plus monthly running",
+    faqs: [
+      { q: "Will it make things up?", a: "It answers only from approved information. When it isn't sure, it says so and hands over to your team." },
+      { q: "Does it speak Hindi or other Indian languages?", a: "Yes. Agents reply in the language the customer writes in, and we test each language on real conversations before launch." },
+    ],
+    related: ["llm-rag-integration", "whatsapp-payments", "workflow-automation"],
+  },
+  {
+    slug: "llm-rag-integration",
+    name: "LLM & RAG integration",
+    group: "ai",
+    short: "Add GPT or Claude to the products you already have.",
+    intro:
+      "Search that understands questions, copilots inside your app, document summaries and drafting tools. We connect language models to your data safely and measure whether the answers are any good.",
+    deliverables: [
