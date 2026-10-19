@@ -78,3 +78,43 @@ export const services: Service[] = [
     intro:
       "Company sites, project microsites, landing pages and online stores. They're quick to load and built to rank, and your team can update them without calling a developer.",
     deliverables: [
+      "Design and build of every page, mobile-first",
+      "Content management your team can use",
+      "Store setup with catalogue, checkout and Indian payment methods",
+      "SEO basics: metadata, sitemaps, structured data and speed",
+      "Lead forms connected to your CRM, email or WhatsApp",
+    ],
+    stack: ["Next.js", "Sanity", "Shopify", "WordPress (headless)", "Vercel"],
+    timeline: "3–6 weeks",
+    engagement: "Fixed quote",
+    faqs: [
+      { q: "Can I edit the site myself?", a: "Yes. Every text, image and page you'd normally change is editable from a simple dashboard." },
+      { q: "Do you write the content?", a: "We can draft it with you, or work from yours. Either way it's written for your buyers, not for search engines." },
+    ],
+    related: ["ui-ux-design", "whatsapp-payments", "qa-security-performance"],
+  },
+  {
+    slug: "apis-backend",
+    name: "APIs & backend",
+    group: "build",
+    short: "Clean APIs, solid databases and real integrations.",
+    intro:
+      "The part nobody sees and everybody depends on. We design the API, model the data, wire up third-party services and make sure it holds up when traffic grows.",
+    deliverables: [
+      "API design with documentation your other teams can follow",
+      "Database schema, migrations and access rules",
+      "Authentication, roles and audit logs",
+      "Integrations with payment, messaging, CRM and ERP systems",
+      "Background jobs, queues and scheduled tasks",
+      "Load testing and monitoring",
+    ],
+    stack: ["Node.js", "Python", "PostgreSQL", "Redis", "REST", "GraphQL"],
+    timeline: "4–10 weeks",
+    engagement: "Fixed scope, or monthly for ongoing work",
+    faqs: [
+      { q: "Can you work alongside my in-house frontend team?", a: "Yes. We agree the API contract first, so both sides can build in parallel." },
+      { q: "Do you write tests?", a: "Every endpoint ships with automated tests that run before each deploy." },
+    ],
+    related: ["web-apps-saas", "cloud-devops", "legacy-modernisation"],
+  },
+  {
