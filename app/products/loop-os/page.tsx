@@ -118,3 +118,5 @@ export default function LoopOS() {
 
       <CtaBand title="Put a crew of agents to work." text="Tell us the three tasks your team repeats most. We'll show you how Loop OS would run them." topic="loop-os" />
     </>
+  );
+}
