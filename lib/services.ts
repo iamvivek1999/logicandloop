@@ -38,3 +38,43 @@ export const services: Service[] = [
       "Automated tests, error monitoring and a deployment pipeline",
       "Handover docs and a recorded walkthrough",
     ],
+    stack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Supabase"],
+    timeline: "6–12 weeks for a first release",
+    engagement: "Fixed scope and quote per phase",
+    faqs: [
+      { q: "Can you take over an app someone else started?", a: "Yes. We start with a one-week code and infrastructure review, tell you plainly what to keep and what to fix, then quote the work." },
+      { q: "Who owns the code?", a: "You do. The repository, cloud accounts and domains are in your name from day one." },
+    ],
+    related: ["apis-backend", "ui-ux-design", "cloud-devops"],
+  },
+  {
+    slug: "mobile-apps",
+    name: "Mobile apps",
+    group: "build",
+    short: "iOS and Android apps from one codebase.",
+    intro:
+      "Apps your customers keep on their home screen: bookings, loyalty, ordering, member areas and field-team tools. One codebase ships to both stores, which saves time and budget without feeling second-rate.",
+    deliverables: [
+      "iOS and Android apps built cross-platform",
+      "Push notifications, deep links and offline support where it matters",
+      "Payments, maps, camera and other device features",
+      "App Store and Play Store listings and submission",
+      "Crash reporting and analytics from the first release",
+    ],
+    stack: ["React Native", "Expo", "Flutter", "Firebase", "Supabase"],
+    timeline: "8–14 weeks to store launch",
+    engagement: "Fixed scope and quote per phase",
+    faqs: [
+      { q: "Do I need a web app as well?", a: "Often the same backend serves both. We plan them together so you pay for it once." },
+      { q: "What if the store rejects the app?", a: "We handle submission and any rework the review asks for. It's part of the quote." },
+    ],
+    related: ["web-apps-saas", "apis-backend", "whatsapp-payments"],
+  },
+  {
+    slug: "websites-ecommerce",
+    name: "Websites & e-commerce",
+    group: "build",
+    short: "Fast marketing sites and online stores your team can edit.",
+    intro:
+      "Company sites, project microsites, landing pages and online stores. They're quick to load and built to rank, and your team can update them without calling a developer.",
+    deliverables: [
