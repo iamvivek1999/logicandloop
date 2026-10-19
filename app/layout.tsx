@@ -38,3 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="wa-float" href={whatsappHref()} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
           <WhatsApp />
         </a>
+      </body>
+    </html>
+  );
+}
