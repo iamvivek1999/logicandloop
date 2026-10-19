@@ -78,3 +78,34 @@ export default function MinuteOne() {
           <div className="features">
             {features.map((f) => (
               <div className="feature" key={f.h}><h3 className="h3">{f.h}</h3><p>{f.p}</p></div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="callout">
+            <div>
+              <p className="kicker" style={{ marginBottom: 12 }}>Founding pilot</p>
+              <h2 className="h3" style={{ fontSize: "var(--step-3)", marginBottom: 14 }}>45-day paid pilot, with a results guarantee.</h2>
+              <p className="muted" style={{ maxWidth: "40em" }}>
+                We measure your site visits per 100 leads before we start. If Minute One doesn't beat that baseline by day 45, your first full month is free. We take three developers at a time.
+              </p>
+            </div>
+            <Link className="btn btn--primary" href="/contact?topic=minute-one">Apply for a pilot slot</Link>
+          </div>
+
+          <h2 className="sub-h" style={{ marginTop: 96 }}>Questions developers ask</h2>
+          <div className="faq">
+            {faqs.map((f) => (
+              <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CtaBand title="See what your leads are waiting for." text="Send us last month's lead export. We'll show you your real first-response time and how many buyers went cold, free." topic="minute-one" />
+    </>
+  );
+}
