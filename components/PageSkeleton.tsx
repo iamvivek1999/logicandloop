@@ -38,3 +38,17 @@ export default function PageSkeleton({ variant = "detail" }: { variant?: "detail
           )}
           {variant === "product" && (
             <div className="features">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div className="feature" key={i}>
+                  <span className="skeleton" style={{ width: "60%", height: 22, marginBottom: 12 }} />
+                  <span className="skeleton" style={{ width: "95%", height: 14, marginBottom: 8 }} />
+                  <span className="skeleton" style={{ width: "75%", height: 14 }} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
