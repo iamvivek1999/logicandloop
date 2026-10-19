@@ -38,3 +38,43 @@ export default function ContactForm() {
     const name = String(fd.get("name") ?? "").trim();
     const email = String(fd.get("email") ?? "").trim();
     const message = String(fd.get("message") ?? "").trim();
+    if (!name) e.name = "Enter your name.";
+    if (!email) e.email = "Enter your email so we can reply.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = "Enter an email like name@company.com.";
+    if (message.length < 10) e.message = "Tell us a little about the project, at least a sentence.";
+    return e;
+  }
+
+  async function onSubmit(ev: React.FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+    const form = ev.currentTarget;
+    const fd = new FormData(form);
+    if (fd.get("_honey")) return; // bot
+    const e = validate(fd);
+    setErrors(e);
+    if (Object.keys(e).length) {
+      const first = form.querySelector<HTMLElement>(`[name="${Object.keys(e)[0]}"]`);
+      first?.focus();
+      return;
+    }
+    setState("sending");
+    const data: Record<string, string> = {};
+    fd.forEach((v, k) => { if (k !== "_honey") data[k] = String(v); });
+    data.topic = labelFor(data.topic);
+    data._subject = `New enquiry: ${data.topic} from ${data.name}`;
+    data._template = "table";
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === "false" || json.success === false) throw new Error(json.message || String(res.status));
+      setState("sent");
+      form.reset();
+    } catch {
+      setState("failed");
+    }
+  }
+
