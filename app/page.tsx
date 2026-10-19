@@ -78,3 +78,43 @@ export default function Home() {
               Built from the work we kept doing for clients, so you can switch them on in weeks instead of building from scratch.
             </p>
           </div>
+          <div className="products">
+            <article className="product">
+              <span className="product__tag">For real estate developers</span>
+              <h3>Minute One</h3>
+              <p>A WhatsApp agent that answers every property lead in under a minute, day or night, qualifies the buyer and books the site visit.</p>
+              <ul>
+                <li>Replies in under a minute, 24/7</li>
+                <li>Answers only from your approved brochure and RERA details</li>
+                <li>Books site visits and sends reminders</li>
+                <li>Hands hot leads to your sales team instantly</li>
+              </ul>
+              <div className="product__foot">
+                <Link className="btn btn--light" href="/products/minute-one">See how it works</Link>
+                <span className="status">Taking 3 founding pilots</span>
+              </div>
+            </article>
+            <article className="product">
+              <span className="product__tag">Licensed software for teams</span>
+              <h3>Loop OS</h3>
+              <p>Your own crew of AI agents, plus the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.</p>
+              <ul>
+                <li>Agents for research, sales briefs, content, reporting and ops</li>
+                <li>Workflows encoded once, run every day</li>
+                <li>Permissions, approvals and a full audit log</li>
+                <li>Cloud or self-hosted licence</li>
+              </ul>
+              <div className="product__foot">
+                <Link className="btn btn--light" href="/products/loop-os">Explore Loop OS</Link>
+                <span className="status status--soon">Early access</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="section" id="process" aria-labelledby="proc-h">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 id="proc-h" className="h2">Small team, short loops, real software in your hands early.</h2>
