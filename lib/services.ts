@@ -318,3 +318,43 @@ export const services: Service[] = [
       "Cloud accounts set up properly, in your name",
       "Automated build, test and deploy pipelines",
       "Backups, monitoring, uptime alerts and logs",
+      "Staging and production environments",
+      "Cost review and right-sizing",
+    ],
+    stack: ["AWS", "Google Cloud", "Vercel", "Docker", "GitHub Actions", "Terraform"],
+    timeline: "1–4 weeks",
+    engagement: "Fixed setup, optional monthly management",
+    faqs: [
+      { q: "Can you cut our AWS bill?", a: "Usually, yes. A cost review often finds idle resources and oversized servers in the first week." },
+      { q: "Will there be downtime during the move?", a: "We plan migrations to avoid it, and rehearse on staging first." },
+    ],
+    related: ["apis-backend", "legacy-modernisation", "maintenance-amc"],
+  },
+  {
+    slug: "legacy-modernisation",
+    name: "Legacy modernisation",
+    group: "automate",
+    short: "Move old systems forward without stopping the business.",
+    intro:
+      "The old PHP app, the Access database, the single-tenant system you now need to sell to many clients. We modernise in stages, so the business keeps running while the system underneath changes.",
+    deliverables: [
+      "Assessment of the current system and a staged plan",
+      "Data migration with checks at every step",
+      "Single-tenant to multi-tenant conversion",
+      "Rewrites module by module, behind the same interface",
+      "Regression tests so nothing your team relies on breaks",
+    ],
+    stack: ["PostgreSQL", "Node.js", "Next.js", "Docker", "Row-level security"],
+    timeline: "Planned in stages of 4–8 weeks",
+    engagement: "Paid assessment, then fixed quote per stage",
+    faqs: [
+      { q: "Do we have to rewrite everything?", a: "Rarely. Most systems improve faster by replacing the worst parts first." },
+      { q: "Can the old and new run together?", a: "Yes. Running both side by side during the move is how we keep risk low." },
+    ],
+    related: ["apis-backend", "cloud-devops", "custom-erp-crm"],
+  },
+
+  // ---------------------------------------------------------------- Design, advise & support
+  {
+    slug: "ui-ux-design",
+    name: "UI/UX & product design",
