@@ -238,3 +238,43 @@ export const services: Service[] = [
   },
   {
     slug: "ml-computer-vision",
+    name: "ML & computer vision",
+    group: "ai",
+    short: "Custom models for documents, images and video.",
+    intro:
+      "Reading invoices and IDs, checking product photos, counting stock from a camera, predicting demand. When a general model isn't enough, we train or tune one on your data.",
+    deliverables: [
+      "Feasibility check on a sample of your real data",
+      "Data labelling plan and training set",
+      "Trained model with accuracy measured on held-out data",
+      "API or on-device deployment",
+      "Monitoring for drift once it's live",
+    ],
+    stack: ["Python", "PyTorch", "OpenCV", "YOLO", "Cloud OCR"],
+    timeline: "4–12 weeks",
+    engagement: "Paid feasibility sprint, then fixed quote",
+    faqs: [
+      { q: "How much data do we need?", a: "It depends on the task. The feasibility sprint tells you, with your own data, before you commit to the full build." },
+      { q: "Can it run without internet?", a: "Yes. Models can run on a phone or an edge device when connectivity is poor." },
+    ],
+    related: ["llm-rag-integration", "data-dashboards", "apis-backend"],
+  },
+
+  // ---------------------------------------------------------------- Automate & integrate
+  {
+    slug: "workflow-automation",
+    name: "Workflow automation",
+    group: "automate",
+    short: "Connect your CRM, sheets, forms and inboxes.",
+    intro:
+      "Leads copied from portals by hand, follow-ups that depend on someone remembering, reports built every Friday. We connect your tools so the repetitive work happens on its own, and nothing falls through.",
+    deliverables: [
+      "Audit of the manual steps costing your team the most hours",
+      "Automations across CRM, email, sheets, forms and WhatsApp",
+      "Error alerts so a failed step never goes unnoticed",
+      "A simple map of every automation and what it does",
+      "Before-and-after report on hours saved",
+    ],
+    stack: ["n8n", "Make", "Zapier", "Google Apps Script", "Node.js"],
+    timeline: "1–4 weeks",
+    engagement: "Fixed quote, optional monthly care",
