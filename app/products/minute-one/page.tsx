@@ -38,3 +38,43 @@ export default function MinuteOne() {
               <li aria-current="page">Minute One</li>
             </ol>
             <p className="kicker" style={{ marginBottom: 18 }}>For real estate developers</p>
+            <h1 className="display" style={{ fontSize: "var(--step-4)" }}>Every property lead answered in under a minute.</h1>
+            <p className="lead" style={{ marginTop: 24 }}>
+              Leads go cold while they wait for a call back. Minute One replies on WhatsApp within a minute, qualifies the buyer and books the site visit, then hands hot leads straight to your sales team.
+            </p>
+            <div className="hero__cta" style={{ marginTop: 32 }}>
+              <Link className="btn btn--primary" href="/contact?topic=minute-one">Get a free lead-response audit</Link>
+              <a className="btn btn--outline" href={whatsappHref("Hi, I'd like to see a Minute One demo.")} target="_blank" rel="noopener">
+                <WhatsApp className="ico" /> See a live demo
+              </a>
+            </div>
+          </div>
+          <div>
+            <div className="phone" aria-label="Example conversation with Minute One">
+              <div className="phone__bar">
+                <div className="phone__av">M1</div>
+                <div><strong>Skyline Residences</strong><small>Minute One, online</small></div>
+              </div>
+              <div className="chat">
+                <div className="msg msg--in" style={{ "--d": 0 } as React.CSSProperties}>Hi, saw your ad. Is the 2BHK still available?</div>
+                <div className="msg msg--out" style={{ "--d": 1 } as React.CSSProperties}>Hi Priya! Yes, 2BHK homes start at ₹78 L on floors 4–12. Are you looking to move in within a year, or later?</div>
+                <div className="msg msg--in" style={{ "--d": 2 } as React.CSSProperties}>Within a year. Can I visit this weekend?</div>
+                <div className="msg msg--out" style={{ "--d": 3 } as React.CSSProperties}>Of course. Saturday 11 am or Sunday 4 pm?</div>
+                <div className="msg msg--in" style={{ "--d": 4 } as React.CSSProperties}>Sunday 4 pm 👍</div>
+                <div className="msg msg--sys" style={{ "--d": 5 } as React.CSSProperties}>Visit booked. Sales head alerted.</div>
+              </div>
+            </div>
+            <p className="muted" style={{ textAlign: "center", fontSize: "var(--step--1)", marginTop: 20 }}>Illustrative demo with a fictional project.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--rule">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 className="h2">What Minute One does.</h2>
+            <p className="lead">Everything between a lead arriving and a buyer standing in your sample flat.</p>
+          </div>
+          <div className="features">
+            {features.map((f) => (
+              <div className="feature" key={f.h}><h3 className="h3">{f.h}</h3><p>{f.p}</p></div>
