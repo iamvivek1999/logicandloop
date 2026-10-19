@@ -38,3 +38,17 @@ export default function Contact() {
             </li>
             <li>
               <a href={`mailto:${site.email}`}>
+                <span className="ways__ico"><Mail /></span>
+                <span><strong>Email</strong><small>{site.email}</small></span>
+                <Arrow className="arrow" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <Suspense fallback={<ContactFormSkeleton />}>
+          <ContactForm />
+        </Suspense>
+      </div>
+    </section>
+  );
+}
