@@ -118,3 +118,43 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head">
             <h2 id="proc-h" className="h2">Small team, short loops, real software in your hands early.</h2>
+            <p className="lead">The same four stages for a two-week automation or a six-month platform.</p>
+          </div>
+          <ol className="steps">
+            <li className="step">
+              <h3 className="h3">Understand</h3>
+              <p>A working session on your goals, users and the numbers that matter. You get a clear scope and a fixed quote.</p>
+              <small>Week 1</small>
+            </li>
+            <li className="step">
+              <h3 className="h3">Design</h3>
+              <p>Flows and screens you can click through before a line of production code is written.</p>
+              <small>Weeks 1–3</small>
+            </li>
+            <li className="step">
+              <h3 className="h3">Build</h3>
+              <p>Weekly demos on a live link. You see progress every week and can change direction early.</p>
+              <small>Weekly releases</small>
+            </li>
+            <li className="step">
+              <h3 className="h3">Launch &amp; improve</h3>
+              <p>We ship, watch the numbers, and keep improving on a monthly plan, or hand over to your team with full docs.</p>
+              <small>Ongoing</small>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      {/* WHO */}
+      <section className="section section--rule" aria-labelledby="who-h">
+        <div className="wrap who">
+          <div>
+            <h2 id="who-h" className="h2">For businesses where every lead and every customer is worth a lot.</h2>
+            <ul className="tags">
+              <li>Real estate developers</li>
+              <li>Premium clinics</li>
+              <li>Education &amp; edtech</li>
+              <li>Startups</li>
+              <li>Service businesses</li>
+            </ul>
+          </div>
