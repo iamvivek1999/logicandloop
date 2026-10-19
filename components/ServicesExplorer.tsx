@@ -38,3 +38,25 @@ export default function ServicesExplorer() {
           <input type="search" placeholder="Search services or tools" value={q} onChange={(e) => setQ(e.target.value)} />
         </label>
       </div>
+
+      <p className="sr-only" aria-live="polite">{list.length} services shown</p>
+
+      {list.length ? (
+        <div className="svc-grid">
+          {list.map((s) => (
+            <Link key={s.slug} href={`/services/${s.slug}`} className="svc-card">
+              <span className="svc-card__group">{groupName(s.group)}</span>
+              <h3 className="h3">{s.name}</h3>
+              <p>{s.short}</p>
+              <span className="svc-card__more">Deliverables and timeline <Arrow /></span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="empty">
+          <p>No service matches "{q}". Try a broader word, or <Link href="/contact" style={{ color: "var(--cobalt)", textDecoration: "underline" }}>describe what you need</Link> and we'll tell you if we can build it.</p>
+        </div>
+      )}
+    </div>
+  );
+}
