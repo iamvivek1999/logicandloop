@@ -398,3 +398,43 @@ export const services: Service[] = [
     faqs: [
       { q: "Will you push us to hire Logic & Loop for the build?", a: "No. Advice comes first. If another team is the better fit, we'll say so." },
       { q: "How much time do we get?", a: "Typically two to six days a month, agreed up front." },
+    ],
+    related: ["mvp-for-startups", "qa-security-performance", "legacy-modernisation"],
+  },
+  {
+    slug: "qa-security-performance",
+    name: "QA, security & performance audits",
+    group: "advise",
+    short: "Find the bugs, holes and slow pages before customers do.",
+    intro:
+      "A fixed-length audit of your app or site: what breaks, what leaks, what's slow. You get a prioritised report with fixes, and we can make those fixes too.",
+    deliverables: [
+      "Functional testing of key user journeys",
+      "Security review against OWASP Top 10, plus access-control checks",
+      "Speed and Core Web Vitals report",
+      "Automated end-to-end tests for critical flows",
+      "Prioritised fix list with effort estimates",
+    ],
+    stack: ["Playwright", "OWASP ZAP", "Lighthouse", "k6"],
+    timeline: "1–2 weeks",
+    engagement: "Fixed price",
+    faqs: [
+      { q: "Is this a full penetration test?", a: "It's a practical security review. For formal compliance we can bring in a certified tester." },
+      { q: "Will you fix what you find?", a: "If you want. The report stands on its own either way." },
+    ],
+    related: ["maintenance-amc", "cloud-devops", "fractional-cto"],
+  },
+  {
+    slug: "ai-training-workshops",
+    name: "AI training & workshops",
+    group: "advise",
+    short: "Teach your team to use AI well, on their own work.",
+    intro:
+      "Hands-on sessions where your team uses AI tools on their real tasks: sales follow-ups, reports, content, research. They leave with prompts, workflows and guardrails that fit how you work.",
+    deliverables: [
+      "Pre-workshop survey of roles and daily tasks",
+      "Half-day or full-day hands-on sessions",
+      "A prompt and workflow library for your team",
+      "AI usage guidelines covering data and privacy",
+      "Follow-up session after 30 days",
+    ],
