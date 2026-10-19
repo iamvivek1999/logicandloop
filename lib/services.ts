@@ -198,3 +198,43 @@ export const services: Service[] = [
     intro:
       "Search that understands questions, copilots inside your app, document summaries and drafting tools. We connect language models to your data safely and measure whether the answers are any good.",
     deliverables: [
+      "Use-case review: where AI saves real time, and where it doesn't",
+      "Retrieval pipeline over your documents, database or tickets",
+      "In-app AI features: search, summaries, drafting, classification",
+      "Evaluation set to measure answer quality before launch",
+      "Cost controls, caching and usage dashboards",
+    ],
+    stack: ["Claude", "OpenAI", "pgvector", "Pinecone", "LlamaIndex", "Python"],
+    timeline: "3–8 weeks",
+    engagement: "Fixed scope per feature",
+    faqs: [
+      { q: "Is our data used to train the model?", a: "No. We use enterprise API terms where your data isn't used for training, and keep sensitive data in your own cloud." },
+      { q: "Which model do you use?", a: "Whichever does your task best for the cost. We test a few on your own examples before choosing." },
+    ],
+    related: ["ai-agents-chatbots", "data-dashboards", "ml-computer-vision"],
+  },
+  {
+    slug: "data-dashboards",
+    name: "Data & dashboards",
+    group: "ai",
+    short: "One place to see the numbers that run your business.",
+    intro:
+      "Sales, marketing spend, operations and finance live in different tools. We pull them into one place and build dashboards that answer the questions you ask every Monday.",
+    deliverables: [
+      "Metric definitions agreed with you, written down",
+      "Data pipelines from your CRM, ads, sheets and databases",
+      "A clean warehouse your team can query",
+      "Dashboards for owners, sales and operations",
+      "Scheduled reports by email or WhatsApp",
+    ],
+    stack: ["PostgreSQL", "BigQuery", "dbt", "Metabase", "Looker Studio", "Python"],
+    timeline: "3–6 weeks",
+    engagement: "Fixed quote, optional monthly upkeep",
+    faqs: [
+      { q: "We only use Excel. Is that enough to start?", a: "Yes. Most projects start with spreadsheets. We automate what you already track first." },
+      { q: "Can we see ad spend against sales?", a: "Yes. Connecting Meta and Google ads to your CRM to show cost per booked visit or sale is a common first dashboard." },
+    ],
+    related: ["custom-erp-crm", "workflow-automation", "llm-rag-integration"],
+  },
+  {
+    slug: "ml-computer-vision",
