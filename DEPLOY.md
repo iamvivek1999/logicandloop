@@ -38,3 +38,4 @@ The form posts to FormSubmit, which emails each enquiry to `logicandloophq@gmail
 - `app/` pages: home, `/services`, `/services/[slug]` (20 pages), `/products/minute-one`, `/products/loop-os`, `/contact`, 404, sitemap, robots, OG image
 - `components/scenes/` the Three.js scenes (hero rings, Loop OS agent crew). They load after the page with a shimmer placeholder, pause when off screen, respect reduced-motion, and don't hijack scrolling on phones
 - `components/PageSkeleton.tsx` shimmer skeletons shown while a page loads on slow connections
+- `app/globals.css` the whole design system (colours, type, layout)
