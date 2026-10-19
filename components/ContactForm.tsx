@@ -158,3 +158,17 @@ export default function ContactForm() {
   );
 }
 
+export function ContactFormSkeleton() {
+  return (
+    <div className="form" aria-busy="true" aria-label="Loading form">
+      {[0, 1, 2, 3].map((i) => (
+        <div className="field" key={i}>
+          <span className="skeleton" style={{ width: 120, height: 14 }} />
+          <span className="skeleton" style={{ height: 46 }} />
+        </div>
+      ))}
+      <span className="skeleton" style={{ height: 130 }} />
+      <span className="skeleton" style={{ height: 48 }} />
+    </div>
+  );
+}
