@@ -78,3 +78,43 @@ function Crew({ reduced, onPick, labels }: { reduced: boolean; onPick: (i: numbe
       if (el && node) {
         node.getWorldPosition(tmp).project(camera);
         const x = ((tmp.x + 1) / 2) * size.width;
+        const y = ((1 - tmp.y) / 2) * size.height;
+        el.style.transform = `translate(-50%, -100%) translate(${x}px, ${y - 16}px)`;
+        el.style.opacity = "1";
+      }
+    });
+  });
+
+  return (
+    <>
+      <Line points={orbitPts} color={LINE} lineWidth={1} transparent opacity={0.45} dashed dashSize={0.18} gapSize={0.12} />
+      {agents.map((a, i) => (
+        <group key={a.name}>
+          <Line
+            ref={(l: any) => { lineRefs.current[i] = l; }}
+            points={[[0, 0, 0], [ORBIT, 0, 0]]}
+            color={LINE}
+            lineWidth={hover === i ? 2.2 : 1}
+            transparent
+            opacity={hover === null || hover === i ? 0.8 : 0.25}
+          />
+          <mesh ref={(m) => { if (m) pulseRefs.current[i] = m; }}>
+            <sphereGeometry args={[0.07, 16, 16]} />
+            <meshBasicMaterial color={SIGNAL} />
+          </mesh>
+          <group ref={(g) => { if (g) nodeRefs.current[i] = g; }}>
+            <mesh
+              onPointerOver={(e) => { e.stopPropagation(); setHover(i); onPick(i); document.body.style.cursor = "pointer"; }}
+              onPointerOut={() => { setHover(null); onPick(null); document.body.style.cursor = ""; }}
+              onClick={(e) => { e.stopPropagation(); setHover(i); onPick(i); }}
+            >
+              <sphereGeometry args={[hover === i ? 0.3 : 0.22, 32, 32]} />
+              <meshBasicMaterial color={hover === i ? "#ffffff" : "#E9EDF7"} />
+            </mesh>
+          </group>
+        </group>
+      ))}
+    </>
+  );
+}
+
