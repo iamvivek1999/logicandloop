@@ -358,3 +358,43 @@ export const services: Service[] = [
   {
     slug: "ui-ux-design",
     name: "UI/UX & product design",
+    group: "advise",
+    short: "Research, flows, prototypes and design systems.",
+    intro:
+      "We come from a design studio background, so design isn't an afterthought. We talk to your users, map the flows, and hand over screens and a design system developers can build from exactly.",
+    deliverables: [
+      "User interviews and a short findings report",
+      "User flows and wireframes",
+      "High-fidelity screens for mobile and desktop",
+      "Clickable Figma prototype",
+      "Design system: colours, type, components and states",
+    ],
+    stack: ["Figma", "FigJam", "Maze", "Design tokens"],
+    timeline: "2–6 weeks",
+    engagement: "Fixed quote",
+    faqs: [
+      { q: "Can you redesign without rebuilding?", a: "Yes. We can refresh the interface of an existing product and work with your developers to ship it." },
+      { q: "Do we get the Figma files?", a: "Yes, everything, organised so your team can keep using it." },
+    ],
+    related: ["websites-ecommerce", "mvp-for-startups", "web-apps-saas"],
+  },
+  {
+    slug: "fractional-cto",
+    name: "Fractional CTO & consulting",
+    group: "advise",
+    short: "Senior technical judgement, a few days a month.",
+    intro:
+      "You need someone senior to choose the stack, review vendors, hire developers and own the roadmap, but not a full-time CTO yet. We do that work part-time, on your side of the table.",
+    deliverables: [
+      "Architecture and stack decisions, written down",
+      "Vendor and agency proposal reviews",
+      "Hiring help: job specs, technical interviews, onboarding",
+      "Quarterly technical roadmap",
+      "Monthly review of delivery, risk and spend",
+    ],
+    stack: ["Architecture reviews", "Decision records", "Roadmaps"],
+    timeline: "Ongoing, minimum three months",
+    engagement: "Monthly retainer",
+    faqs: [
+      { q: "Will you push us to hire Logic & Loop for the build?", a: "No. Advice comes first. If another team is the better fit, we'll say so." },
+      { q: "How much time do we get?", a: "Typically two to six days a month, agreed up front." },
