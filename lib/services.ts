@@ -438,3 +438,43 @@ export const services: Service[] = [
       "AI usage guidelines covering data and privacy",
       "Follow-up session after 30 days",
     ],
+    stack: ["Claude", "ChatGPT", "Gemini", "Your own tools"],
+    timeline: "1–2 weeks to prepare and deliver",
+    engagement: "Fixed price per workshop",
+    faqs: [
+      { q: "Is this for technical teams?", a: "It's for everyone. Sessions are tailored to the roles in the room." },
+      { q: "Online or in person?", a: "Either. In-person works best for groups over ten." },
+    ],
+    related: ["ai-agents-chatbots", "workflow-automation", "llm-rag-integration"],
+  },
+  {
+    slug: "maintenance-amc",
+    name: "Maintenance & AMC",
+    group: "advise",
+    short: "Monthly care: fixes, updates, uptime and small changes.",
+    intro:
+      "Software needs looking after. Our care plans cover security updates, bug fixes, monitoring and a pool of hours for small improvements, with a clear response time.",
+    deliverables: [
+      "Uptime and error monitoring",
+      "Security patches and dependency updates",
+      "Bug fixes with an agreed response time",
+      "Monthly hours for small changes",
+      "Monthly report of what was done",
+    ],
+    stack: ["Sentry", "Uptime monitoring", "Automated backups"],
+    timeline: "Ongoing",
+    engagement: "Monthly or annual plan",
+    faqs: [
+      { q: "Can you maintain software another team built?", a: "Yes. We start with a short review, then take it on." },
+      { q: "What if we need more hours one month?", a: "Extra work is quoted up front, at the same rate." },
+    ],
+    related: ["cloud-devops", "qa-security-performance", "dedicated-developers"],
+  },
+  {
+    slug: "dedicated-developers",
+    name: "Dedicated developers",
+    group: "advise",
+    short: "A developer or small squad working inside your team.",
+    intro:
+      "When you have a roadmap and need more hands, we place a developer or a small squad in your team. They join your standups and your tools, backed by our senior review.",
+    deliverables: [
