@@ -118,3 +118,43 @@ function InfinityLoop({ hovered, setHovered, reduced }: { hovered: Ring; setHove
     // the dashed centre line flows around the loop
     if (dash.current?.material && !reduced) dash.current.material.dashOffset -= dt * (hovered ? 1.6 : 0.6);
   });
+
+  const local = useRef(new THREE.Vector3());
+  const pick = (e: ThreeEvent<PointerEvent | MouseEvent>) => {
+    e.stopPropagation();
+    e.object.worldToLocal(local.current.copy(e.point));
+    const side = local.current.x < 0 ? "logic" : "loop";
+    if (side !== hovered) setHovered(side);
+  };
+
+  return (
+    <group>
+      <lineSegments geometry={left}>
+        <lineBasicMaterial ref={matL} color={INK} transparent opacity={0.5} />
+      </lineSegments>
+      <lineSegments geometry={right}>
+        <lineBasicMaterial ref={matR} color={COBALT} transparent opacity={0.7} />
+      </lineSegments>
+      <Line ref={dash} points={centre} color={COBALT} lineWidth={1.6} dashed dashSize={0.35} gapSize={0.25} transparent opacity={0.9} />
+      <mesh
+        geometry={hit}
+        onPointerMove={(e) => { pick(e); document.body.style.cursor = "grab"; }}
+        onPointerOut={() => { setHovered(null); document.body.style.cursor = ""; }}
+        onClick={pick}
+      >
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+      <Nodes curve={curve} hovered={hovered} reduced={reduced} />
+    </group>
+  );
+}
+
+/** Gentle idle sway plus pointer parallax. The sway never turns the loop edge-on. */
+function Rig({ children, reduced }: { children: React.ReactNode; reduced: boolean }) {
+  const g = useRef<THREE.Group>(null);
+  const t = useRef(0);
+  useFrame(({ pointer }, dt) => {
+    if (!g.current || reduced) return;
+    t.current += dt;
+    const swayY = Math.sin(t.current * 0.35) * 0.55;
+    const swayX = 0.42 + Math.sin(t.current * 0.23) * 0.12;
