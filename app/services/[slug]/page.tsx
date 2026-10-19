@@ -38,3 +38,43 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <li><Link href="/services">Services</Link></li>
             <li aria-current="page">{s.name}</li>
           </ol>
+          <p className="kicker" style={{ marginBottom: 18 }}>{groupName(s.group)}</p>
+          <h1 className="display">{s.name}</h1>
+          <p className="lead">{s.intro}</p>
+        </div>
+      </header>
+
+      <section className="section" style={{ paddingTop: 64 }}>
+        <div className="wrap detail">
+          <div>
+            <h2 className="sub-h">What you get</h2>
+            <ul className="deliver">
+              {s.deliverables.map((d) => (
+                <li key={d}><Check />{d}</li>
+              ))}
+            </ul>
+
+            <h2 className="sub-h">How it runs</h2>
+            <ol className="deliver" style={{ listStyle: "none" }}>
+              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>1</span><span><b>Understand.</b> A working session on goals, users and constraints. You get a written scope and a fixed quote.</span></li>
+              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>2</span><span><b>Design.</b> Flows and screens, or an architecture plan, signed off before the build.</span></li>
+              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>3</span><span><b>Build.</b> Weekly demos on a live link, so you can steer early.</span></li>
+              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>4</span><span><b>Launch &amp; improve.</b> We ship, measure and keep improving, or hand over with full docs.</span></li>
+            </ol>
+
+            <h2 className="sub-h">Questions</h2>
+            <div className="faq">
+              {s.faqs.map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+
+            {related.length > 0 && (
+              <>
+                <h2 className="sub-h">Often paired with</h2>
+                <ul className="chips">
+                  {related.map((r) => (
+                    <li key={r!.slug}><Link className="chip" href={`/services/${r!.slug}`}>{r!.name}</Link></li>
