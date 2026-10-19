@@ -118,3 +118,39 @@ function Crew({ reduced, onPick, labels }: { reduced: boolean; onPick: (i: numbe
   );
 }
 
+export default function LoopScene({
+  active,
+  reduced,
+  coarse,
+  onPick,
+  labels,
+}: {
+  active: boolean;
+  reduced: boolean;
+  coarse: boolean;
+  onPick: (i: number | null) => void;
+  labels: Labels;
+}) {
+  return (
+    <Canvas
+      dpr={[1, 2]}
+      camera={{ position: [0, 2.4, 11.5], fov: 38 }}
+      gl={{ antialias: true, alpha: true }}
+      frameloop={active ? "always" : "never"}
+    >
+      <group rotation={[0.1, 0, 0]}>
+        <Core />
+        <Crew reduced={reduced} onPick={onPick} labels={labels} />
+      </group>
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        enableRotate={!coarse}
+        minPolarAngle={Math.PI * 0.3}
+        maxPolarAngle={Math.PI * 0.6}
+        rotateSpeed={0.6}
+        enableDamping
+      />
+    </Canvas>
+  );
+}
