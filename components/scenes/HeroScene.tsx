@@ -198,3 +198,12 @@ export default function HeroScene({
         enablePan={false}
         enableRotate={!coarse}
         minPolarAngle={Math.PI * 0.3}
+        maxPolarAngle={Math.PI * 0.56}
+        minAzimuthAngle={-Math.PI / 3}
+        maxAzimuthAngle={Math.PI / 3}
+        rotateSpeed={0.6}
+        enableDamping
+      />
+    </Canvas>
+  );
+}
