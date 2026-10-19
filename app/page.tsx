@@ -158,3 +158,18 @@ export default function Home() {
               <li>Service businesses</li>
             </ul>
           </div>
+          <div className="principles">
+            <div className="principle"><h3 className="h3">Design-led</h3><p>Built with a product designer's eye, so your customers actually enjoy using it.</p></div>
+            <div className="principle"><h3 className="h3">Outcome-first</h3><p>We agree on the number that matters, like visits booked or hours saved, and report on it.</p></div>
+            <div className="principle"><h3 className="h3">Senior hands</h3><p>You work directly with the people building your product. No account-manager relay.</p></div>
+            <div className="principle"><h3 className="h3">Safe AI</h3><p>Agents answer only from approved information and hand off to a human when unsure.</p></div>
+            <div className="principle"><h3 className="h3">You own it</h3><p>Code, cloud accounts and domains are in your name from day one.</p></div>
+            <div className="principle"><h3 className="h3">No lock-in</h3><p>Monthly plans, not long contracts. Stay because it works.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <CtaBand whatsapp={whatsappHref()} />
+    </>
+  );
+}
