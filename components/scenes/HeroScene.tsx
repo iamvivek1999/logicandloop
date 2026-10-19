@@ -78,3 +78,43 @@ function Nodes({ curve, hovered, reduced }: { curve: Infinity3D; hovered: Ring; 
       if (!reduced) u.current[i] = (val + dt * (hovered ? 0.12 : 0.045)) % 1;
       const m = refs.current[i];
       if (!m) return;
+      curve.getPointAt(u.current[i], tmp);
+      m.position.copy(tmp);
+      const side = tmp.x < 0 ? "logic" : "loop";
+      const s = hovered === side ? 1.35 : 1;
+      m.scale.setScalar(m.scale.x + (s - m.scale.x) * 0.15);
+    });
+  });
+  return (
+    <>
+      {Array.from({ length: COUNT }, (_, i) => (
+        <mesh key={i} ref={(m) => { if (m) refs.current[i] = m; }}>
+          <sphereGeometry args={[0.12, 20, 20]} />
+          <meshBasicMaterial color={SIGNAL} />
+        </mesh>
+      ))}
+    </>
+  );
+}
+
+function InfinityLoop({ hovered, setHovered, reduced }: { hovered: Ring; setHovered: (r: Ring) => void; reduced: boolean }) {
+  const curve = useMemo(() => new Infinity3D(), []);
+  const { left, right } = useMemo(() => buildTube(curve), [curve]);
+  const hit = useMemo(() => new THREE.TubeGeometry(curve, 160, TUBE_R * 1.15, 8, true), [curve]);
+  const centre = useMemo(() => curve.getSpacedPoints(300).map((p) => [p.x, p.y, p.z] as [number, number, number]), [curve]);
+
+  const matL = useRef<THREE.LineBasicMaterial>(null);
+  const matR = useRef<THREE.LineBasicMaterial>(null);
+  const dash = useRef<any>(null);
+
+  useFrame((_, dt) => {
+    const ease = (m: THREE.LineBasicMaterial | null, side: "logic" | "loop", base: number) => {
+      if (!m) return;
+      const target = hovered === side ? 1 : hovered ? 0.16 : base;
+      m.opacity += (target - m.opacity) * 0.12;
+    };
+    ease(matL.current, "logic", 0.5);
+    ease(matR.current, "loop", 0.7);
+    // the dashed centre line flows around the loop
+    if (dash.current?.material && !reduced) dash.current.material.dashOffset -= dt * (hovered ? 1.6 : 0.6);
+  });
