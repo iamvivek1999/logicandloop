@@ -78,3 +78,43 @@ export default function ContactForm() {
     }
   }
 
+  const clear = (k: keyof Errors) => errors[k] && setErrors((e) => ({ ...e, [k]: undefined }));
+
+  if (state === "sent") {
+    return (
+      <div className="form" role="status">
+        <div className="done">
+          <Check />
+          <h2 className="h3">Message sent.</h2>
+          <p className="muted">
+            Thanks. It's in our inbox and we'll reply {site.replyPromise}. If it's urgent, WhatsApp is the fastest way to reach us.
+          </p>
+          <div><button className="btn btn--outline" onClick={() => setState("idle")}>Send another message</button></div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <form ref={formRef} className="form" onSubmit={onSubmit} noValidate aria-label="Project enquiry">
+      <div className="field">
+        <label htmlFor="name">Your name</label>
+        <input id="name" name="name" autoComplete="name" aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-err" : undefined} onInput={() => clear("name")} />
+        {errors.name && <span id="name-err" className="field__err">{errors.name}</span>}
+      </div>
+      <div className="row-2">
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" autoComplete="email" inputMode="email" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-err" : undefined} onInput={() => clear("email")} />
+          {errors.email && <span id="email-err" className="field__err">{errors.email}</span>}
+        </div>
+        <div className="field">
+          <label htmlFor="phone">Phone or WhatsApp <span className="opt">(optional)</span></label>
+          <input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" />
+        </div>
+      </div>
+      <div className="row-2">
+        <div className="field">
+          <label htmlFor="company">Company <span className="opt">(optional)</span></label>
+          <input id="company" name="company" autoComplete="organization" />
+        </div>
