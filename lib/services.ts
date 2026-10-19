@@ -478,3 +478,23 @@ export const services: Service[] = [
     intro:
       "When you have a roadmap and need more hands, we place a developer or a small squad in your team. They join your standups and your tools, backed by our senior review.",
     deliverables: [
+      "Developers matched to your stack",
+      "Onboarding within a week",
+      "Daily updates and weekly demos",
+      "Code review by a senior engineer",
+      "Easy scale up or down each month",
+    ],
+    stack: ["React", "Next.js", "React Native", "Node.js", "Python"],
+    timeline: "Start within 1–2 weeks",
+    engagement: "Monthly, per developer",
+    faqs: [
+      { q: "Is there a minimum term?", a: "One month. Most teams stay longer, but you're never locked in." },
+      { q: "What if it's not a good fit?", a: "We replace the developer at no cost." },
+    ],
+    related: ["maintenance-amc", "fractional-cto", "web-apps-saas"],
+  },
+];
+
+export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
+export const servicesIn = (g: GroupId) => services.filter((s) => s.group === g);
+export const groupName = (g: GroupId) => groups.find((x) => x.id === g)!.name;
