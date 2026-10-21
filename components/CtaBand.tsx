@@ -7,20 +7,17 @@ export default function CtaBand({
   text = "A 30-minute call is enough to tell you whether we're the right team, what it would take and roughly what it would cost.",
   topic,
   whatsapp = whatsappHref(),
-  stop = false,
 }: {
   title?: string;
   text?: string;
   topic?: string;
   whatsapp?: string;
-  /** Marks the heading as the end of the home page Spine, where the loop closes. */
-  stop?: boolean;
 }) {
   return (
     <section className="section dark" aria-label="Start a project">
       <div className="wrap cta-band">
         <div>
-          <h2 className="h2" data-stop={stop || undefined}>{title}</h2>
+          <h2 className="h2">{title}</h2>
           <p className="lead" style={{ marginTop: 20 }}>{text}</p>
         </div>
         <div className="cta-band__actions">

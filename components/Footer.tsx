@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Icons";
+import { ConsentLink } from "./Consent";
 import { groups, servicesIn, services } from "@/lib/services";
 import { site, whatsappHref } from "@/lib/site";
 
@@ -48,9 +49,14 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        <p className="footer__mark" aria-hidden="true">Logic &amp; Loop</p>
         <div className="footer__base">
           <span>© {year} Logic &amp; Loop. All rights reserved.</span>
           <span>Based in India, working with clients everywhere.</span>
+          <span className="footer__end">
+            <ConsentLink />
+            <a href="#main">Back to top ↑</a>
+          </span>
         </div>
       </div>
     </footer>

@@ -4,8 +4,10 @@ import "@fontsource-variable/source-serif-4/opsz.css";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { WhatsApp } from "@/components/Icons";
-import { site, whatsappHref } from "@/lib/site";
+import Dock from "@/components/Dock";
+import Consent from "@/components/Consent";
+import Motion from "@/components/Motion";
+import { NOTE_KEY, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -67,8 +69,14 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // The inline script below and components/Motion.tsx add classes to <html> before React hydrates.
+    <html lang="en" suppressHydrationWarning>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{localStorage.getItem("${NOTE_KEY}")&&document.documentElement.classList.add("note-off")}catch(e){}`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -77,9 +85,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main">{children}</main>
         <Footer />
-        <a className="wa-float" href={whatsappHref()} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-          <WhatsApp />
-        </a>
+        <Dock />
+        <Consent />
+        <Motion />
       </body>
     </html>
   );

@@ -28,5 +28,9 @@ export const site = {
 export const whatsappHref = (text = site.whatsappMessage) =>
   `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(text)}`;
 
-export const bookingReady = !/your-link/.test(site.bookingUrl);
+// Remembers that the visitor closed the announcement bar. Change the value when
+// the announcement changes, so everyone sees the new one.
+export const NOTE_KEY = "ll-note-minute-one";
+
+export const bookingReady =!/your-link/.test(site.bookingUrl);
 export const bookingHref = bookingReady ? site.bookingUrl : "/contact?topic=call";
