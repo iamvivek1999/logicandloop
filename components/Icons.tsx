@@ -2,8 +2,9 @@ type P = { className?: string };
 
 export const Logo = ({ className }: P) => (
   <svg className={className} viewBox="0 0 40 40" aria-hidden="true">
-    <circle cx="15" cy="20" r="9" fill="none" stroke="currentColor" strokeWidth="3.4" />
-    <circle cx="25" cy="20" r="9" fill="none" stroke="#2340FF" strokeWidth="3.4" />
+    <rect width="40" height="40" rx="10" fill="#12363A" stroke="rgba(255,255,255,0.16)" />
+    <circle cx="15.5" cy="20" r="7.8" fill="none" stroke="#EEF0EB" strokeWidth="3.2" />
+    <circle cx="24.5" cy="20" r="7.8" fill="none" stroke="#F0AB16" strokeWidth="3.2" />
   </svg>
 );
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
-import LoopStage from "@/components/scenes/LoopStage";
+import SampleLog from "@/components/SampleLog";
 import { Check } from "@/components/Icons";
 
 export const metadata: Metadata = {
@@ -50,10 +50,10 @@ const faqs = [
 export default function LoopOS() {
   return (
     <>
-      <section className="p-hero ink">
+      <section className="p-hero dark">
         <div className="wrap p-hero__grid">
           <div>
-            <ol className="crumbs" aria-label="Breadcrumb" style={{ color: "var(--on-ink-muted)" }}>
+            <ol className="crumbs" aria-label="Breadcrumb">
               <li><Link href="/">Home</Link></li>
               <li>Products</li>
               <li aria-current="page">Loop OS</li>
@@ -68,7 +68,11 @@ export default function LoopOS() {
               <a className="btn btn--ghost-light" href="#licences">See licence options</a>
             </div>
           </div>
-          <LoopStage />
+          <div className="p-hero__aside">
+            <div style={{ width: "min(460px, 100%)" }}>
+              <SampleLog />
+            </div>
+          </div>
         </div>
       </section>
 

@@ -54,7 +54,7 @@ export default function ServicesExplorer() {
         </div>
       ) : (
         <div className="empty">
-          <p>No service matches "{q}". Try a broader word, or <Link href="/contact" style={{ color: "var(--cobalt)", textDecoration: "underline" }}>describe what you need</Link> and we'll tell you if we can build it.</p>
+          <p>No service matches "{q}". Try a broader word, or <Link href="/contact" style={{ color: "var(--accent)", textDecoration: "underline" }}>describe what you need</Link> and we'll tell you if we can build it.</p>
         </div>
       )}
     </div>

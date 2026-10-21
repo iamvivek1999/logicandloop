@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/archivo/wdth.css";
+import "@fontsource-variable/bricolage-grotesque/wdth.css";
+import "@fontsource-variable/source-serif-4/opsz.css";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#EEF1F5",
+  themeColor: "#EEF0EB",
 };
 
 // Tells search engines this site is one organisation called Logic & Loop.

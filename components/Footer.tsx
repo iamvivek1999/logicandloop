@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Icons";
-import { groups, servicesIn } from "@/lib/services";
+import { groups, servicesIn, services } from "@/lib/services";
 import { site, whatsappHref } from "@/lib/site";
 
 export default function Footer() {
@@ -34,7 +34,7 @@ export default function Footer() {
             </ul>
             <h4 style={{ marginTop: 28 }}>More</h4>
             <ul>
-              <li><Link href="/services">All 20 services</Link></li>
+              <li><Link href="/services">All {services.length} services</Link></li>
               <li><Link href="/#process">How we work</Link></li>
             </ul>
           </div>
