@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Spine from "@/components/Spine";
+import HeroStage from "@/components/scenes/HeroStage";
 import CtaBand from "@/components/CtaBand";
 import SampleLog from "@/components/SampleLog";
 import { groups, servicesIn, services } from "@/lib/services";
@@ -27,17 +28,22 @@ export default function Home() {
   return (
     <Spine>
       <section className="hero">
-        <div className="wrap">
-          <h1 className="display" data-stop>We write the logic. Your business runs the loop.</h1>
-          <div className="hero__foot">
-            <p className="lead">
-              A small senior engineering studio building web apps, mobile apps, AI agents and the automations that tie them together.
-            </p>
-            <div className="hero__cta">
-              <a className="btn btn--primary" href={bookingHref} {...ext}>Book a 30-minute call</a>
-              <Link className="btn btn--outline" href="/services">See all {services.length} services</Link>
+        <div className="wrap hero__grid">
+          <div className="hero__copy">
+            <h1 className="display" data-stop>We write the logic. Your business runs the loop.</h1>
+            <div className="hero__foot">
+              <p className="lead">
+                A small senior engineering studio building web apps, mobile apps, AI agents and the automations that tie them together.
+              </p>
+              <div className="hero__cta">
+                <a className="btn btn--primary" href={bookingHref} {...ext}>Book a 30-minute call</a>
+                <Link className="btn btn--outline" href="/services">See all {services.length} services</Link>
+              </div>
             </div>
           </div>
+          <HeroStage />
+        </div>
+        <div className="wrap">
           <ul className="facts">
             <li>Fixed quotes</li>
             <li>Replies {site.replyPromise}</li>
