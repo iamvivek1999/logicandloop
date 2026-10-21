@@ -58,11 +58,11 @@ export default function Nav() {
     <header className={`nav${hidden && !open ? " is-hidden" : ""}${scrolled ? " is-scrolled" : ""}`}>
       {/* Rendered on the server so it never pushes the page down; a dismissed bar is
           hidden before first paint by the inline script in app/layout.tsx. */}
-      {path !== "/products/minute-one" && (
+      {path !== "/products/loop-os" && (
         <div className="note">
-          <Link href="/products/minute-one" className="note__link">
+          <Link href="/products/loop-os" className="note__link">
             <span className="note__dot" aria-hidden="true" />
-            Minute One is taking founding pilots with real estate developers
+            Loop OS is opening early access for teams
             <Arrow className="note__arrow" />
           </Link>
           <button className="note__x" onClick={closeNote} aria-label="Dismiss announcement">×</button>
@@ -92,6 +92,7 @@ export default function Nav() {
           <a
             className="btn btn--primary btn--sm"
             href={bookingHref}
+            data-analytics="booking_click"
             {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}
           >
             Book a call

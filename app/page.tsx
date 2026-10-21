@@ -70,15 +70,15 @@ const faqs = [
   },
   {
     q: "You're a new studio. Why should we trust you with this?",
-    a: "Because you don't have to take our word for it. We agree on the one number that matters, like site visits booked or hours saved, report on it every week, and work on monthly plans rather than long contracts.",
+    a: "Because you don't have to take our word for it. We agree on the one number that matters, like qualified next steps or hours saved, report on it every week, and work on monthly plans rather than long contracts.",
   },
   {
     q: "Will an AI agent say the wrong thing to our customers?",
     a: "Our agents answer only from information you have approved, and hand the conversation to a person when they are unsure. In Loop OS, anything sensitive waits for someone on your team to approve it.",
   },
   {
-    q: "Do you work with clients outside India?",
-    a: "Yes. We are based in India and work with clients anywhere. Minute One, for example, is built for real estate developers selling in the Gulf.",
+    q: "Who is Minute One for?",
+    a: "Minute One is built for teams that depend on fast lead response: real estate developers, premium clinics, education and edtech companies, startups and service businesses. It adapts the questions and next step to your sales process.",
   },
 ];
 
@@ -108,7 +108,7 @@ export default function Home() {
                 A small senior engineering studio building web apps, mobile apps, AI agents and the automations that tie them together.
               </p>
               <div className="hero__cta">
-                <a className="btn btn--ring" href={bookingHref} {...ext}>
+                <a className="btn btn--ring" href={bookingHref} data-analytics="booking_click" {...ext}>
                   Book a 30-minute call
                   <span className="btn__go"><Arrow /></span>
                 </a>
@@ -217,8 +217,8 @@ export default function Home() {
           </div>
           <div className="calc-block">
             <div className="center-head">
-              <h3 className="h2 h2--sm">How many hours could you <span className="tone">get back?</span></h3>
-              <p className="lead">Move the sliders for a rough idea of the repetitive work agents can take off your team.</p>
+              <h3 className="h2 h2--sm">How much repetitive work could your team <span className="tone">hand off?</span></h3>
+              <p className="lead">Choose a task, describe the effort and see where automation could give your team capacity back.</p>
             </div>
             <HoursCalc />
           </div>
@@ -230,30 +230,50 @@ export default function Home() {
           <div className="section-head">
             <div>
               <p className="kicker">Products</p>
-              <h2 id="prod-h" className="h2">Two products of our own.</h2>
+              <h2 id="prod-h" className="h2">Products built around the work businesses repeat.</h2>
             </div>
-            <p className="lead">Built from the work we kept doing for clients, so you can switch them on in weeks instead of building from scratch.</p>
+            <p className="lead">Minute One handles the front door. Loop OS runs the work behind it. Both start from a real workflow, not a blank chat box.</p>
           </div>
           <div className="cards" data-reveal="stagger">
             <Link href="/products/minute-one" className="card">
-              <div className="card__thumb tint--sage card-chat" aria-hidden="true">
-                <p className="card-chat__in">Saw your ad. Is the 2-bedroom available?</p>
-                <p className="card-chat__out">Yes, from AED 1.1 M. Can you visit on Saturday?</p>
-                <p className="card-chat__sys">Visit booked · Sales head alerted</p>
+              <div className="card__thumb tint--sage card-chat">
+                <span className="product-card__status">Founding pilots open</span>
+                <div className="card-chat__flow" aria-hidden="true">
+                  <p className="card-chat__in">New enquiry</p>
+                  <span>↓</span>
+                  <p className="card-chat__out">Instant reply + qualification</p>
+                  <span>↓</span>
+                  <p className="card-chat__sys">Next step booked · Team alerted</p>
+                </div>
               </div>
-              <h3>Minute One <em>For real estate developers · Taking founding pilots</em></h3>
-              <p>Replies to every property enquiry on WhatsApp within a minute, asks the buyer a few questions and books the site visit.</p>
+              <div className="product-card__meta"><span>Minute One</span><b>Lead response</b></div>
+              <h3>Turn new enquiries into the next useful conversation.</h3>
+              <p>Replies on WhatsApp within a minute, answers routine questions, qualifies the lead and books a site visit, consultation, counselling call, demo or discovery call.</p>
+              <div className="product-card__tags" aria-label="Minute One audiences">
+                <span>Real estate</span><span>Clinics</span><span>Education</span><span>Startups</span><span>Services</span>
+              </div>
+              <span className="product-card__cta">Get a free lead-response audit <Arrow /></span>
             </Link>
             <Link href="/products/loop-os" className="card">
-              <div className="card__thumb tint--sun card-log" aria-hidden="true">
-                <p><time>09:02</time>Enquiry added to the CRM</p>
-                <p><time>09:03</time>Quote drafted from the price sheet</p>
-                <p className="is-wait"><time>09:03</time>Waiting for your approval</p>
+              <div className="card__thumb tint--sun card-log">
+                <span className="product-card__status">Early access</span>
+                <div className="card-log__flow" aria-hidden="true">
+                  <p><time>09:02</time>Agent receives a task</p>
+                  <p><time>09:03</time>Checks approved information</p>
+                  <p className="is-wait"><time>09:03</time>Waiting for your approval</p>
+                  <p className="card-log__done"><time>09:04</time>Action logged</p>
+                </div>
               </div>
-              <h3>Loop OS <em>Licensed software for teams · Early access</em></h3>
-              <p>Your own crew of AI agents, plus the harness that runs them on your tools and data. Anything sensitive waits for a person.</p>
+              <div className="product-card__meta"><span>Loop OS</span><b>Agent operations</b></div>
+              <h3>Run repeatable work with AI agents you can trust.</h3>
+              <p>Your own crew of agents connected to your tools, with permissions, approvals and an audit trail for every important action.</p>
+              <div className="product-card__tags" aria-label="Loop OS workflows">
+                <span>Operations</span><span>Sales</span><span>Support</span><span>Reporting</span>
+              </div>
+              <span className="product-card__cta">Join early access <Arrow /></span>
             </Link>
           </div>
+          <p className="products-bridge">Need something specific? <Link href="/services">Explore custom systems for your workflow <Arrow /></Link></p>
         </div>
       </section>
 
@@ -332,11 +352,11 @@ export default function Home() {
           <h2 id="final-h" className="h2">Your team is too good to spend the day <span className="tone">on busywork.</span></h2>
           <p className="lead">A 30-minute call is enough to tell you whether we&rsquo;re the right team, what it would take and roughly what it would cost.</p>
           <div className="hero__cta closing__cta">
-            <a className="btn btn--ring" href={bookingHref} {...ext}>
+            <a className="btn btn--ring" href={bookingHref} data-analytics="booking_click" {...ext}>
               Book a 30-minute call
               <span className="btn__go"><Arrow /></span>
             </a>
-            <a className="btn btn--outline" href={whatsappHref()} target="_blank" rel="noopener">
+            <a className="btn btn--outline" href={whatsappHref()} target="_blank" rel="noopener" data-analytics="whatsapp_click">
               <WhatsApp className="ico" /> WhatsApp us
             </a>
           </div>

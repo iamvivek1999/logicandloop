@@ -133,7 +133,7 @@ export default function LoopScene({
 }) {
   return (
     <Canvas
-      dpr={[1, 2]}
+      dpr={coarse ? [1, 1.25] : [1, 2]}
       camera={{ position: [0, 2.4, 11.5], fov: 38 }}
       gl={{ antialias: true, alpha: true }}
       frameloop={active ? "always" : "never"}

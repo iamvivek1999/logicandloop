@@ -8,7 +8,7 @@ const cases: { who: string; h: string; p: string; lines: Line[] }[] = [
   {
     who: "Real estate developers",
     h: "Answer every enquiry within a minute.",
-    p: "Minute One replies on WhatsApp, asks the buyer a few questions and books the site visit, then alerts your sales head.",
+    p: "Minute One replies on WhatsApp, answers approved property questions, qualifies the buyer and books the site visit, then alerts your sales team.",
     lines: [
       { k: "in", t: "Saw your ad. Is the 2-bedroom still available?" },
       { k: "out", t: "Yes, 2-bedroom homes start at AED 1.1 M on floors 4–12. When are you hoping to move?" },
@@ -40,24 +40,24 @@ const cases: { who: string; h: string; p: string; lines: Line[] }[] = [
   },
   {
     who: "Startups",
-    h: "Put a working product in front of users in weeks.",
-    p: "A clickable prototype first, then an MVP in six to ten weeks, with a demo on a live link every week along the way.",
+    h: "Turn demo requests into conversations.",
+    p: "Minute One answers product questions from your approved knowledge base, qualifies the account and books a demo while the prospect is still engaged.",
     lines: [
-      { k: "log", at: "Week 1", t: "Scope and fixed quote signed" },
-      { k: "log", at: "Week 3", t: "Clickable prototype approved" },
-      { k: "log", at: "Week 5", t: "Demo: sign-up and payments working" },
-      { k: "wait", at: "Week 8", t: "Live with the first users" },
+      { k: "in", t: "Can I see how this works for a 20-person team?" },
+      { k: "out", t: "Yes. I can arrange a product demo and answer a few questions first." },
+      { k: "in", t: "Tomorrow afternoon works." },
+      { k: "sys", t: "Demo booked · Sales owner alerted" },
     ],
   },
   {
     who: "Service businesses",
-    h: "Stop retyping the same data into every tool.",
-    p: "Automations move enquiries, quotes and updates between the tools you already use, and wait for a person on anything that matters.",
+    h: "Turn enquiries into booked discovery calls.",
+    p: "Minute One answers common questions, learns what the prospect needs and books a discovery call with the right person.",
     lines: [
-      { k: "log", at: "09:02", t: "Website enquiry added to the CRM" },
-      { k: "log", at: "09:02", t: "Quote drafted from the price sheet" },
-      { k: "wait", at: "09:03", t: "Waiting for your approval" },
-      { k: "log", at: "09:11", t: "Approved · Quote emailed to the customer" },
+      { k: "in", t: "We need help redesigning our customer portal." },
+      { k: "out", t: "I can help. What is the main problem, and when would you like to start?" },
+      { k: "in", t: "Can we speak this week?" },
+      { k: "sys", t: "Discovery call booked · Brief added to CRM" },
     ],
   },
 ];

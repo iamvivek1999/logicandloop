@@ -97,7 +97,7 @@ export default function About() {
           <dl className="terms">
             <div>
               <dt><Link href="/products/minute-one">Minute One</Link></dt>
-              <dd>A WhatsApp agent for real estate developers. It replies to a property enquiry within a minute, asks the buyer a few questions and books the site visit. It starts with a free audit and a 60-day pilot you pay for only if site visits go up.</dd>
+              <dd>A WhatsApp lead-response agent for real estate developers, premium clinics, education and edtech companies, startups and service businesses. It replies within a minute, answers routine questions, qualifies the lead and books the next step.</dd>
             </div>
             <div>
               <dt><Link href="/products/loop-os">Loop OS</Link></dt>

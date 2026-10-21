@@ -3,7 +3,6 @@ import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const paths = ["", "/services", "/products/minute-one", "/products/loop-os", "/about", "/contact", ...services.map((s) => `/services/${s.slug}`)];
-  return paths.map((p) => ({ url: `${site.url}${p}`, lastModified: now, changeFrequency: "monthly", priority: p === "" ? 1 : 0.7 }));
+  const paths = ["", "/services", "/products/minute-one", "/products/loop-os", "/about", "/contact", "/privacy", "/terms", ...services.map((s) => `/services/${s.slug}`)];
+  return paths.map((p) => ({ url: `${site.url}${p}`, changeFrequency: "monthly", priority: p === "" ? 1 : 0.7 }));
 }
