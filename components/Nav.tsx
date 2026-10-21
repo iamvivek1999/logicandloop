@@ -11,6 +11,7 @@ const links = [
   { href: "/products/minute-one", label: "Minute One", match: "/products/minute-one" },
   { href: "/products/loop-os", label: "Loop OS", match: "/products/loop-os" },
   { href: "/#process", label: "Process" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 

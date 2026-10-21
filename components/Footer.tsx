@@ -36,6 +36,7 @@ export default function Footer() {
             <ul>
               <li><Link href="/services">All {services.length} services</Link></li>
               <li><Link href="/#process">How we work</Link></li>
+              <li><Link href="/about">About Logic &amp; Loop</Link></li>
             </ul>
           </div>
           <div>
