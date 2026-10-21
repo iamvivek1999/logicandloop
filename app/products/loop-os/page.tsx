@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
-import SampleLog from "@/components/SampleLog";
+import LoopStage from "@/components/scenes/LoopStage";
 import { Check } from "@/components/Icons";
 
 export const metadata: Metadata = {
@@ -68,11 +68,7 @@ export default function LoopOS() {
               <a className="btn btn--ghost-light" href="#licences">See licence options</a>
             </div>
           </div>
-          <div className="p-hero__aside">
-            <div style={{ width: "min(460px, 100%)" }}>
-              <SampleLog />
-            </div>
-          </div>
+          <LoopStage />
         </div>
       </section>
 
