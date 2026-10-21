@@ -14,6 +14,12 @@ export const site = {
   // "your-link", every "Book a call" button opens the contact page instead.
   bookingUrl: "https://calendly.com/your-link",
   replyPromise: "within one working day",
+  // Other spellings people type when they search for the studio.
+  alternateNames: ["LogicAndLoop", "Logic and Loop", "Logic & Loop"],
+  // Add the studio's own profile URLs here once they exist (LinkedIn company page,
+  // GitHub organisation, Clutch, Crunchbase, X). Search engines use them to
+  // connect those profiles to this site as one organisation.
+  sameAs: [] as string[],
 };
 
 export const whatsappHref = (text = site.whatsappMessage) =>

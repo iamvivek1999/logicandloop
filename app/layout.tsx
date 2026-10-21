@@ -13,6 +13,17 @@ export const metadata: Metadata = {
     template: "%s | Logic & Loop",
   },
   description: site.description,
+  // Each page points at its own address as the canonical one.
+  alternates: { canonical: "./" },
+  robots: { index: true, follow: true },
+  // Set these two in Vercel (Settings, Environment Variables) with the codes
+  // Google Search Console and Bing Webmaster Tools give you.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -27,10 +38,40 @@ export const viewport: Viewport = {
   themeColor: "#EEF1F5",
 };
 
+// Tells search engines this site is one organisation called Logic & Loop.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      alternateName: site.alternateNames,
+      url: site.url,
+      logo: `${site.url}/icon.svg`,
+      description: site.description,
+      email: site.email,
+      ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      alternateName: site.alternateNames,
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <a className="skip" href="#main">Skip to content</a>
         <Nav />
         <main id="main">{children}</main>
