@@ -56,10 +56,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             <h2 className="sub-h">How it runs</h2>
             <ol className="deliver" style={{ listStyle: "none" }}>
-              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>1</span><span><b>Understand.</b> A working session on goals, users and constraints. You get a written scope and a fixed quote.</span></li>
-              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>2</span><span><b>Design.</b> Flows and screens, or an architecture plan, signed off before the build.</span></li>
-              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>3</span><span><b>Build.</b> Weekly demos on a live link, so you can steer early.</span></li>
-              <li><span style={{ color: "var(--cobalt)", fontWeight: 700 }}>4</span><span><b>Launch &amp; improve.</b> We ship, measure and keep improving, or hand over with full docs.</span></li>
+              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>1</span><span><b>Understand.</b> A working session on goals, users and constraints. You get a written scope and a fixed quote.</span></li>
+              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>2</span><span><b>Design.</b> Flows and screens, or an architecture plan, signed off before the build.</span></li>
+              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>3</span><span><b>Build.</b> Weekly demos on a live link, so you can steer early.</span></li>
+              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>4</span><span><b>Launch &amp; improve.</b> We ship, measure and keep improving, or hand over with full docs.</span></li>
             </ol>
 
             <h2 className="sub-h">Questions</h2>
