@@ -20,6 +20,9 @@ export const site = {
   // GitHub organisation, Clutch, Crunchbase, X). Search engines use them to
   // connect those profiles to this site as one organisation.
   sameAs: [] as string[],
+  // Shown in a "Who runs it" block on the About page once `name` is filled in.
+  // Leave `name` empty to show nothing. `linkedin` is optional.
+  founder: { name: "", role: "", linkedin: "" },
 };
 
 export const whatsappHref = (text = site.whatsappMessage) =>
