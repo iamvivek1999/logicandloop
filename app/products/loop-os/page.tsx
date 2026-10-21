@@ -48,8 +48,18 @@ const faqs = [
 ];
 
 export default function LoopOS() {
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Loop OS",
+    applicationCategory: "BusinessApplication",
+    description: "A crew of AI agents and a harness that runs them safely on company tools and data.",
+    creator: { "@type": "Organization", name: "Logic & Loop" },
+    offers: { "@type": "Offer", availability: "https://schema.org/PreOrder" },
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
       <section className="p-hero dark">
         <div className="wrap p-hero__grid">
           <div>
@@ -92,7 +102,7 @@ export default function LoopOS() {
         <div className="wrap">
           <div className="section-head">
             <h2 className="h2">Three ways to license it.</h2>
-            <p className="lead">Pricing is set per team during early access. Tell us your team size and tools and we'll send a quote.</p>
+            <p className="lead">Pricing is set per team during early access. Tell us your team size and tools and we&apos;ll send a quote.</p>
           </div>
           <div className="plans">
             {plans.map((p) => (

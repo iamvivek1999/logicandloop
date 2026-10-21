@@ -22,7 +22,7 @@ export const site = {
   sameAs: [] as string[],
   // Shown in a "Who runs it" block on the About page once `name` is filled in.
   // Leave `name` empty to show nothing. `linkedin` is optional.
-  founder: { name: "", role: "", linkedin: "" },
+  founder: { name: "Vivek Bhange", role: "Founder", linkedin: "https://linkedin.com/in/viveksainathbhange/" },
 };
 
 export const whatsappHref = (text = site.whatsappMessage) =>
@@ -30,7 +30,7 @@ export const whatsappHref = (text = site.whatsappMessage) =>
 
 // Remembers that the visitor closed the announcement bar. Change the value when
 // the announcement changes, so everyone sees the new one.
-export const NOTE_KEY = "ll-note-minute-one";
+export const NOTE_KEY = "ll-note-loop-os";
 
 export const bookingReady =!/your-link/.test(site.bookingUrl);
 export const bookingHref = bookingReady ? site.bookingUrl : "/contact?topic=call";

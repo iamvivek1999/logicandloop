@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { groups, services, servicesIn } from "@/lib/services";
 import { site } from "@/lib/site";
 import { Check } from "./Icons";
+import { trackEvent } from "@/lib/analytics";
 
 const extraTopics = [
   { value: "minute-one", label: "Minute One pilot" },
@@ -61,20 +62,20 @@ export default function ContactForm() {
     const data: Record<string, string> = {};
     fd.forEach((v, k) => { if (k !== "_honey") data[k] = String(v); });
     data.topic = labelFor(data.topic);
-    data._subject = `New enquiry: ${data.topic} from ${data.name}`;
-    data._template = "table";
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, _honey: fd.get("_honey") }),
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.success === "false" || json.success === false) throw new Error(json.message || String(res.status));
+      if (!res.ok) throw new Error(json.error || String(res.status));
       setState("sent");
+      trackEvent("contact_submit", { topic: data.topic });
       form.reset();
     } catch {
       setState("failed");
+      trackEvent("contact_submit_failed");
     }
   }
 

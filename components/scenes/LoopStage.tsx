@@ -27,13 +27,6 @@ export default function LoopStage() {
           ))}
         </div>
       </div>
-      <p className="loop-caption" aria-live="polite">
-        {pick === null ? (
-          <>Fig. 2. Six agents around one harness. Point at an agent to see its job.</>
-        ) : (
-          <><b>{agents[pick].name}</b>: {agents[pick].job}</>
-        )}
-      </p>
     </div>
   );
 }

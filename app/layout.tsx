@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Dock from "@/components/Dock";
 import Consent from "@/components/Consent";
 import Motion from "@/components/Motion";
+import Analytics from "@/components/Analytics";
 import { NOTE_KEY, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <Dock />
         <Consent />
+        <Analytics />
         <Motion />
       </body>
     </html>

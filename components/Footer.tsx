@@ -38,13 +38,15 @@ export default function Footer() {
               <li><Link href="/services">All {services.length} services</Link></li>
               <li><Link href="/#process">How we work</Link></li>
               <li><Link href="/about">About Logic &amp; Loop</Link></li>
+              <li><Link href="/privacy">Privacy policy</Link></li>
+              <li><Link href="/terms">Terms</Link></li>
             </ul>
           </div>
           <div>
             <h4>Contact</h4>
             <ul>
               <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-              <li><a href={whatsappHref()} target="_blank" rel="noopener">WhatsApp</a></li>
+              <li><a href={whatsappHref()} target="_blank" rel="noopener" data-analytics="whatsapp_click">WhatsApp</a></li>
               <li><Link href="/contact">Project enquiry</Link></li>
             </ul>
           </div>

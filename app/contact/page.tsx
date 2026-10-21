@@ -21,16 +21,24 @@ export default function Contact() {
           </ol>
           <h1 className="display" style={{ fontSize: "var(--step-4)" }}>Tell us what you want to build.</h1>
           <p className="lead" style={{ marginTop: 24 }}>We reply {site.replyPromise}, usually much faster.</p>
+          <div className="contact__expectations">
+            <h2 className="h3">What happens next</h2>
+            <ol>
+              <li>We read your brief and reply within one working day.</li>
+              <li>We ask only the questions needed to understand the opportunity.</li>
+              <li>You get a clear next step, scope and quote before any work starts.</li>
+            </ol>
+          </div>
           <ul className="ways">
             <li>
-              <a href={whatsappHref()} target="_blank" rel="noopener">
+              <a href={whatsappHref()} target="_blank" rel="noopener" data-analytics="whatsapp_click">
                 <span className="ways__ico"><WhatsApp /></span>
                 <span><strong>WhatsApp</strong><small>Fastest reply</small></span>
                 <Arrow className="arrow" />
               </a>
             </li>
             <li>
-              <a href={bookingReady ? bookingHref : "#name"} {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}>
+              <a href={bookingReady ? bookingHref : "#name"} data-analytics="booking_click" {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}>
                 <span className="ways__ico"><Calendar /></span>
                 <span><strong>Book a call</strong><small>30 minutes, free</small></span>
                 <Arrow className="arrow" />

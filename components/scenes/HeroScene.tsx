@@ -168,24 +168,18 @@ export default function HeroScene({
   active,
   reduced,
   coarse,
-  onHover,
 }: {
   active: boolean;
   reduced: boolean;
   coarse: boolean;
-  onHover: (r: Ring) => void;
 }) {
-  const [hovered, setHoveredState] = useState<Ring>(null);
-  const setHovered = (r: Ring) => {
-    setHoveredState(r);
-    onHover(r);
-  };
+  const [hovered, setHovered] = useState<Ring>(null);
 
   return (
     <Canvas
-      dpr={[1, 2]}
+      dpr={coarse ? [1, 1.25] : [1, 2]}
       camera={{ position: [0, 1.2, 12.5], fov: 35 }}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      gl={{ antialias: true, alpha: true }}
       frameloop={active ? "always" : "never"}
       aria-hidden="true"
     >

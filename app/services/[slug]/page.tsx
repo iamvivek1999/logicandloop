@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import { Check } from "@/components/Icons";
 import { groupName, serviceBySlug, services } from "@/lib/services";
-import { bookingHref, bookingReady } from "@/lib/site";
+import { bookingHref, bookingReady, site } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -28,9 +28,27 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const prev = services[(i - 1 + services.length) % services.length];
   const next = services[(i + 1) % services.length];
   const related = s.related.map(serviceBySlug).filter(Boolean);
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${site.url}/services` },
+      { "@type": "ListItem", position: 3, name: s.name, item: `${site.url}/services/${s.slug}` },
+    ],
+  };
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.name,
+    description: `${s.short} ${s.intro}`,
+    provider: { "@type": "Organization", name: site.name, url: site.url },
+    areaServed: "Worldwide",
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbJsonLd, serviceJsonLd]) }} />
       <header className="page-head">
         <div className="wrap">
           <ol className="crumbs" aria-label="Breadcrumb">
