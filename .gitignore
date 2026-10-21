@@ -6,3 +6,7 @@ next-env.d.ts
 .vercel
 .env*
 .serena
+
+
+# founder-skill planning output
+founder/
