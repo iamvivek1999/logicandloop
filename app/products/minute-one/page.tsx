@@ -44,7 +44,7 @@ export default function MinuteOne() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
-      <section className="p-hero">
+      <section className="p-hero dark">
         <div className="wrap p-hero__grid">
           <div>
             <ol className="crumbs" aria-label="Breadcrumb">

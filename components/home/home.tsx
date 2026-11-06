@@ -21,7 +21,7 @@ const pledges = [
   { n: "100%", unit: "", p: "of the code, cloud accounts and domains in your name" },
 ];
 
-/** Graphite-style marquee and statement, then the before/after switch. */
+/** Services marquee, then who we are: the statement, the before/after switch and our pledges. */
 export function Proof() {
   return (
     <>
@@ -30,30 +30,69 @@ export function Proof() {
           {[...marquee, ...marquee].map((w, n) => <span key={n}>{w}<Logo small reversed /></span>)}
         </div>
       </div>
-      <section className="h-intro" aria-labelledby="h-intro">
-        <div className="wrap h-intro__grid">
-          <p className="h-kicker">Who we are</p>
-          <h2 id="h-intro" className="h-statement">
-            A technology services company for teams that need software <em>shipped</em>, not slides. We design, build and run it, and <em>answer</em> for every line.
-          </h2>
-          <dl className="h-stats">
-            {pledges.map((x) => <div key={x.p}><dt>{x.n}{x.unit && <small>{x.unit}</small>}</dt><dd>{x.p}</dd></div>)}
-          </dl>
-        </div>
-      </section>
-      <section className="glow" aria-labelledby="gap-h">
+      <section className="glow h-who" aria-labelledby="gap-h">
         <div className="wrap">
           <div className="center-head">
-            <p className="kicker">Why we exist</p>
-            <h2 id="gap-h" className="h2">
-              The expensive work happens between your tools. <span className="tone">We write the logic that closes the gaps.</span>
+            <p className="kicker">Who we are</p>
+            <h2 id="gap-h" className="h2 h-who__h">
+              A technology services company for teams that need software <em>shipped</em>, not slides. We write the logic that closes the gaps <em>between your tools</em>.
             </h2>
             <p className="lead">Flip the switch to see the same business with one accountable team running the whole loop.</p>
           </div>
           <Shift />
+          <dl className="h-stats h-stats--dark">
+            {pledges.map((x) => <div key={x.p}><dt>{x.n}{x.unit && <small>{x.unit}</small>}</dt><dd>{x.p}</dd></div>)}
+          </dl>
         </div>
       </section>
     </>
+  );
+}
+
+const offers = [
+  {
+    tag: "Lead response", name: "Minute One", for: "Real estate, clinics, education, service businesses",
+    h: "Every enquiry answered on WhatsApp within a minute.", time: "Live in about 2 weeks", start: "Starts with a free lead-response audit",
+    href: "/products/minute-one", cta: "Get the free audit",
+  },
+  {
+    tag: "AI & automation", name: "Automation sprint", for: "Operations, sales and finance teams",
+    h: "One costly manual workflow, automated end to end.", time: "1–4 weeks", start: "Fixed scope and fixed quote",
+    href: "/services/workflow-automation", cta: "See how a sprint runs",
+  },
+  {
+    tag: "Product build", name: "MVP build", for: "Founders and new business lines",
+    h: "From idea to a launched product your users can pay for.", time: "6–10 weeks", start: "Fixed price, fixed timeline",
+    href: "/services/mvp-for-startups", cta: "See the MVP build",
+  },
+];
+
+/** Three flagship offers, so a visitor has an obvious place to start. */
+export function Offers() {
+  return (
+    <section className="h-sec" id="start" aria-labelledby="h-offers">
+      <div className="wrap">
+        <div className="h-head">
+          <p className="h-eyebrow">Where most clients start</p>
+          <h2 id="h-offers" className="h-h2">Three ways to start this month.</h2>
+          <p className="h-sub">Each one has a clear scope, a fixed quote and a demo you can click before you commit to more.</p>
+        </div>
+        <div className="h-offers">
+          {offers.map((o, n) => (
+            <Link key={o.name} href={o.href} className={`h-offer${n === 0 ? " is-lead" : ""}`}>
+              <p className="h-offer__tag">{o.tag}</p>
+              <h3><span>{o.name}</span>{o.h}</h3>
+              <dl>
+                <div><dt>Best for</dt><dd>{o.for}</dd></div>
+                <div><dt>Timeline</dt><dd>{o.time}</dd></div>
+                <div><dt>Terms</dt><dd>{o.start}</dd></div>
+              </dl>
+              <span className="h-link">{o.cta} <Arrow /></span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -63,11 +102,11 @@ const groupPhoto: Partial<Record<string, PhotoName>> = { build: "team-laptops", 
 export function Services() {
   const cards = groups.filter((g) => g.id !== "hiring");
   return (
-    <section className="h-sec" id="services" aria-labelledby="h-svc">
+    <section className="h-sec h-mist" id="services" aria-labelledby="h-svc">
       <div className="wrap">
         <div className="h-head">
           <p className="h-eyebrow">Capabilities</p>
-          <h2 id="h-svc" className="h-h2">20+ services, organised the way you buy them.</h2>
+          <h2 id="h-svc" className="h-h2">Or pick from 20+ services, organised the way you buy them.</h2>
           <Link href="/services" className="h-link">Browse all services <Arrow /></Link>
         </div>
         <div className="h-cards">
