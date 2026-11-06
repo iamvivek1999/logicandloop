@@ -5,7 +5,7 @@
  */
 
 /* Controls: pills */
-.btn, .chip, .filter, .filter__pill, .search input, .ways a, .tabs__btn { border-radius: 999px; }
+.btn, .chip, .filter, .filter__pill, .search input, .tabs__btn { border-radius: 999px; }
 .btn { padding: 15px 24px; }
 .btn--sm { padding: 10px 18px; }
 .btn--lg { padding: 17px 28px; }

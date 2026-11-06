@@ -6,9 +6,7 @@ import "./labbar.css";
 
 /** Development-only switcher between the live pages and the lab versions. */
 const groups = [
-  { t: "Home", items: [{ href: "/", label: "Current" }, { href: "/lab/zendesk", label: "Zendesk-style" }] },
-  { t: "Pricing", items: [{ href: "/lab/pricing", label: "New page" }] },
-  { t: "Contact", items: [{ href: "/contact", label: "Current form" }, { href: "/lab/contact", label: "Step wizard" }] },
+  { t: "Pricing (draft)", items: [{ href: "/lab/pricing", label: "Preview" }] },
 ];
 
 export default function LabBar() {
