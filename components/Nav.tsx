@@ -50,6 +50,20 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => { setMega(false); setSheet(false); setFind(false); }, [path]);
+
+  // The services menu opens on click and closes on a click anywhere outside it.
+  const megaBtn = useRef<HTMLButtonElement>(null);
+  const megaBox = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!mega) return;
+    const away = (e: PointerEvent) => {
+      const t = e.target as Node;
+      if (megaBox.current?.contains(t) || megaBtn.current?.contains(t)) return;
+      setMega(false);
+    };
+    document.addEventListener("pointerdown", away);
+    return () => document.removeEventListener("pointerdown", away);
+  }, [mega]);
   useEffect(() => {
     let last = scrollY;
     const on = () => {
@@ -78,16 +92,16 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`snav${hidden && !sheet && !find ? " is-hidden" : ""}${scrolled ? " is-scrolled" : ""}`} onMouseLeave={() => setMega(false)}>
+      <header className={`snav${hidden && !sheet && !find ? " is-hidden" : ""}${scrolled ? " is-scrolled" : ""}`}>
         <Link href="/" className="snav__pill snav__brand" aria-label="Logic & Loop, home">
           <Logo small /> <span>Logic &amp; Loop</span>
         </Link>
         <nav className="snav__pill snav__links" aria-label="Main">
-          <button className={`snav__l${mega ? " is-open" : ""}`} aria-expanded={mega} aria-controls="snav-mega" aria-current={current("/services") ? "page" : undefined} onClick={() => setMega((m) => !m)} onMouseEnter={() => setMega(true)}>
+          <button ref={megaBtn} className={`snav__l${mega ? " is-open" : ""}`} aria-expanded={mega} aria-controls="snav-mega" aria-current={current("/services") ? "page" : undefined} onClick={() => setMega((m) => !m)}>
             Services <span className="snav__caret" aria-hidden="true" />
           </button>
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="snav__l" aria-current={current(l.href) ? "page" : undefined} onMouseEnter={() => setMega(false)}>{l.label}</Link>
+            <Link key={l.href} href={l.href} className="snav__l" aria-current={current(l.href) ? "page" : undefined}>{l.label}</Link>
           ))}
         </nav>
         <div className="snav__pill snav__end">
@@ -97,7 +111,7 @@ export default function Nav() {
         </div>
         <AnimatePresence>
           {mega && (
-            <motion.div id="snav-mega" className="snav__mega" initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: 0.98 }} transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}>
+            <motion.div ref={megaBox} id="snav-mega" className="snav__mega" onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMega(false); }} initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: 0.98 }} transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}>
               {groups.map((g) => (
                 <div key={g.id} className="snav__col">
                   <p className="snav__colh">{g.name}</p>
