@@ -112,7 +112,7 @@ export default function Nav() {
           )}
         </AnimatePresence>
         {sheet && (
-          <nav id="snav-sheet" className="snav__sheet" aria-label="Menu">
+          <nav id="snav-sheet" className="snav__sheet" aria-label="Menu" data-lenis-prevent>
             {[{ href: "/services", label: "Services" }, { href: "/industries", label: "Industries" }, ...links, { href: "/faq", label: "FAQ" }].map((l) => (
               <Link key={l.href} href={l.href} aria-current={current(l.href) ? "page" : undefined}>{l.label}</Link>
             ))}
@@ -148,7 +148,7 @@ function Find({ onClose }: { onClose: () => void }) {
             }} />
           <button className="sfind__x" onClick={onClose} aria-label="Close search">{I.close}</button>
         </label>
-        <ul id="sfind-list" className="sfind__list" role="listbox" aria-label="Results">
+        <ul id="sfind-list" className="sfind__list" role="listbox" aria-label="Results" data-lenis-prevent>
           {list.length === 0 && <li className="sfind__none">Nothing matches &ldquo;{q}&rdquo;. Try &ldquo;AI&rdquo;, &ldquo;app&rdquo; or &ldquo;automation&rdquo;.</li>}
           {list.map((x, n) => (
             <li key={x.href} role="option" aria-selected={n === at}>
