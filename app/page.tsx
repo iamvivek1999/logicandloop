@@ -1,5 +1,5 @@
 import HeroLoop from "@/components/home/HeroLoop";
-import { Global, Process, Products, Proof, Services } from "@/components/home/home";
+import { Global, Offers, Process, Products, Proof, Services } from "@/components/home/home";
 import { Agents, Closing, Industries, Why } from "@/components/home/sections";
 import "./home.css";
 
@@ -8,6 +8,7 @@ export default function Home() {
     <>
       <HeroLoop />
       <Proof />
+      <Offers />
       <Services />
       <Industries />
       <Agents />
