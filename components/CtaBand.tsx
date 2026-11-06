@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WhatsApp } from "./Icons";
+import TextRoll from "./fx/TextRoll";
 import { whatsappHref } from "@/lib/site";
 
 export default function CtaBand({
@@ -21,9 +22,9 @@ export default function CtaBand({
           <p className="lead" style={{ marginTop: 20 }}>{text}</p>
         </div>
         <div className="cta-band__actions">
-          <Link className="btn btn--light" href={topic ? `/contact?topic=${topic}` : "/contact"}>Start a project</Link>
-          <a className="btn btn--ghost-light" href={whatsapp} target="_blank" rel="noopener">
-            <WhatsApp className="ico" /> WhatsApp us
+          <Link className="btn btn--primary btn--lg roll-host" href={topic ? `/contact?topic=${topic}` : "/contact"}><TextRoll>Start a project</TextRoll></Link>
+          <a className="btn btn--ghost-light roll-host" href={whatsapp} target="_blank" rel="noopener">
+            <WhatsApp className="ico" /> <TextRoll>WhatsApp us</TextRoll>
           </a>
         </div>
       </div>

@@ -12,5 +12,5 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "off",
     },
   },
-  globalIgnores([".next/**", "node_modules/**", "next-env.d.ts"]),
+  globalIgnores([".next/**", "node_modules/**", "next-env.d.ts", "components/fx/vendor/**"]),
 ]);
