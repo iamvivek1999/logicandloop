@@ -12,7 +12,6 @@ import { bookingHref, bookingReady } from "@/lib/site";
 const links = [
   { href: "/products/minute-one", label: "Minute One" },
   { href: "/products/loop-os", label: "Loop OS" },
-  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/careers", label: "Careers" },
 ];
