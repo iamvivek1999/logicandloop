@@ -182,3 +182,15 @@
 @media (max-width: 960px) { .zx-flow, .zx-feats { grid-template-columns: 1fr 1fr; } .zx-flow li::after { display: none; } .zx-offer { grid-template-columns: 1fr; } .zx-offer .zp-tier { justify-self: stretch; max-width: none; } .zx-tiers3 { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .zx-flow, .zx-feats { grid-template-columns: 1fr; } }
 main:has(> .z) { background: #f7f5ef; }
+
+/* Contact wizard on the contact page */
+.zw-root { background: none; }
+.zw-muted { margin-top: 6px; color: var(--mute); font-size: 15px; }
+.zw-q:focus { outline: none; }
+.zw-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.zw-fields label small { font-weight: 500; color: var(--mute); }
+.zw-fields select { padding: 13px 14px; border-radius: 12px; border: 1.5px solid var(--line); font: 500 16px var(--sans); background: #fff; color: var(--ink); }
+.zw-honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.zw-fine { margin-top: 14px; font-size: 13px; color: var(--mute); }
+.zw-done svg { width: 40px; height: 40px; color: #1f9d6c; }
+@media (max-width: 520px) { .zw-two { grid-template-columns: 1fr; } }
