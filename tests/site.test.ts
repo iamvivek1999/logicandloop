@@ -23,8 +23,8 @@ describe("WhatsApp links", () => {
 });
 
 describe("booking link", () => {
-  it("sends visitors to the contact page until a real booking URL is set", () => {
+  it("sends visitors to the call request page until a real booking URL is set", () => {
     if (bookingReady) expect(bookingHref).toBe(site.bookingUrl);
-    else expect(bookingHref).toBe("/contact?topic=call");
+    else expect(bookingHref).toBe("/book");
   });
 });
