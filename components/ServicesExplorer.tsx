@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { groups, services, groupName, type GroupId } from "@/lib/services";
-import { Arrow, Search } from "./Icons";
+import { Search } from "./Icons";
+import { motion } from "motion/react";
+import TextRoll from "./fx/TextRoll";
 
 export default function ServicesExplorer() {
   const [group, setGroup] = useState<GroupId | "all">("all");
@@ -24,11 +26,13 @@ export default function ServicesExplorer() {
       <div className="explorer__bar">
         <div className="filters" role="group" aria-label="Filter by area">
           <button className="filter" aria-pressed={group === "all"} onClick={() => setGroup("all")}>
-            All<span>{services.length}</span>
+            {group === "all" && <motion.span className="filter__pill" layoutId="filter-pill" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
+            <span className="filter__label">All</span>
           </button>
           {groups.map((g) => (
             <button key={g.id} className="filter" aria-pressed={group === g.id} onClick={() => setGroup(g.id)}>
-              {g.name}<span>{services.filter((s) => s.group === g.id).length}</span>
+              {group === g.id && <motion.span className="filter__pill" layoutId="filter-pill" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
+              <span className="filter__label">{g.name}</span>
             </button>
           ))}
         </div>
@@ -44,11 +48,11 @@ export default function ServicesExplorer() {
       {list.length ? (
         <div className="svc-grid">
           {list.map((s) => (
-            <Link key={s.slug} href={`/services/${s.slug}`} className="svc-card">
+            <Link key={s.slug} href={`/services/${s.slug}`} className="svc-card roll-host">
               <span className="svc-card__group">{groupName(s.group)}</span>
               <h3 className="h3">{s.name}</h3>
               <p>{s.short}</p>
-              <span className="svc-card__more">Deliverables and timeline <Arrow /></span>
+              <span className="svc-card__more"><TextRoll center={false}>Deliverables and timeline</TextRoll></span>
             </Link>
           ))}
         </div>

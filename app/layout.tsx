@@ -1,19 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/bricolage-grotesque/wdth.css";
-import "@fontsource-variable/source-serif-4/opsz.css";
+import "@fontsource-variable/funnel-display";
+import "@fontsource-variable/funnel-sans";
 import "./globals.css";
+import "./refresh.css";
+import "./nav.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Dock from "@/components/Dock";
 import Consent from "@/components/Consent";
 import Motion from "@/components/Motion";
 import Analytics from "@/components/Analytics";
-import { NOTE_KEY, site } from "@/lib/site";
+import SmoothScroll from "@/components/fx/SmoothScroll";
+import { baseOpenGraph, NOTE_KEY, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Logic & Loop | Web apps, mobile apps, AI agents and automations",
+    default: "Logic & Loop | Technology services for software engineering, AI and automation",
     template: "%s | Logic & Loop",
   },
   description: site.description,
@@ -29,17 +32,15 @@ export const metadata: Metadata = {
       : undefined,
   },
   openGraph: {
-    type: "website",
-    siteName: site.name,
+    ...baseOpenGraph,
     title: "Logic & Loop | We write the logic. Your business runs the loop.",
     description: site.description,
-    locale: "en_IN",
   },
   twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#EEF0EB",
+  themeColor: "#FFFFFF",
 };
 
 // Tells search engines this site is one organisation called Logic & Loop.
@@ -56,6 +57,7 @@ const organizationJsonLd = {
       description: site.description,
       email: site.email,
       ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
+      founder: site.leaders.map((l) => ({ "@type": "Person", name: l.name, jobTitle: l.role, sameAs: [l.linkedin] })),
     },
     {
       "@type": "WebSite",
@@ -90,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Consent />
         <Analytics />
         <Motion />
+        <SmoothScroll />
       </body>
     </html>
   );

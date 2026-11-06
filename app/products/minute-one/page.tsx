@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
-import { whatsappHref } from "@/lib/site";
+import { baseOpenGraph, whatsappHref } from "@/lib/site";
 import { WhatsApp } from "@/components/Icons";
+import Faq from "@/components/fx/Faq";
+import TextRoll from "@/components/fx/TextRoll";
+
+const description =
+  "Minute One replies to new enquiries on WhatsApp within a minute, answers routine questions, qualifies leads and books the next step for growing teams.";
 
 export const metadata: Metadata = {
   title: "Minute One: WhatsApp lead-response agent for growing teams",
-  description:
-    "Minute One replies to new enquiries on WhatsApp within a minute, answers routine questions, qualifies leads and books the next step for growing teams.",
+  description,
+  openGraph: { ...baseOpenGraph, title: "Minute One: WhatsApp lead-response agent for growing teams", description },
 };
 
 const features = [
@@ -53,9 +58,9 @@ export default function MinuteOne() {
               Leads go cold while they wait for a reply. Minute One answers on WhatsApp within a minute, handles routine questions, qualifies the lead and books the next step — a site visit, consultation, counselling call, product demo or discovery call.
             </p>
             <div className="hero__cta" style={{ marginTop: 32 }}>
-              <Link className="btn btn--primary" href="/contact?topic=minute-one">Get a free lead-response audit</Link>
-              <a className="btn btn--outline" href={whatsappHref("Hi, I'd like to see a Minute One demo.")} target="_blank" rel="noopener">
-                <WhatsApp className="ico" /> See a live demo
+              <Link className="btn btn--primary btn--lg roll-host" href="/contact?topic=minute-one"><TextRoll>Get a free lead-response audit</TextRoll></Link>
+              <a className="btn btn--quiet roll-host" href={whatsappHref("Hi, I'd like to see a Minute One demo.")} target="_blank" rel="noopener">
+                <WhatsApp className="ico" /> <TextRoll>See a live demo</TextRoll>
               </a>
             </div>
           </div>
@@ -116,15 +121,11 @@ export default function MinuteOne() {
                 We start with a free audit of your lead response and agree on the conversion that matters to your business: a site visit, consultation, counselling call, product demo or discovery call. The 60-day pilot runs with no setup fee and no monthly fee. At day 60 you get a report against that baseline, and if qualified next steps did not go up you owe nothing.
               </p>
             </div>
-            <Link className="btn btn--primary" href="/contact?topic=minute-one">Apply for a pilot slot</Link>
+            <Link className="btn btn--primary roll-host" href="/contact?topic=minute-one"><TextRoll>Apply for a pilot slot</TextRoll></Link>
           </div>
 
           <h2 className="sub-h" style={{ marginTop: 96 }}>Questions teams ask</h2>
-          <div className="faq">
-            {faqs.map((f) => (
-              <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
-            ))}
-          </div>
+          <Faq items={faqs} />
         </div>
       </section>
 

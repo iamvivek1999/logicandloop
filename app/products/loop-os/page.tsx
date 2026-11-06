@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/site";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import LoopStage from "@/components/scenes/LoopStage";
 import { Check } from "@/components/Icons";
+import Faq from "@/components/fx/Faq";
+import TextRoll from "@/components/fx/TextRoll";
+
+const description =
+  "Loop OS gives your team a crew of AI agents and the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.";
 
 export const metadata: Metadata = {
   title: "Loop OS: your own crew of AI agents, licensed",
-  description:
-    "Loop OS gives your team a crew of AI agents and the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.",
+  description,
+  openGraph: { ...baseOpenGraph, title: "Loop OS: your own crew of AI agents, licensed", description },
 };
 
 const harness = [
@@ -74,8 +80,8 @@ export default function LoopOS() {
               Loop OS gives your team agents with real jobs, plus the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.
             </p>
             <div className="hero__cta" style={{ marginTop: 32 }}>
-              <Link className="btn btn--light" href="/contact?topic=loop-os">Join early access</Link>
-              <a className="btn btn--ghost-light" href="#licences">See licence options</a>
+              <Link className="btn btn--light roll-host" href="/contact?topic=loop-os"><TextRoll>Join early access</TextRoll></Link>
+              <a className="btn btn--ghost-light roll-host" href="#licences"><TextRoll>See licence options</TextRoll></a>
             </div>
           </div>
           <LoopStage />
@@ -112,17 +118,13 @@ export default function LoopOS() {
                 <ul>
                   {p.items.map((i) => <li key={i}><Check />{i}</li>)}
                 </ul>
-                <Link className={`btn ${p.mark ? "btn--primary" : "btn--outline"}`} href="/contact?topic=loop-os">{p.cta}</Link>
+                <Link className={`btn ${p.mark ? "btn--primary" : "btn--outline"} roll-host`} href="/contact?topic=loop-os"><TextRoll>{p.cta}</TextRoll></Link>
               </div>
             ))}
           </div>
 
           <h2 className="sub-h" style={{ marginTop: 96 }}>Questions</h2>
-          <div className="faq">
-            {faqs.map((f) => (
-              <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
-            ))}
-          </div>
+          <Faq items={faqs} />
         </div>
       </section>
 

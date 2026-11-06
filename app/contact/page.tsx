@@ -3,11 +3,15 @@ import Link from "next/link";
 import { Suspense } from "react";
 import ContactForm, { ContactFormSkeleton } from "@/components/ContactForm";
 import { Arrow, Calendar, Mail, WhatsApp } from "@/components/Icons";
-import { bookingHref, bookingReady, site, whatsappHref } from "@/lib/site";
+import { baseOpenGraph, bookingHref, bookingReady, site, whatsappHref } from "@/lib/site";
+
+const description =
+  "Tell us what you want to build. We reply within one working day.";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Tell us what you want to build. We reply within one working day.",
+  description,
+  openGraph: { ...baseOpenGraph, title: "Contact | Logic & Loop", description },
 };
 
 export default function Contact() {

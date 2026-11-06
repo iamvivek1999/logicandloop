@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useId, useState } from "react";
+import { motion } from "motion/react";
+import SlidingNumber from "@/components/fx/SlidingNumber";
 import { Logo } from "@/components/Icons";
 import { groups, servicesIn } from "@/lib/services";
+import TextRoll from "@/components/fx/TextRoll";
 
 /* Interactive pieces of the home page (app/page.tsx). Styles: "Home page blocks" in globals.css. */
 
@@ -19,7 +22,7 @@ const shift = {
     "Every enquiry answered within a minute",
     "Tools that update each other",
     "Reports that build themselves",
-    "One senior team, from design to support",
+    "One accountable team, from design to support",
     "Agents live, answering from approved information",
   ],
 };
@@ -56,7 +59,7 @@ export function Shift() {
           ))}
         </svg>
         <div className="shift__core">
-          <Logo />
+          <Logo reversed />
         </div>
         <ul className="shift__out" aria-live="polite">
           {side.map((t) => (
@@ -105,14 +108,19 @@ export function ServiceTabs() {
               }
             }}
           >
-            {x.name}
+            {/* The dark highlight slides from tab to tab. Adapted from Motion Primitives'
+                Animated Background (MIT, https://motion-primitives.com). */}
+            {x.id === on && (
+              <motion.span className="tabs__pill" layoutId={`${id}-pill`} transition={{ type: "spring", stiffness: 420, damping: 36 }} />
+            )}
+            <span className="tabs__label">{x.name}</span>
           </button>
         ))}
       </div>
       <div className="tabs__panel" role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-${on}`} key={on}>
         <div className="tabs__lead">
           <h3>{g.blurb}</h3>
-          <p>{servicesIn(g.id).length} services, each with a fixed scope and a fixed quote.</p>
+          <p>Each with a fixed scope and a fixed quote.</p>
         </div>
         <ul className="tabs__list">
           {servicesIn(g.id).map((s) => (
@@ -210,7 +218,7 @@ export function HoursCalc() {
       </div>
       <div className="calc__out" aria-live="polite">
         <p className="calc__eyebrow">Your estimated recovery</p>
-        <p className="calc__big">{monthly.toLocaleString("en-IN")}</p>
+        <p className="calc__big"><SlidingNumber value={monthly} /></p>
         <p>hours a month from {selectedTask.label.toLowerCase()}, about {fte < 1 ? "part of one person's" : `${fte.toFixed(1)} people's`} working time.</p>
         <div className="calc__breakdown" aria-label={`${monthly} potentially automated hours and ${monthlyTotal - monthly} hours remaining for people`}>
           <div><span style={{ width: `${confidence * 100}%` }} /><i style={{ width: `${(1 - confidence) * 100}%` }} /></div>
@@ -218,7 +226,7 @@ export function HoursCalc() {
         </div>
         <p className="calc__recommendation">Your likely starting point: <b>{selectedTask.service}</b>.</p>
         <div className="calc__actions">
-          <Link className="btn btn--light btn--sm" href={selectedTask.href}>Explore {selectedTask.service}</Link>
+          <Link className="btn btn--light btn--sm roll-host" href={selectedTask.href}><TextRoll>{`Explore ${selectedTask.service}`}</TextRoll></Link>
           <button type="button" className="calc__copy" onClick={copyResult}>{copied ? "Copied" : "Copy estimate"}</button>
         </div>
         <p className="calc__note">
