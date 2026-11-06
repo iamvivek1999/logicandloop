@@ -3,9 +3,8 @@ import { baseOpenGraph } from "@/lib/site";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import LoopStage from "@/components/scenes/LoopStage";
-import { Check } from "@/components/Icons";
 import Faq from "@/components/fx/Faq";
-import TextRoll from "@/components/fx/TextRoll";
+import "@/app/zen.css";
 
 const description =
   "Loop OS gives your team a crew of AI agents and the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.";
@@ -47,6 +46,19 @@ const plans = [
   },
 ];
 
+const promises = [
+  { n: "6", u: "agents", p: "ready-made on the Team plan: research, sales, content, reporting, ops, support" },
+  { n: "3", u: "model families", p: "Claude, GPT and Gemini, switchable per agent" },
+  { n: "100%", u: "", p: "of agent actions logged: who asked, what ran, what changed" },
+  { n: "2", u: "ways to host", p: "in our cloud, or self-hosted on yours" },
+];
+const loop = [
+  { h: "Triggered", p: "On a schedule, by an event in your tools, or when someone asks." },
+  { h: "Works the job", p: "Reads real data through official connectors, inside its permissions." },
+  { h: "Waits for approval", p: "Anything sensitive pauses for a person before it's sent or changed." },
+  { h: "Logs and remembers", p: "Every action recorded; context carried into the next run." },
+];
+
 const faqs = [
   { q: "Is this a chatbot?", a: "No. A chatbot waits for questions. Loop OS agents run defined jobs on your tools, on a schedule or when triggered, and report back." },
   { q: "Is our data used to train AI models?", a: "No. Loop OS uses API terms where your data isn't used for training, and the self-hosted licence keeps everything on your infrastructure." },
@@ -64,71 +76,102 @@ export default function LoopOS() {
     offers: { "@type": "Offer", availability: "https://schema.org/PreOrder" },
   };
   return (
-    <>
+    <div className="z">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
-      <section className="p-hero dark">
-        <div className="wrap p-hero__grid">
-          <div>
-            <ol className="crumbs" aria-label="Breadcrumb">
-              <li><Link href="/">Home</Link></li>
-              <li>Products</li>
-              <li aria-current="page">Loop OS</li>
-            </ol>
-            <p className="status status--soon" style={{ marginBottom: 18 }}>Early access</p>
-            <h1 className="display" style={{ fontSize: "var(--step-4)" }}>Your own crew of AI agents, licensed.</h1>
-            <p className="lead" style={{ marginTop: 24 }}>
-              Loop OS gives your team agents with real jobs, plus the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.
-            </p>
-            <div className="hero__cta" style={{ marginTop: 32 }}>
-              <Link className="btn btn--light roll-host" href="/contact?topic=loop-os"><TextRoll>Join early access</TextRoll></Link>
-              <a className="btn btn--ghost-light roll-host" href="#licences"><TextRoll>See licence options</TextRoll></a>
-            </div>
-          </div>
-          <LoopStage />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="wrap">
-          <div className="section-head">
-            <h2 className="h2">The agents are the easy part. The harness is the product.</h2>
-            <p className="lead">
-              Anyone can open a chat window. Loop OS is the layer that makes agents dependable at work: defined jobs, real connections, limits and a record of everything they do.
-            </p>
-          </div>
-          <div className="features">
-            {harness.map((f) => (
-              <div className="feature" key={f.h}><h3 className="h3">{f.h}</h3><p>{f.p}</p></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--rule" id="licences">
-        <div className="wrap">
-          <div className="section-head">
-            <h2 className="h2">Three ways to license it.</h2>
-            <p className="lead">Pricing is set per team during early access. Tell us your team size and tools and we&apos;ll send a quote.</p>
-          </div>
-          <div className="plans">
-            {plans.map((p) => (
-              <div className={`plan${p.mark ? " plan--mark" : ""}`} key={p.name}>
-                <h3 className="h3">{p.name}</h3>
-                <p>{p.who}</p>
-                <ul>
-                  {p.items.map((i) => <li key={i}><Check />{i}</li>)}
-                </ul>
-                <Link className={`btn ${p.mark ? "btn--primary" : "btn--outline"} roll-host`} href="/contact?topic=loop-os"><TextRoll>{p.cta}</TextRoll></Link>
+      <section className="z-hero" aria-labelledby="los-h">
+        <div className="z-wrap">
+          <div className="zx-hero zx-hero--deep">
+            <div className="zx-hero__copy">
+              <ol className="crumbs" aria-label="Breadcrumb">
+                <li><Link href="/">Home</Link></li>
+                <li>Products</li>
+                <li aria-current="page">Loop OS</li>
+              </ol>
+              <p className="z-over">Loop OS · Early access</p>
+              <h1 id="los-h">Your own crew of AI agents, licensed.</h1>
+              <p className="zx-hero__p">Loop OS gives your team agents with real jobs, plus the harness that runs them safely on your tools and data. Licensed per team, in our cloud or yours.</p>
+              <div className="z-cta">
+                <Link className="z-btn z-btn--sun" href="/contact?topic=loop-os">Join early access</Link>
+                <a className="z-btn z-btn--glass" href="#licences">See licence options</a>
               </div>
+              <p className="zx-hero__fine">Permissions and approvals · Full audit log · Your choice of model</p>
+            </div>
+            <div className="zx-hero__vis"><LoopStage /></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="z-proof" aria-label="What Loop OS includes">
+        <div className="z-wrap">
+          <p className="z-over z-over--dark">What comes with it</p>
+          <dl className="z-stats">
+            {promises.map((x) => <div key={x.p}><dt>{x.n}{x.u && <small> {x.u}</small>}</dt><dd>{x.p}</dd></div>)}
+          </dl>
+        </div>
+      </section>
+
+      <section className="z-sec" aria-labelledby="los-loop">
+        <div className="z-wrap">
+          <div className="z-head">
+            <p className="z-over z-over--dark">How an agent runs</p>
+            <h2 id="los-loop" className="z-h2">Every run follows the same safe loop.</h2>
+            <p className="z-sub">Not a blank chat box: a defined job, real connections, limits and a record of everything it does.</p>
+          </div>
+          <ol className="zx-flow">
+            {loop.map((f, n) => <li key={f.h}><span>0{n + 1}</span><b>{f.h}</b><p>{f.p}</p></li>)}
+          </ol>
+        </div>
+      </section>
+
+      <section className="z-sec z-sec--soft" aria-labelledby="los-harness">
+        <div className="z-wrap">
+          <div className="z-head">
+            <p className="z-over z-over--dark">The harness</p>
+            <h2 id="los-harness" className="z-h2">The agents are the easy part. The harness is the product.</h2>
+            <p className="z-sub">Anyone can open a chat window. Loop OS is the layer that makes agents dependable at work.</p>
+          </div>
+          <div className="zx-feats">
+            {harness.map((f, n) => (
+              <article className="zx-feat" key={f.h}><i aria-hidden="true">0{n + 1}</i><h3>{f.h}</h3><p>{f.p}</p></article>
             ))}
           </div>
+        </div>
+      </section>
 
-          <h2 className="sub-h" style={{ marginTop: 96 }}>Questions</h2>
+      <section className="z-sec" id="licences" aria-labelledby="los-lic">
+        <div className="z-wrap">
+          <div className="z-head">
+            <p className="z-over z-over--dark">Licences</p>
+            <h2 id="los-lic" className="z-h2">Three ways to license it.</h2>
+            <p className="z-sub">Pricing is set per team during early access. Tell us your team size and tools and we&apos;ll send a quote.</p>
+          </div>
+          <div className="zp-tiers zx-tiers3">
+            {plans.map((p) => (
+              <article key={p.name} className={`zp-tier${p.mark ? " is-pop" : ""}`}>
+                {p.mark && <span className="zp-tier__pop">Recommended</span>}
+                <h3>{p.name}</h3>
+                <p className="zp-for">{p.who}</p>
+                <p className="zp-price">Quote per team<small>{p.name === "Self-hosted" ? "annual licence with updates" : "during early access"}</small></p>
+                <ul>{p.items.map((i) => <li key={i}>{i}</li>)}</ul>
+                <Link className={`z-btn ${p.mark ? "z-btn--sun" : "z-btn--line"}`} href="/contact?topic=loop-os">{p.cta}</Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="z-sec z-sec--soft" aria-labelledby="los-faq">
+        <div className="z-wrap z-faq">
+          <div className="z-head">
+            <p className="z-over z-over--dark">FAQ</p>
+            <h2 id="los-faq" className="z-h2">Questions.</h2>
+            <Link href="/faq" className="z-link">View all FAQs →</Link>
+          </div>
           <Faq items={faqs} />
         </div>
       </section>
 
       <CtaBand title="Put a crew of agents to work." text="Tell us the three tasks your team repeats most. We'll show you how Loop OS would run them." topic="loop-os" />
-    </>
+    </div>
   );
 }

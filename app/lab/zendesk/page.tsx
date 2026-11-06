@@ -4,7 +4,7 @@ import Faq from "@/components/fx/Faq";
 import { industries } from "@/lib/industries";
 import { faqs } from "@/lib/faqs";
 import { bookingHref } from "@/lib/site";
-import "../zen.css";
+import "@/app/zen.css";
 
 /**
  * Zendesk-inspired home (lab). Warm light canvas, a rounded photo hero led by
