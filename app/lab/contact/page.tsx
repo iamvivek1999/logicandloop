@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ContactWizard from "@/components/lab/ContactWizard";
 import { bookingHref, site, whatsappHref } from "@/lib/site";
-import "../zen.css";
+import "@/app/zen.css";
 
 /** Contact as a short step-by-step wizard (lab), to compare with /contact. */
 export default function ContactLab() {

@@ -3,7 +3,7 @@ import CtaBand from "@/components/CtaBand";
 import Faq from "@/components/fx/Faq";
 import { HoursCalc } from "@/components/HomeParts";
 import { bookingHref } from "@/lib/site";
-import "../zen.css";
+import "@/app/zen.css";
 
 /**
  * "How we price" (lab). Engagement models instead of seat prices, since we
