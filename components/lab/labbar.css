@@ -1,9 +1,0 @@
-/* Development-only comparison bar */
-.labbar { position: fixed; right: 16px; top: 82px; z-index: 150; display: flex; gap: 6px; padding: 6px; border-radius: 16px; background: rgba(17, 19, 21, .94); backdrop-filter: blur(12px); box-shadow: 0 20px 40px -16px rgba(0, 0, 0, .6); font: 600 13px system-ui, sans-serif; max-width: calc(100vw - 90px); overflow-x: auto; }
-@media (max-width: 900px) { .labbar { top: auto; bottom: 84px; right: 8px; } }
-.labbar__g { display: flex; align-items: center; gap: 2px; padding-right: 6px; }
-.labbar__g + .labbar__g { padding-left: 6px; border-left: 1px solid rgba(255, 255, 255, .12); }
-.labbar__g span { padding: 0 8px; color: #9aa3ab; white-space: nowrap; }
-.labbar a { padding: 9px 12px; border-radius: 10px; color: #fff; white-space: nowrap; }
-.labbar a:hover { background: rgba(255, 255, 255, .08); }
-.labbar a[aria-current="page"] { background: #f0ab16; color: #111; }

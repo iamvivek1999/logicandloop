@@ -12,6 +12,7 @@ import { bookingHref, bookingReady } from "@/lib/site";
 const links = [
   { href: "/products/minute-one", label: "Minute One" },
   { href: "/products/loop-os", label: "Loop OS" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/careers", label: "Careers" },
 ];
@@ -22,6 +23,7 @@ const pages = [
   { label: "All services", hint: "Every service, by area", href: "/services", kind: "Company" },
   { label: "About", hint: "Vision and leadership", href: "/about", kind: "Company" },
   { label: "Careers", hint: "Openings and talent pool", href: "/careers", kind: "Company" },
+  { label: "Pricing", hint: "How we price projects, plans and pilots", href: "/pricing", kind: "Company" },
   { label: "FAQ", hint: "Pricing, timelines, ownership", href: "/faq", kind: "Company" },
   { label: "Contact", hint: "Start a project", href: "/contact", kind: "Company" },
 ];

@@ -1,26 +1,36 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import Faq from "@/components/fx/Faq";
 import { HoursCalc } from "@/components/HomeParts";
-import { bookingHref } from "@/lib/site";
+import { baseOpenGraph, bookingHref, site } from "@/lib/site";
 import "@/app/zen.css";
 
+const description =
+  "How Logic & Loop prices its work: fixed-scope projects, monthly plans, a pay-on-results Minute One pilot and per-drive or yearly talent assessment. A written scope and a clear price before any work starts.";
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description,
+  openGraph: { ...baseOpenGraph, title: "Pricing | Logic & Loop", description },
+};
+
 /**
- * "How we price" (lab). Engagement models instead of seat prices, since we
- * sell services. No rupee figures yet: each model says how the number is set.
+ * How we price. Engagement models instead of seat prices, since we sell
+ * services. No rupee figures: each model says how the number is set.
  */
 const tiers = [
   {
     name: "Fixed-scope project", for: "A defined build: an app, website, integration or automation.",
     price: "Fixed quote", note: "after a one-week scoping",
     items: ["Written scope and a fixed quote", "Clickable design before the build", "Demo on a live link every week", "Code and accounts in your name", "Handover docs and a recorded walkthrough"],
-    cta: "Get a fixed quote", href: "/contact?topic=call",
+    cta: "Get a fixed quote", href: "/contact",
   },
   {
     name: "Monthly plan", pop: true, for: "Products and operations that keep improving after launch.",
     price: "Monthly retainer", note: "no long lock-in",
     items: ["Everything in a project, plus:", "A standing team that ships every week", "One outcome number, reported weekly", "Priority fixes and monitoring", "Change direction month to month"],
-    cta: "Plan a monthly team", href: "/contact?topic=call",
+    cta: "Plan a monthly team", href: "/contact",
   },
   {
     name: "Minute One pilot", for: "Teams that depend on fast lead response.",
@@ -49,8 +59,24 @@ const qa = [
 ];
 
 export default function Pricing() {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Pricing", item: `${site.url}/pricing` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: qa.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ];
   return (
     <div className="z">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="page-head">
         <div className="wrap">
           <ol className="crumbs" aria-label="Breadcrumb"><li><Link href="/">Home</Link></li><li aria-current="page">Pricing</li></ol>
