@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/funnel-display";
 import "@fontsource-variable/funnel-sans";
@@ -87,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <a className="skip" href="#main">Skip to content</a>
         <Nav />
-        <main id="main">{children}</main>
+        <main id="main"><ViewTransition>{children}</ViewTransition></main>
         <Footer />
         <Dock />
         <Consent />

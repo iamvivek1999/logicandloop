@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Logo } from "./Icons";
 import { groups, services, servicesIn } from "@/lib/services";
+import { industries } from "@/lib/industries";
 import { bookingHref, bookingReady } from "@/lib/site";
 
 const links = [
@@ -24,7 +25,7 @@ const pages = [
   { label: "FAQ", hint: "Pricing, timelines, ownership", href: "/faq", kind: "Company" },
   { label: "Contact", hint: "Start a project", href: "/contact", kind: "Company" },
 ];
-const index = [...pages, ...services.map((s) => ({ label: s.name, hint: s.short, href: `/services/${s.slug}`, kind: "Service" }))];
+const index = [...pages, ...industries.map((i) => ({ label: i.name, hint: i.short, href: `/industries/${i.slug}`, kind: "Industry" })), ...services.map((s) => ({ label: s.name, hint: s.short, href: `/services/${s.slug}`, kind: "Service" }))];
 
 const ext = bookingReady ? { target: "_blank", rel: "noopener" } : {};
 const I = {
@@ -102,13 +103,17 @@ export default function Nav() {
                   {servicesIn(g.id).map((s) => <Link key={s.slug} href={`/services/${s.slug}`}>{s.name}</Link>)}
                 </div>
               ))}
+              <div className="snav__inds">
+                <Link href="/industries" className="snav__colh">Industries</Link>
+                {industries.map((i) => <Link key={i.slug} href={`/industries/${i.slug}`}>{i.name}</Link>)}
+              </div>
               <Link href="/services" className="snav__all">Browse all services {I.arrow}</Link>
             </motion.div>
           )}
         </AnimatePresence>
         {sheet && (
           <nav id="snav-sheet" className="snav__sheet" aria-label="Menu">
-            {[{ href: "/services", label: "Services" }, ...links, { href: "/faq", label: "FAQ" }].map((l) => (
+            {[{ href: "/services", label: "Services" }, { href: "/industries", label: "Industries" }, ...links, { href: "/faq", label: "FAQ" }].map((l) => (
               <Link key={l.href} href={l.href} aria-current={current(l.href) ? "page" : undefined}>{l.label}</Link>
             ))}
             <a className="snav__cta snav__cta--wide" href={bookingHref} data-analytics="booking_click" {...ext}>Book a 30-minute call</a>

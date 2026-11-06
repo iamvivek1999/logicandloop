@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 type Line = { k: "in" | "out" | "sys" | "log" | "wait"; t: string; at?: string };
 
-const cases: { who: string; h: string; p: string; lines: Line[] }[] = [
+const cases: { who: string; slug?: string; h: string; p: string; lines: Line[] }[] = [
   {
     who: "Real estate developers",
+    slug: "real-estate",
     h: "Answer every enquiry within a minute.",
     p: "Minute One replies on WhatsApp, answers approved property questions, qualifies the buyer and books the site visit, then alerts your sales team.",
     lines: [
@@ -18,6 +20,7 @@ const cases: { who: string; h: string; p: string; lines: Line[] }[] = [
   },
   {
     who: "Premium clinics",
+    slug: "clinics",
     h: "Fill the diary without a bigger front desk.",
     p: "An agent answers treatment questions from your approved price list, books consultations into your calendar and sends reminders before each one.",
     lines: [
@@ -29,6 +32,7 @@ const cases: { who: string; h: string; p: string; lines: Line[] }[] = [
   },
   {
     who: "Education & edtech",
+    slug: "education",
     h: "Turn course enquiries into counselling calls.",
     p: "Questions answered from your prospectus, counselling slots booked, and every lead logged in your CRM with where it came from.",
     lines: [
@@ -40,6 +44,7 @@ const cases: { who: string; h: string; p: string; lines: Line[] }[] = [
   },
   {
     who: "Startups",
+    slug: "startups",
     h: "Turn demo requests into conversations.",
     p: "Minute One answers product questions from your approved knowledge base, qualifies the account and books a demo while the prospect is still engaged.",
     lines: [
@@ -122,6 +127,7 @@ export default function UseCases() {
               <div className="uc__body">
                 <h3 className="h3">{x.h}</h3>
                 <p>{x.p}</p>
+                {x.slug && <Link className="link-draw uc__more" href={`/industries/${x.slug}`}>How it works for {x.who.toLowerCase()} →</Link>}
               </div>
             )}
             {i === on && <span className="uc__bar" key={`${on}-${running}`} aria-hidden="true" />}

@@ -24,6 +24,8 @@ const PHOTO_MS = 2000;
 export default function HeroLoop() {
   const [i, setI] = useState(0);
   const [ph, setPh] = useState(0);
+  // Load each photo only when it is about to be shown, so the first view stays light.
+  const [loaded, setLoaded] = useState(2);
   const [paused, setPaused] = useState(false);
   const calm = useCalm();
   const still = calm || paused;
@@ -34,13 +36,16 @@ export default function HeroLoop() {
   }, [i, still]);
   useEffect(() => {
     if (still) return;
-    const t = setInterval(() => setPh((n) => (n + 1) % photos.length), PHOTO_MS);
+    const t = setInterval(() => {
+      setPh((n) => (n + 1) % photos.length);
+      setLoaded((l) => Math.min(photos.length, l + 1));
+    }, PHOTO_MS);
     return () => clearInterval(t);
   }, [still]);
   const s = slides[i];
   return (
     <section className={`h-hero h-hero--calm${paused ? " is-paused" : ""}`} aria-roledescription="carousel" aria-label="What we do">
-      {photos.map((x, n) => (
+      {photos.slice(0, loaded).map((x, n) => (
         <div key={x} className={`h-hero__bg${n === ph ? " is-on" : ""}`} aria-hidden="true">
           <Image src={`/images/${x}.webp`} alt="" fill priority={n === 0} sizes="100vw" />
         </div>

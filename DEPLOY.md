@@ -32,7 +32,7 @@ All contact settings live in `lib/site.ts`:
 | Setting | What it does |
 | --- | --- |
 | `whatsappNumber` | Every WhatsApp button (91 + 10 digits, digits only) |
-| `bookingUrl` | Every "Book a call" button. While it still says `your-link`, the buttons open the contact page instead |
+| `bookingUrl` | Every "Book a call" button. While it still says `your-link`, the buttons open the contact page instead. Free option: create a 30-minute event on cal.com (free for one person, connects to Google Calendar and Google Meet) and paste its link, e.g. `https://cal.com/logicandloop/30min` |
 | `email` | Contact form delivery and email links |
 
 Services (all 20 pages) are generated from `lib/services.ts`: edit a service's text, deliverables, stack, timeline or FAQs there and its page updates. Add a new object to the array and a new page appears, in the sitemap too.
