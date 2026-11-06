@@ -194,3 +194,8 @@ main:has(> .z) { background: #f7f5ef; }
 .zw-fine { margin-top: 14px; font-size: 13px; color: var(--mute); }
 .zw-done svg { width: 40px; height: 40px; color: #1f9d6c; }
 @media (max-width: 520px) { .zw-two { grid-template-columns: 1fr; } }
+
+/* Book a call */
+.bk-h { margin-top: 22px; font: 600 14px var(--sans); }
+.bk-days, .bk-times { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.bk-opt { padding: 11px 16px; border-radius: 999px; font-size: 15px; }

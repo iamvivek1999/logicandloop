@@ -62,4 +62,4 @@ export const whatsappHref = (text = site.whatsappMessage) =>
 export const NOTE_KEY = "ll-note-loop-os";
 
 export const bookingReady =!/your-link/.test(site.bookingUrl);
-export const bookingHref = bookingReady ? site.bookingUrl : "/contact?topic=call";
+export const bookingHref = bookingReady ? site.bookingUrl : "/book";
