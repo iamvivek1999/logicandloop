@@ -195,7 +195,44 @@ main:has(> .z) { background: #f7f5ef; }
 .zw-done svg { width: 40px; height: 40px; color: #1f9d6c; }
 @media (max-width: 520px) { .zw-two { grid-template-columns: 1fr; } }
 
-/* Book a call */
-.bk-h { margin-top: 22px; font: 600 14px var(--sans); }
-.bk-days, .bk-times { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.bk-opt { padding: 11px 16px; border-radius: 999px; font-size: 15px; }
+/* Book a call: calendar + animated time slots */
+.bk { padding: clamp(20px, 3vw, 32px); }
+.bk-pick { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; }
+.bk-cal__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.bk-cal__m { font: 650 1.2rem var(--sans); letter-spacing: -0.02em; }
+.bk-cal__nav { display: flex; gap: 6px; }
+.bk-cal__nav button { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: #fff; font: 600 20px/1 var(--sans); color: var(--ink); cursor: pointer; transition: background-color .2s, border-color .2s; }
+.bk-cal__nav button:hover:not(:disabled) { border-color: var(--spr); background: #eef3f1; }
+.bk-cal__nav button:disabled { opacity: .35; cursor: default; }
+.bk-cal__week, .bk-cal__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.bk-cal__week span { padding-bottom: 6px; text-align: center; font: 600 12px var(--sans); color: var(--mute); text-transform: uppercase; letter-spacing: .04em; }
+.bk-cal__viewport { overflow: hidden; }
+.bk-day { position: relative; isolation: isolate; aspect-ratio: 1; border: 0; border-radius: 12px; background: #eef3f1; font: 600 15px var(--sans); color: var(--spr); cursor: pointer; transition: background-color .2s, transform .15s; }
+.bk-day:hover:not(:disabled) { background: #dfeae5; }
+.bk-day:active:not(:disabled) { transform: scale(.94); }
+.bk-day:disabled { background: none; color: #a3aca8; font-weight: 500; cursor: default; }
+.bk-day.is-today .bk-day__n::after { content: ""; position: absolute; left: 50%; bottom: 7px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--sun); }
+.bk-day__sel { position: absolute; inset: 0; z-index: -1; border-radius: 12px; background: var(--spr); }
+.bk-day[aria-pressed="true"] { color: #fff; background: transparent; }
+.bk-day__n { position: relative; }
+.bk-tz { margin-top: 14px; font: 500 13px var(--sans); color: var(--mute); }
+.bk-tz b { color: var(--ink); font-weight: 600; }
+.bk-times { min-height: 320px; max-height: 420px; overflow-y: auto; padding-right: 4px; border-left: 1px solid var(--line); padding-left: 20px; }
+.bk-times__day { margin-bottom: 12px; font: 650 1rem var(--sans); }
+.bk-times__empty { display: grid; place-items: center; gap: 12px; height: 100%; min-height: 300px; text-align: center; color: var(--mute); font-size: 15px; }
+.bk-times__icon { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--line); position: relative; }
+.bk-times__icon::before, .bk-times__icon::after { content: ""; position: absolute; left: 50%; top: 50%; width: 2px; background: var(--sun); transform-origin: bottom center; border-radius: 2px; }
+.bk-times__icon::before { height: 14px; margin: -14px 0 0 -1px; animation: bk-spin 6s linear infinite; }
+.bk-times__icon::after { height: 10px; margin: -10px 0 0 -1px; background: var(--spr); animation: bk-spin 60s linear infinite; }
+@keyframes bk-spin { to { transform: rotate(360deg); } }
+.bk-slots { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bk-slots li { display: flex; gap: 8px; overflow: hidden; }
+.bk-slot { flex: 1; min-width: 0; padding: 12px 10px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; font: 600 15px var(--sans); color: var(--spr); cursor: pointer; transition: border-color .2s, background-color .2s, color .2s; }
+.bk-slot:hover { border-color: var(--spr); }
+.bk-slots li.is-on .bk-slot { background: #2f3b38; border-color: #2f3b38; color: #fff; }
+.bk-next { flex: none; overflow: hidden; white-space: nowrap; padding: 12px 18px; border: 0; border-radius: 12px; background: var(--sun); color: #1b1e22; font: 600 15px var(--sans); cursor: pointer; }
+.bk-sum { display: grid; gap: 2px; }
+@media (max-width: 700px) { .bk-pick { grid-template-columns: 1fr; } .bk-times { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 18px; max-height: none; min-height: 0; } .bk-times__empty { min-height: 120px; } }
+@media (prefers-reduced-motion: reduce) { .bk-times__icon::before, .bk-times__icon::after { animation: none; } }
+/* The sticky "Book a call" bar is redundant on the booking and contact pages. */
+body:has(.zw-root) > .dock { display: none; }
