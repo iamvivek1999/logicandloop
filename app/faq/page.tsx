@@ -33,19 +33,18 @@ export default function FaqPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="section" style={{ paddingTop: "clamp(48px, 7vw, 96px)" }} aria-labelledby="faq-h">
+      <header className="page-head">
         <div className="wrap">
           <ol className="crumbs" aria-label="Breadcrumb">
             <li><Link href="/">Home</Link></li>
             <li aria-current="page">FAQ</li>
           </ol>
-          <div className="section-head">
-            <div>
-              <p className="kicker">FAQ</p>
-              <h1 id="faq-h" className="display">Questions people ask <span className="tone">before the first call.</span></h1>
-            </div>
-            <p className="lead">Anything else, ask on WhatsApp or the <Link className="link-draw" href="/contact">contact form</Link>. A person replies {site.replyPromise}.</p>
-          </div>
+          <h1 id="faq-h" className="display">Questions people ask <span className="tone">before the first call.</span></h1>
+          <p className="lead">Anything else, ask on WhatsApp or the <Link className="link-draw" href="/contact">contact form</Link>. A person replies {site.replyPromise}.</p>
+        </div>
+      </header>
+      <section className="section" style={{ paddingTop: 56 }} aria-label="Answers">
+        <div className="wrap faq-page">
           <Faq items={faqs} />
         </div>
       </section>

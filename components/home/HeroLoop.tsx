@@ -24,20 +24,22 @@ const PHOTO_MS = 2000;
 export default function HeroLoop() {
   const [i, setI] = useState(0);
   const [ph, setPh] = useState(0);
+  const [paused, setPaused] = useState(false);
   const calm = useCalm();
+  const still = calm || paused;
   useEffect(() => {
-    if (calm) return;
+    if (still) return;
     const t = setTimeout(() => setI((n) => (n + 1) % slides.length), MS);
     return () => clearTimeout(t);
-  }, [i, calm]);
+  }, [i, still]);
   useEffect(() => {
-    if (calm) return;
+    if (still) return;
     const t = setInterval(() => setPh((n) => (n + 1) % photos.length), PHOTO_MS);
     return () => clearInterval(t);
-  }, [calm]);
+  }, [still]);
   const s = slides[i];
   return (
-    <section className="h-hero h-hero--calm" aria-roledescription="carousel" aria-label="What we do">
+    <section className={`h-hero h-hero--calm${paused ? " is-paused" : ""}`} aria-roledescription="carousel" aria-label="What we do">
       {photos.map((x, n) => (
         <div key={x} className={`h-hero__bg${n === ph ? " is-on" : ""}`} aria-hidden="true">
           <Image src={`/images/${x}.webp`} alt="" fill priority={n === 0} sizes="100vw" />
@@ -61,7 +63,8 @@ export default function HeroLoop() {
         </div>
       </div>
       <div className="wrap">
-        <div className="h-tabs" role="tablist" aria-label="Choose a slide">
+        <div className="h-tabs">
+          <div className="h-tabs__list" role="tablist" aria-label="Choose a slide">
           {slides.map((x, n) => (
             <button key={x.img} role="tab" aria-selected={n === i} className={`h-tab${n === i ? " is-on" : ""}${n < i ? " is-done" : ""}`} onClick={() => setI(n)}>
               <span className="h-tab__bar" aria-hidden="true"><i /></span>
@@ -70,6 +73,14 @@ export default function HeroLoop() {
               <span className="h-tab__sub">{x.sub}</span>
             </button>
           ))}
+          </div>
+          <button className="h-pause" onClick={() => setPaused((p) => !p)} aria-pressed={paused} aria-label={paused ? "Play the slideshow" : "Pause the slideshow"}>
+            {paused ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor" /></svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" /></svg>
+            )}
+          </button>
         </div>
       </div>
     </section>

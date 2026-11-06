@@ -4,7 +4,6 @@
  */
 import Link from "next/link";
 import UseCases from "@/components/UseCases";
-import { HoursCalc } from "@/components/HomeParts";
 import { WhatsApp } from "@/components/Icons";
 import TextRoll from "@/components/fx/TextRoll";
 import ExpandAgents from "@/components/fx/ExpandAgents";
@@ -95,13 +94,13 @@ export function Agents() {
             <p className="lead">Most of what we automate falls into one of three jobs. Most businesses need all three, wired together.</p>
           </div>
           <ExpandAgents agents={agents} />
-          <div className="calc-block">
-            <div className="center-head">
-              <h3 className="h2 h2--sm">How much repetitive work could your team <span className="tone">hand off?</span></h3>
-              <p className="lead">Choose a task, describe the effort and see where automation could give your team capacity back.</p>
-            </div>
-            <HoursCalc />
-          </div>
+          <Link href="/hours-calculator" className="calc-teaser">
+            <span>
+              <b>How much repetitive work could your team hand off?</b>
+              <small>Pick a task, describe the effort and see the hours automation could give back.</small>
+            </span>
+            <span className="calc-teaser__go">Open the calculator <span aria-hidden="true">→</span></span>
+          </Link>
         </div>
       </section>
     </>
