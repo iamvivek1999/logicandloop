@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ScrollWords from "@/components/fx/ScrollWords";
+import Leaders from "@/components/Leaders";
+import Photo from "@/components/Photo";
 import CtaBand from "@/components/CtaBand";
-import { groups, servicesIn, services } from "@/lib/services";
-import { site, whatsappHref } from "@/lib/site";
+import { groups, servicesIn } from "@/lib/services";
+import { baseOpenGraph, site, whatsappHref } from "@/lib/site";
+
+const description =
+  "Logic & Loop is a technology services company based in India, delivering software engineering, AI and automation services, with two products of its own: Minute One and Loop OS.";
 
 export const metadata: Metadata = {
-  title: { absolute: "About Logic & Loop | A small engineering studio in India" },
-  description:
-    "Logic & Loop is a small engineering studio in India. We build web apps, mobile apps, AI agents and automations, and run two products of our own: Minute One and Loop OS.",
+  title: { absolute: "About Logic & Loop | Technology services company, India" },
+  description,
+  openGraph: { ...baseOpenGraph, title: "About Logic & Loop | Technology services company, India", description },
 };
 
 const principles = [
@@ -26,7 +32,6 @@ const principles = [
 ];
 
 export default function About() {
-  const founder = site.founder;
   return (
     <>
       <header className="page-head">
@@ -37,21 +42,49 @@ export default function About() {
           </ol>
           <h1 className="display">About Logic &amp; Loop.</h1>
           <p className="lead">
-            Logic &amp; Loop is a small engineering studio based in India. We build web apps, mobile apps, AI agents and the automations that connect them, and we run two products of our own.
+            Logic &amp; Loop is a technology services company based in India. We deliver software engineering, AI and automation services to businesses that run on their software, and we build two products of our own.
           </p>
         </div>
       </header>
+
+      <div className="wrap band-photo">
+        <Photo name="team-meeting" className="band-photo__img" sizes="(max-width: 1280px) 100vw, 1280px" priority />
+      </div>
+
+      <section className="vision dark" aria-labelledby="vision-h">
+        <div className="wrap">
+          <div className="vision__grid">
+            <h2 id="vision-h" className="vision__label">Our vision</h2>
+            <ScrollWords className="vision__text" text="A business should spend its people on judgement, not repetition. We're building toward companies where every repeating process, from the first enquiry to the month-end report, runs on its own, reliably, and people get their time back for the work only people can do." />
+          </div>
+          <div className="vision__grid vision__grid--mission">
+            <h2 className="vision__label">Our mission</h2>
+            <p className="vision__mission">Engineer the software, AI and automation that run a business&rsquo;s repeating work, and answer for the outcome, not the hours.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="lead-h">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="kicker">Leadership</p>
+              <h2 id="lead-h" className="h2">The people who answer for the work.</h2>
+            </div>
+            <p className="lead">Every engagement is led by a founder, from the first call to the weekly numbers.</p>
+          </div>
+          <Leaders />
+        </div>
+      </section>
 
       <section className="section">
         <div className="wrap">
           <div className="section-head">
             <h2 className="h2">We write the logic. Your business runs the loop.</h2>
-            <p className="lead">
-              The logic is the software we write: the rules, the data and the connections between your tools. The loop is the work your business repeats every day, such as answering an enquiry, booking a visit, sending an invoice or closing the month. We take that repeating work off people&rsquo;s hands and make it run reliably.
-            </p>
           </div>
+          <ScrollWords className="why-words" text="The logic is the software we write: the rules, the data and the connections between your tools. The loop is the work your business repeats every day, like answering an enquiry, booking a visit or closing the month. We take that work off people's hands and make it run reliably." />
 
-          <h2 className="sub-h">What we build</h2>
+          <h2 className="sub-h">Capabilities</h2>
           <dl className="terms">
             {groups.map((g) => (
               <div key={g.id}>
@@ -69,7 +102,7 @@ export default function About() {
             ))}
           </dl>
           <p className="muted" style={{ marginTop: 20 }}>
-            <Link href="/services">See all {services.length} services</Link>
+            <Link href="/services">See all services</Link>
           </p>
         </div>
       </section>
@@ -77,7 +110,7 @@ export default function About() {
       <section className="section section--rule">
         <div className="wrap">
           <div className="section-head">
-            <h2 className="h2">How we work.</h2>
+            <h2 className="h2">How we engage.</h2>
             <p className="lead">Plain terms, written down before any work starts.</p>
           </div>
           <div className="features">
@@ -107,30 +140,14 @@ export default function About() {
         </div>
       </section>
 
-      {founder.name ? (
-        <section className="section section--rule">
-          <div className="wrap">
-            <div className="section-head">
-              <h2 className="h2">Who runs it.</h2>
-              <p className="lead">
-                {founder.name}
-                {founder.role ? `, ${founder.role}` : ""}.{" "}
-                {founder.linkedin ? (
-                  <a href={founder.linkedin} target="_blank" rel="noopener noreferrer me">LinkedIn</a>
-                ) : null}
-              </p>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       <section className="section section--rule">
         <div className="wrap">
           <h2 className="sub-h">The facts</h2>
           <dl className="terms">
             <div><dt>Name</dt><dd>Logic &amp; Loop, also written LogicAndLoop</dd></div>
+            <div><dt>Leadership</dt><dd>{site.leaders.map((l) => `${l.name} (${l.role})`).join(", ")}</dd></div>
             <div><dt>Based in</dt><dd>India, working with clients everywhere</dd></div>
-            <div><dt>What we build</dt><dd>Web apps, mobile apps, AI agents and automations</dd></div>
+            <div><dt>What we do</dt><dd>Technology services: software engineering, AI, automation, and hiring assessments</dd></div>
             <div><dt>Replies</dt><dd>{site.replyPromise.charAt(0).toUpperCase() + site.replyPromise.slice(1)}</dd></div>
             <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
             <div><dt>WhatsApp</dt><dd><a href={whatsappHref()} target="_blank" rel="noopener">Message us</a></dd></div>

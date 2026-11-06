@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Icons";
 import { ConsentLink } from "./Consent";
-import { groups, servicesIn, services } from "@/lib/services";
+import { groupName, groups, servicesIn } from "@/lib/services";
 import { site, whatsappHref } from "@/lib/site";
 
 export default function Footer() {
@@ -12,10 +12,10 @@ export default function Footer() {
         <div className="footer__grid">
           <div className="footer__brand">
             <Link href="/" className="brand">
-              <Logo />
+              <Logo reversed />
               Logic &amp; Loop
             </Link>
-            <p>Web apps, mobile apps, AI agents and automations, built by a small senior team.</p>
+            <p>Technology services for software engineering, AI and automation. One accountable team from design to run.</p>
           </div>
           {groups.slice(0, 2).map((g) => (
             <div key={g.id}>
@@ -25,6 +25,17 @@ export default function Footer() {
                   <li key={s.slug}><Link href={`/services/${s.slug}`}>{s.name}</Link></li>
                 ))}
               </ul>
+              {/* Talent assessment sits with the services, so it never reads as "we're hiring". */}
+              {g.id === "ai" ? (
+                <>
+                  <h4 style={{ marginTop: 28 }}>{groupName("hiring")} services</h4>
+                  <ul>
+                    {servicesIn("hiring").map((s) => (
+                      <li key={s.slug}><Link href={`/services/${s.slug}`}>{s.name}</Link></li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
             </div>
           ))}
           <div>
@@ -35,9 +46,10 @@ export default function Footer() {
             </ul>
             <h4 style={{ marginTop: 28 }}>More</h4>
             <ul>
-              <li><Link href="/services">All {services.length} services</Link></li>
+              <li><Link href="/services">All services</Link></li>
               <li><Link href="/#process">How we work</Link></li>
               <li><Link href="/about">About Logic &amp; Loop</Link></li>
+              <li><Link href="/careers">Careers</Link></li>
               <li><Link href="/privacy">Privacy policy</Link></li>
               <li><Link href="/terms">Terms</Link></li>
             </ul>

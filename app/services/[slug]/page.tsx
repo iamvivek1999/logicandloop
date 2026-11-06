@@ -3,8 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import { Check } from "@/components/Icons";
-import { groupName, serviceBySlug, services } from "@/lib/services";
-import { bookingHref, bookingReady, site } from "@/lib/site";
+import { groupName, serviceBySlug, servicePhoto, services } from "@/lib/services";
+import Photo from "@/components/Photo";
+import { baseOpenGraph, bookingHref, bookingReady, site } from "@/lib/site";
+import Faq from "@/components/fx/Faq";
+import TextRoll from "@/components/fx/TextRoll";
 
 export const dynamicParams = false;
 
@@ -16,8 +19,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const s = serviceBySlug(slug);
   if (!s) return {};
-  return { title: s.name, description: `${s.short} ${s.intro}`.slice(0, 160) };
+  const description = `${s.short} ${s.intro}`.slice(0, 160);
+  return { title: s.name, description, openGraph: { ...baseOpenGraph, title: `${s.name} | ${site.name}`, description } };
 }
+
+// The four stages most services follow; a service can set its own in lib/services.ts.
+const defaultSteps: [string, string][] = [
+  ["Understand", "A working session on goals, users and constraints. You get a written scope and a fixed quote."],
+  ["Design", "Flows and screens, or an architecture plan, signed off before the build."],
+  ["Build", "Weekly demos on a live link, so you can steer early."],
+  ["Launch & improve", "We ship, measure and keep improving, or hand over with full docs."],
+];
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -50,15 +62,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbJsonLd, serviceJsonLd]) }} />
       <header className="page-head">
-        <div className="wrap">
-          <ol className="crumbs" aria-label="Breadcrumb">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/services">Services</Link></li>
-            <li aria-current="page">{s.name}</li>
-          </ol>
-          <p className="kicker" style={{ marginBottom: 18 }}>{groupName(s.group)}</p>
-          <h1 className="display">{s.name}</h1>
-          <p className="lead">{s.intro}</p>
+        <div className="wrap page-head__grid">
+          <div>
+            <ol className="crumbs" aria-label="Breadcrumb">
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/services">Services</Link></li>
+              <li aria-current="page">{s.name}</li>
+            </ol>
+            <p className="kicker" style={{ marginBottom: 18 }}>{groupName(s.group)}</p>
+            <h1 className="display">{s.name}</h1>
+            <p className="lead">{s.intro}</p>
+          </div>
+          <Photo name={servicePhoto(s)} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" />
         </div>
       </header>
 
@@ -74,21 +89,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             <h2 className="sub-h">How it runs</h2>
             <ol className="deliver" style={{ listStyle: "none" }}>
-              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>1</span><span><b>Understand.</b> A working session on goals, users and constraints. You get a written scope and a fixed quote.</span></li>
-              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>2</span><span><b>Design.</b> Flows and screens, or an architecture plan, signed off before the build.</span></li>
-              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>3</span><span><b>Build.</b> Weekly demos on a live link, so you can steer early.</span></li>
-              <li><span style={{ color: "var(--accent)", fontWeight: 700 }}>4</span><span><b>Launch &amp; improve.</b> We ship, measure and keep improving, or hand over with full docs.</span></li>
+              {(s.steps ?? defaultSteps).map(([h, p], i) => (
+                <li key={h}><span style={{ color: "var(--accent)", fontWeight: 700 }}>{i + 1}</span><span><b>{h}.</b> {p}</span></li>
+              ))}
             </ol>
 
             <h2 className="sub-h">Questions</h2>
-            <div className="faq">
-              {s.faqs.map((f) => (
-                <details key={f.q}>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
-              ))}
-            </div>
+            <Faq items={s.faqs} />
 
             {related.length > 0 && (
               <>
@@ -117,8 +124,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </div>
             </dl>
             <div className="sheet__actions">
-              <Link className="btn btn--primary btn--block" href={`/contact?topic=${s.slug}`}>Get a fixed quote</Link>
-              <a className="btn btn--outline btn--block" href={bookingHref} {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}>Book a 30-minute call</a>
+              <Link className="btn btn--primary btn--block roll-host" href={`/contact?topic=${s.slug}`}><TextRoll>Get a fixed quote</TextRoll></Link>
+              <a className="btn btn--outline btn--block roll-host" href={bookingHref} {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}><TextRoll>Book a 30-minute call</TextRoll></a>
             </div>
           </aside>
         </div>

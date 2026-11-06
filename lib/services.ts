@@ -1,10 +1,13 @@
-export type GroupId = "build" | "ai" | "automate" | "advise";
+import type { PhotoName } from "@/components/Photo";
+
+export type GroupId = "build" | "ai" | "automate" | "advise" | "hiring";
 
 export const groups: { id: GroupId; name: string; blurb: string }[] = [
   { id: "build", name: "Build", blurb: "Products your customers and team use every day." },
   { id: "ai", name: "AI & data", blurb: "Agents, language models and the data underneath them." },
   { id: "automate", name: "Automate & integrate", blurb: "Connect your tools so the routine work runs itself." },
   { id: "advise", name: "Design, advise & support", blurb: "The thinking before the build and the care after it." },
+  { id: "hiring", name: "Talent assessment", blurb: "Online assessments and hiring drives we run for employers." },
 ];
 
 export type Service = {
@@ -19,6 +22,10 @@ export type Service = {
   engagement: string;
   faqs: { q: string; a: string }[];
   related: string[];
+  /** Photo for the page head (components/Photo.tsx); defaults to the group photo. */
+  image?: PhotoName;
+  /** How the engagement runs, if it differs from the usual understand / design / build / launch. */
+  steps?: [string, string][];
 };
 
 export const services: Service[] = [
@@ -361,7 +368,7 @@ export const services: Service[] = [
     group: "advise",
     short: "Research, flows, prototypes and design systems.",
     intro:
-      "We come from a design studio background, so design isn't an afterthought. We talk to your users, map the flows, and hand over screens and a design system developers can build from exactly.",
+      "Design is part of how we deliver, not an afterthought. We talk to your users, map the flows, and hand over screens and a design system developers can build from exactly.",
     deliverables: [
       "User interviews and a short findings report",
       "User flows and wireframes",
@@ -493,8 +500,83 @@ export const services: Service[] = [
     ],
     related: ["maintenance-amc", "fractional-cto", "web-apps-saas"],
   },
+
+  // ---------------------------------------------------------------- Hiring & assessments
+  {
+    slug: "online-assessments",
+    name: "Online assessments (OA)",
+    group: "hiring",
+    short: "Campus and off-campus tests we design, proctor and evaluate for you.",
+    intro:
+      "You choose the roles and the dates. We write a fresh test for every drive, run it under proctoring on the platform you prefer, check every submission for copying and AI help, and hand back a ranked shortlist with the evidence behind it.",
+    deliverables: [
+      "Role-specific test design: aptitude, coding, technical and communication sections",
+      "Fresh questions written for every drive, so leaked question banks don't help",
+      "Candidate invites, reminders and a help desk on test day",
+      "Webcam and screen proctoring with tab-switch and face checks",
+      "Checks for copied code and AI-written answers after the test",
+      "A ranked shortlist with section scores and integrity flags, ready for interviews",
+    ],
+    stack: ["Your platform or one we set up", "Coding tests", "Webcam & screen proctoring", "Plagiarism checks", "AI-answer detection"],
+    timeline: "2–3 weeks from brief to test day",
+    engagement: "Per drive, or a yearly contract for repeat hiring",
+    faqs: [
+      { q: "Can you run it on the platform we already use?", a: "Yes. We can run the drive on the assessment platform you already license, or set one up for you. Either way we write the questions, run the drive and own the evaluation." },
+      { q: "How do you stop cheating?", a: "Fresh questions for every drive, proctoring during the test, and checks afterwards for copied code and AI-written answers. Flagged candidates come with the evidence, so your team makes the final call." },
+      { q: "How many candidates can you handle?", a: "We size each drive before we quote: test windows, slots and support staff are planned around your candidate count and the colleges involved." },
+      { q: "What happens to candidate data?", a: "Candidates give consent before the test, data is kept only as long as the contract allows, and we sign a data-processing agreement in line with India's Digital Personal Data Protection Act." },
+    ],
+    related: ["hiring-drives", "data-dashboards", "ai-agents-chatbots"],
+    steps: [
+      ["Brief", "Roles, skills, candidate count and dates. You get a test plan and a fixed quote per drive."],
+      ["Build the test", "Fresh questions written and reviewed with your hiring team, then a trial run before candidates see it."],
+      ["Run the drive", "Invites, proctored test windows and a help desk while candidates take the test."],
+      ["Shortlist", "Scores, integrity checks and a ranked shortlist with evidence, usually within days of the test."],
+    ],
+  },
+  {
+    slug: "hiring-drives",
+    name: "Managed hiring drives",
+    group: "hiring",
+    short: "The whole drive, from registration to offer letters, run for you.",
+    intro:
+      "For teams that would rather not run a drive at all. We take your brief and run everything in between: registration, the online assessment, interview scheduling for your panels, candidate communication and the offer tracker, with one report at the end.",
+    deliverables: [
+      "A drive plan agreed upfront: colleges or channels, dates, rounds and cut-offs",
+      "Registration page and candidate updates by email and WhatsApp",
+      "The online assessment, designed, proctored and evaluated",
+      "Interview scheduling for your panels, with reminders and no-show follow-ups",
+      "A live dashboard of every candidate's stage for your hiring team",
+      "Offer and joining tracker, and a report once the drive closes",
+    ],
+    stack: ["Your platform or one we set up", "Registration & communication", "WhatsApp & email", "Interview scheduling", "Live drive dashboard"],
+    timeline: "3–6 weeks per drive, depending on rounds",
+    engagement: "Per drive, or a yearly contract for repeat hiring",
+    faqs: [
+      { q: "Can we hand over only some rounds?", a: "Yes. Choose the rounds you want us to run, from the assessment alone to the whole drive. We fit around your process and your interview panels." },
+      { q: "Who do candidates hear from?", a: "Your company. Every message goes out in your name and branding; we work behind the scenes." },
+      { q: "What does a yearly contract include?", a: "A set number of drives a year at a fixed price per drive, one team that learns your roles and your hiring bar, and reporting across drives so you can compare colleges and channels." },
+    ],
+    related: ["online-assessments", "whatsapp-payments", "data-dashboards"],
+    image: "exam-hall",
+    steps: [
+      ["Plan", "Colleges or channels, rounds, cut-offs and dates agreed with you. A fixed quote per drive or for the year."],
+      ["Register", "Registration opens and candidates get every update by email and WhatsApp, in your name."],
+      ["Assess & interview", "The online assessment, then interviews scheduled straight into your panels' calendars."],
+      ["Offer & report", "Offers and joining tracked to the end, then a report comparing colleges, rounds and drop-offs."],
+    ],
+  },
 ];
 
 export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
 export const servicesIn = (g: GroupId) => services.filter((s) => s.group === g);
 export const groupName = (g: GroupId) => groups.find((x) => x.id === g)!.name;
+
+const groupPhoto: Record<GroupId, PhotoName> = {
+  build: "code-screen",
+  ai: "analytics-dashboard",
+  automate: "network-cables",
+  advise: "whiteboard-sketch",
+  hiring: "computer-lab",
+};
+export const servicePhoto = (s: Service): PhotoName => s.image ?? groupPhoto[s.group];
