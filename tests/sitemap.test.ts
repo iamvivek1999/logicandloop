@@ -12,7 +12,8 @@ const appDir = join(process.cwd(), "app");
 function appRoutes(dir = appDir): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const full = join(dir, entry.name);
-    if (entry.isDirectory()) return entry.name === "api" ? [] : appRoutes(full);
+    // api: not pages; lab: development-only design comparisons, never deployed.
+    if (entry.isDirectory()) return entry.name === "api" || entry.name === "lab" ? [] : appRoutes(full);
     if (entry.name !== "page.tsx") return [];
     const parts = relative(appDir, dir).split(sep).filter(Boolean);
     return [parts.length ? `/${parts.join("/")}` : ""];

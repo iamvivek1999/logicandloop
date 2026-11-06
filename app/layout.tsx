@@ -1,4 +1,5 @@
 import { ViewTransition } from "react";
+import LabBar from "@/components/lab/LabBar";
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/funnel-display";
 import "@fontsource-variable/funnel-sans";
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main"><ViewTransition>{children}</ViewTransition></main>
         <Footer />
+        {process.env.NODE_ENV !== "production" && <LabBar />}
         <Dock />
         <Consent />
         <Analytics />
