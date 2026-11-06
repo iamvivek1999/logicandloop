@@ -217,7 +217,7 @@ main:has(> .z) { background: #f7f5ef; }
 .bk-day__n { position: relative; }
 .bk-tz { margin-top: 14px; font: 500 13px var(--sans); color: var(--mute); }
 .bk-tz b { color: var(--ink); font-weight: 600; }
-.bk-times { min-height: 320px; max-height: 420px; overflow-y: auto; padding-right: 4px; border-left: 1px solid var(--line); padding-left: 20px; }
+.bk-times { min-height: 320px; max-height: 420px; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; border-left: 1px solid var(--line); padding-left: 20px; }
 .bk-times__day { margin-bottom: 12px; font: 650 1rem var(--sans); }
 .bk-times__empty { display: grid; place-items: center; gap: 12px; height: 100%; min-height: 300px; text-align: center; color: var(--mute); font-size: 15px; }
 .bk-times__icon { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--line); position: relative; }

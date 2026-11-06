@@ -177,7 +177,7 @@ export default function BookCall() {
                 <p className="bk-tz">Times shown in your time zone{tz && <>: <b>{tz}</b></>}</p>
               </div>
 
-              <div className="bk-times">
+              <div className="bk-times" data-lenis-prevent>
                 <AnimatePresence mode="wait" initial={false}>
                   {!day ? (
                     <motion.div key="empty" className="bk-times__empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
