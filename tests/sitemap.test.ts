@@ -3,6 +3,7 @@ import { join, relative, sep } from "node:path";
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
 import { services } from "@/lib/services";
+import { industries } from "@/lib/industries";
 import { site } from "@/lib/site";
 
 const appDir = join(process.cwd(), "app");
@@ -24,7 +25,9 @@ describe("sitemap", () => {
 
   it("lists every page in the app", () => {
     const expected = appRoutes().flatMap((r) =>
-      r === "/services/[slug]" ? services.map((s) => `/services/${s.slug}`) : [r]
+      r === "/services/[slug]" ? services.map((s) => `/services/${s.slug}`)
+        : r === "/industries/[slug]" ? industries.map((i) => `/industries/${i.slug}`)
+        : [r]
     );
     // A new dynamic route needs its own expansion above.
     expect(expected.filter((r) => r.includes("["))).toEqual([]);
