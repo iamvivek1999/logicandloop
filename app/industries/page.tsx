@@ -28,9 +28,9 @@ export default function Industries() {
       </header>
       <section className="section" style={{ paddingTop: 56 }} aria-label="Industries">
         <div className="wrap ind-grid">
-          {industries.map((i) => (
+          {industries.map((i, n) => (
             <Link key={i.slug} href={`/industries/${i.slug}`} className="ind-card">
-              <Photo name={i.photo} className="ind-card__img" sizes="(max-width: 760px) 100vw, 50vw" alt="" />
+              <Photo name={i.photo} className="ind-card__img" sizes="(max-width: 760px) 100vw, 50vw" alt="" priority={n < 2} />
               <div className="ind-card__body"><b>{i.name}</b><span>{i.short}</span></div>
             </Link>
           ))}

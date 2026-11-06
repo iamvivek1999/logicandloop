@@ -48,7 +48,7 @@ export default function About() {
       </header>
 
       <div className="wrap band-photo">
-        <Photo name="team-meeting" className="band-photo__img" sizes="(max-width: 1280px) 100vw, 1280px" />
+        <Photo name="team-meeting" className="band-photo__img" sizes="(max-width: 1280px) 100vw, 1280px" priority />
       </div>
 
       <section className="vision dark" aria-labelledby="vision-h">

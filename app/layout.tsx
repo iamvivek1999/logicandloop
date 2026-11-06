@@ -75,7 +75,7 @@ const organizationJsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // The inline script below and components/Motion.tsx add classes to <html> before React hydrates.
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <script
           dangerouslySetInnerHTML={{
