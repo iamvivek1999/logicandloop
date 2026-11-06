@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { site } from "@/lib/site";
+import { validateContact } from "@/lib/contact";
+import { createRateLimiter } from "@/lib/rate-limit";
 
-const WINDOW_MS = 10 * 60 * 1000;
-const MAX_REQUESTS = 5;
-const requests = new Map<string, { count: number; resetAt: number }>();
+// Five enquiries per visitor every ten minutes.
+const allowed = createRateLimiter({ windowMs: 10 * 60 * 1000, max: 5, prefix: "contact" });
 
 type ContactPayload = {
   name?: unknown;
@@ -24,18 +25,6 @@ function clientKey(request: Request) {
     || "unknown";
 }
 
-function allowed(key: string) {
-  const now = Date.now();
-  const current = requests.get(key);
-  if (!current || current.resetAt <= now) {
-    requests.set(key, { count: 1, resetAt: now + WINDOW_MS });
-    return true;
-  }
-  if (current.count >= MAX_REQUESTS) return false;
-  current.count += 1;
-  return true;
-}
-
 export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -43,7 +32,7 @@ export async function POST(request: Request) {
   }
 
   const key = clientKey(request);
-  if (!allowed(key)) {
+  if (!(await allowed(key))) {
     return NextResponse.json({ error: "Too many enquiries. Please try again later." }, { status: 429 });
   }
 
@@ -61,11 +50,9 @@ export async function POST(request: Request) {
   const name = text(payload.name);
   const email = text(payload.email);
   const message = text(payload.message);
-  if (!name || name.length > 120 || !email || email.length > 254 || message.length < 10 || message.length > 5000) {
-    return NextResponse.json({ error: "Please check your name, email and message." }, { status: 422 });
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-    return NextResponse.json({ error: "Please enter a valid email address." }, { status: 422 });
+  const errors = validateContact({ name, email, message });
+  if (Object.keys(errors).length) {
+    return NextResponse.json({ error: Object.values(errors)[0], errors }, { status: 422 });
   }
 
   const topic = text(payload.topic) || "Not specified";

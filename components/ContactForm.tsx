@@ -2,49 +2,33 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { groups, services, servicesIn } from "@/lib/services";
+import { groups, servicesIn } from "@/lib/services";
 import { site } from "@/lib/site";
+import { DEFAULT_TOPIC, extraTopics, topicFromParam, topicLabel, validateContact, type ContactErrors } from "@/lib/contact";
 import { Check } from "./Icons";
 import { trackEvent } from "@/lib/analytics";
-
-const extraTopics = [
-  { value: "minute-one", label: "Minute One pilot" },
-  { value: "loop-os", label: "Loop OS early access" },
-  { value: "call", label: "A 30-minute intro call" },
-  { value: "not-sure", label: "Not sure yet" },
-];
+import TextRoll from "@/components/fx/TextRoll";
 
 const budgets = ["Under ₹2 lakh", "₹2–5 lakh", "₹5–15 lakh", "₹15 lakh +", "Not sure yet"];
 
-type Errors = Partial<Record<"name" | "email" | "message", string>>;
 type State = "idle" | "sending" | "sent" | "failed";
-
-const labelFor = (v: string) =>
-  services.find((s) => s.slug === v)?.name ?? extraTopics.find((t) => t.value === v)?.label ?? v;
 
 export default function ContactForm() {
   const params = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
-  const [topic, setTopic] = useState("not-sure");
-  const [errors, setErrors] = useState<Errors>({});
+  const [topic, setTopic] = useState(DEFAULT_TOPIC);
+  const [errors, setErrors] = useState<ContactErrors>({});
   const [state, setState] = useState<State>("idle");
 
   useEffect(() => {
-    const t = params.get("topic");
-    if (t && (services.some((s) => s.slug === t) || extraTopics.some((x) => x.value === t))) setTopic(t);
+    setTopic(topicFromParam(params.get("topic")));
   }, [params]);
 
-  function validate(fd: FormData): Errors {
-    const e: Errors = {};
-    const name = String(fd.get("name") ?? "").trim();
-    const email = String(fd.get("email") ?? "").trim();
-    const message = String(fd.get("message") ?? "").trim();
-    if (!name) e.name = "Enter your name.";
-    if (!email) e.email = "Enter your email so we can reply.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = "Enter an email like name@company.com.";
-    if (message.length < 10) e.message = "Tell us a little about the project, at least a sentence.";
-    return e;
-  }
+  const validate = (fd: FormData) => validateContact({
+    name: String(fd.get("name") ?? ""),
+    email: String(fd.get("email") ?? ""),
+    message: String(fd.get("message") ?? ""),
+  });
 
   async function onSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
@@ -61,7 +45,7 @@ export default function ContactForm() {
     setState("sending");
     const data: Record<string, string> = {};
     fd.forEach((v, k) => { if (k !== "_honey") data[k] = String(v); });
-    data.topic = labelFor(data.topic);
+    data.topic = topicLabel(data.topic);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -79,7 +63,7 @@ export default function ContactForm() {
     }
   }
 
-  const clear = (k: keyof Errors) => errors[k] && setErrors((e) => ({ ...e, [k]: undefined }));
+  const clear = (k: keyof ContactErrors) => errors[k] && setErrors((e) => ({ ...e, [k]: undefined }));
 
   if (state === "sent") {
     return (
@@ -90,7 +74,7 @@ export default function ContactForm() {
           <p className="muted">
             Thanks. It's in our inbox and we'll reply {site.replyPromise}. If it's urgent, WhatsApp is the fastest way to reach us.
           </p>
-          <div><button className="btn btn--outline" onClick={() => setState("idle")}>Send another message</button></div>
+          <div><button className="btn btn--outline roll-host" onClick={() => setState("idle")}><TextRoll>Send another message</TextRoll></button></div>
         </div>
       </div>
     );
@@ -151,8 +135,8 @@ export default function ContactForm() {
           The message didn't go through. Try again, or email us at <a href={`mailto:${site.email}`}>{site.email}</a>.
         </p>
       )}
-      <button className="btn btn--primary btn--block" type="submit" disabled={state === "sending"}>
-        {state === "sending" ? (<><span className="spinner" aria-hidden="true" /> Sending</>) : "Send message"}
+      <button className="btn btn--primary btn--block roll-host" type="submit" disabled={state === "sending"}>
+        {state === "sending" ? (<><span className="spinner" aria-hidden="true" /> Sending</>) : <TextRoll>Send message</TextRoll>}
       </button>
       <p className="form__note">We reply {site.replyPromise}. Your details are only used to answer this enquiry.</p>
     </form>
