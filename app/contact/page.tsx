@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import ContactForm, { ContactFormSkeleton } from "@/components/ContactForm";
+import ContactWizard, { ContactWizardSkeleton } from "@/components/ContactWizard";
+import "@/app/zen.css";
 import { Arrow, Calendar, Mail, WhatsApp } from "@/components/Icons";
-import { bookingHref, bookingReady, site, whatsappHref } from "@/lib/site";
+import { baseOpenGraph, bookingHref, bookingReady, site, whatsappHref } from "@/lib/site";
+
+const description =
+  "Tell us what you want to build. We reply within one working day.";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Tell us what you want to build. We reply within one working day.",
+  description,
+  openGraph: { ...baseOpenGraph, title: "Contact | Logic & Loop", description },
 };
 
 export default function Contact() {
@@ -38,7 +43,7 @@ export default function Contact() {
               </a>
             </li>
             <li>
-              <a href={bookingReady ? bookingHref : "#name"} data-analytics="booking_click" {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}>
+              <a href={bookingHref} data-analytics="booking_click" {...(bookingReady ? { target: "_blank", rel: "noopener" } : {})}>
                 <span className="ways__ico"><Calendar /></span>
                 <span><strong>Book a call</strong><small>30 minutes, free</small></span>
                 <Arrow className="arrow" />
@@ -53,8 +58,8 @@ export default function Contact() {
             </li>
           </ul>
         </div>
-        <Suspense fallback={<ContactFormSkeleton />}>
-          <ContactForm />
+        <Suspense fallback={<ContactWizardSkeleton />}>
+          <ContactWizard />
         </Suspense>
       </div>
     </section>
