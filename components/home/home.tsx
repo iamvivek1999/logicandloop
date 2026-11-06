@@ -76,6 +76,7 @@ export function Offers() {
           <p className="h-eyebrow">Where most clients start</p>
           <h2 id="h-offers" className="h-h2">Three ways to start this month.</h2>
           <p className="h-sub">Each one has a clear scope, a fixed quote and a demo you can click before you commit to more.</p>
+          <Link href="/pricing" className="h-link">See how we price <Arrow /></Link>
         </div>
         <div className="h-offers">
           {offers.map((o, n) => (

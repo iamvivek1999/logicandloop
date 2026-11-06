@@ -46,6 +46,7 @@ export default function FaqPage() {
       <section className="section" style={{ paddingTop: 56 }} aria-label="Answers">
         <div className="wrap faq-page">
           <Faq items={faqs} />
+          <p className="products-bridge">Want the detail on cost? <Link className="link-draw" href="/pricing">See how we price</Link></p>
         </div>
       </section>
       <CtaBand />

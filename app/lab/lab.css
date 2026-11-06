@@ -1,3 +1,0 @@
-/* Design lab (development only); the bar shows on every page in development */
-body:has(.lab) > .dock { display: none; }
-body:has(.lab) > main { padding-top: 0; }
