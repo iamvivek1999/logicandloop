@@ -23,7 +23,6 @@
 
 /* Hero: rounded photo card */
 .z-hero { padding: 12px 0 24px; }
-.lab .z-hero { padding-top: 96px; }
 .z-hero__card { position: relative; isolation: isolate; overflow: hidden; border-radius: 32px; min-height: min(78svh, 720px); display: flex; align-items: flex-end; }
 .z-hero__img { position: absolute !important; inset: 0; z-index: -2; border-radius: 0 !important; }
 .z-hero__card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(11, 38, 34, .92) 0%, rgba(11, 38, 34, .72) 45%, rgba(11, 38, 34, .1) 100%); }
@@ -236,3 +235,6 @@ main:has(> .z) { background: #f7f5ef; }
 @media (prefers-reduced-motion: reduce) { .bk-times__icon::before, .bk-times__icon::after { animation: none; } }
 /* The sticky "Book a call" bar is redundant on the booking and contact pages. */
 body:has(.zw-root) > .dock { display: none; }
+
+/* Pages wrapped in .z whose first block is the midnight header start under the floating nav. */
+main:has(> .z > .page-head:first-child), main:has(> .z > script:first-child + .page-head) { padding-top: 0; }
