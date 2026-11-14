@@ -54,10 +54,11 @@ export default function HeroLoop() {
       <div className="h-hero__stage h-hero__stage--art"><HeroArt /></div>
       <div className="wrap h-hero__in">
         <div className="h-hero__copy">
-          <Link href="/products/loop-os" className="h-chip"><i aria-hidden="true" />Loop OS is opening early access for teams<span aria-hidden="true">→</span></Link>
+          <Link href="/products/minute-one" className="h-chip"><i aria-hidden="true" />Minute One: get a free lead-response audit<span aria-hidden="true">→</span></Link>
+          {/* One fixed headline for visitors and search engines; the slides change only the line under it. */}
+          <h1 className="h-hero__h"><span>Software and AI agents</span> <span className="h-sun">that run your routine work.</span></h1>
           <div key={i} className="h-hero__swap" aria-live="polite">
-            <h1 className="h-hero__h"><span>{s.h[0]}</span> <span className="h-sun">{s.h[1]}</span></h1>
-            <p className="h-hero__p">{s.p}</p>
+            <p className="h-hero__p"><strong>{s.h[0]} {s.h[1]}</strong> {s.p}</p>
           </div>
           <div className="h-hero__cta">
             <Magnetic>

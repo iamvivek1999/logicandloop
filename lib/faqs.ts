@@ -24,4 +24,20 @@ export const faqs = [
     q: "Who is Minute One for?",
     a: "Minute One is built for teams that depend on fast lead response: real estate developers, premium clinics, education and edtech companies, startups and service businesses. It adapts the questions and next step to your sales process.",
   },
+  {
+    q: "Where is Logic & Loop based, and which time zones do you cover?",
+    a: "We are based in India and work with clients in any time zone. Calls are offered between 10:00 and 17:30 India time, and we reply to messages within one working day.",
+  },
+  {
+    q: "Who does the work?",
+    a: "Every engagement is led by a founder, from the first call to the weekly demo, and the engineers who scope the work are the ones who build it.",
+  },
+  {
+    q: "How do payments work?",
+    a: "The price, the payment schedule and what each payment covers are written into the proposal you approve before any work starts. If the scope changes, you see the new number before we continue.",
+  },
+  {
+    q: "What support do we get after launch?",
+    a: "You choose: a monthly plan where we keep monitoring and improving the system, a maintenance contract for fixes and updates, or a handover to your team with full documentation and a recorded walkthrough.",
+  },
 ];

@@ -192,7 +192,7 @@ export function Global() {
     <section className="india" aria-labelledby="global-h">
       <Photo name="glass-atrium" className="india__img" sizes="100vw" />
       <div className="wrap india__inner">
-        <h2 id="global-h" className="india__h">One team. Every time zone.<br />Systems that never clock out.</h2>
+        <h2 id="global-h" className="india__h">One accountable team.<br />Clients in any time zone.</h2>
         <p className="india__p">Software, AI and automation for businesses that run on their systems every day, wherever their customers are.</p>
       </div>
     </section>

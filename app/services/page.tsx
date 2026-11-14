@@ -28,6 +28,9 @@ export default function ServicesPage() {
             <p className="lead">
               Hire us for a single piece or the full product. Each service has its own page with what you get, the stack we use and typical timelines.
             </p>
+            <p className="muted" style={{ marginTop: 16 }}>
+              Most clients start with <Link href="/services/ai-agents-chatbots">AI agents</Link>, <Link href="/services/workflow-automation">workflow automation</Link>, a <Link href="/services/web-apps-saas">web app</Link> or an <Link href="/services/mvp-for-startups">MVP</Link>.
+            </p>
           </div>
           <Photo name="team-whiteboard" className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" />
         </div>

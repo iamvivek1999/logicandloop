@@ -8,6 +8,7 @@ import Photo from "@/components/Photo";
 import { baseOpenGraph, bookingHref, bookingReady, site } from "@/lib/site";
 import Faq from "@/components/fx/Faq";
 import TextRoll from "@/components/fx/TextRoll";
+import { searchTitle } from "@/lib/search-titles";
 
 export const dynamicParams = false;
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const s = serviceBySlug(slug);
   if (!s) return {};
   const description = `${s.short} ${s.intro}`.slice(0, 160);
-  return { title: s.name, description, openGraph: { ...baseOpenGraph, title: `${s.name} | ${site.name}`, description } };
+  return { title: searchTitle(s), description, openGraph: { ...baseOpenGraph, title: `${s.name} | ${site.name}`, description } };
 }
 
 // The four stages most services follow; a service can set its own in lib/services.ts.
@@ -99,6 +100,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             {related.length > 0 && (
               <>
+            {(s.group === "automate" || s.group === "ai") && (
+              <p className="muted" style={{ marginTop: 20 }}>
+                Not sure it is worth automating? <Link href="/hours-calculator">Estimate the hours it could give back</Link>.
+              </p>
+            )}
+
                 <h2 className="sub-h">Often paired with</h2>
                 <ul className="chips">
                   {related.map((r) => (

@@ -16,13 +16,15 @@ export default function Privacy() {
           <li aria-current="page">Privacy policy</li>
         </ol>
         <h1 className="display">Privacy policy.</h1>
-        <p className="lead">Last updated October 22, 2026.</p>
+        <p className="lead">Last updated November 14, 2026.</p>
         <h2 className="sub-h">What we collect</h2>
         <p>When you contact us, we collect the details you submit: your name, email address, optional phone number, company, budget and project message.</p>
         <h2 className="sub-h">Why we use it</h2>
         <p>We use enquiry details only to reply to you, understand your project and provide a quote. We do not sell your data or use it for unrelated marketing.</p>
         <h2 className="sub-h">Contact delivery</h2>
         <p>Enquiries are sent through Resend to {site.email}. Resend may retain delivery and event logs under its own privacy policy. We do not store enquiries in this website&apos;s database.</p>
+        <h2 className="sub-h">Hosting and spam protection</h2>
+        <p>The website is hosted on Vercel. To limit spam, the contact form counts enquiries per IP address for ten minutes.</p>
         <h2 className="sub-h">Analytics</h2>
         <p>If you accept optional analytics, Google Analytics may set cookies and collect page and interaction data. You can reject or change this choice using Cookie settings in the footer.</p>
         <h2 className="sub-h">Your choices</h2>

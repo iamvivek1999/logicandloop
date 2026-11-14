@@ -7,7 +7,7 @@ import { Arrow, Calendar, Mail, WhatsApp } from "@/components/Icons";
 import { baseOpenGraph, bookingHref, bookingReady, site, whatsappHref } from "@/lib/site";
 
 const description =
-  "Tell us what you want to build. We reply within one working day.";
+  "Tell us what you want to build or fix. Message Logic & Loop by form, WhatsApp or email and get a reply within one working day, with a clear next step.";
 
 export const metadata: Metadata = {
   title: "Contact",

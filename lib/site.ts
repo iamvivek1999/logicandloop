@@ -1,5 +1,5 @@
 /* ================================================================
-   Logic & Loop — site settings. Edit these, commit, Vercel redeploys.
+   Logic & Loop: site settings. Edit these, commit, Vercel redeploys.
    ================================================================ */
 export const site = {
   name: "Logic & Loop",

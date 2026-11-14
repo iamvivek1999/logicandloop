@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ScrollWords from "@/components/fx/ScrollWords";
 import Leaders from "@/components/Leaders";
-import Photo from "@/components/Photo";
 import CtaBand from "@/components/CtaBand";
 import { groups, servicesIn } from "@/lib/services";
 import { baseOpenGraph, site, whatsappHref } from "@/lib/site";
@@ -46,10 +45,6 @@ export default function About() {
           </p>
         </div>
       </header>
-
-      <div className="wrap band-photo">
-        <Photo name="team-meeting" className="band-photo__img" sizes="(max-width: 1280px) 100vw, 1280px" priority />
-      </div>
 
       <section className="vision dark" aria-labelledby="vision-h">
         <div className="wrap">
@@ -125,7 +120,7 @@ export default function About() {
         <div className="wrap">
           <div className="section-head">
             <h2 className="h2">Two products of our own.</h2>
-            <p className="lead">Built from work we kept doing for clients.</p>
+            <p className="lead">Built around the work businesses repeat every day.</p>
           </div>
           <dl className="terms">
             <div>

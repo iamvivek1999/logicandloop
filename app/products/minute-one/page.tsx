@@ -11,9 +11,9 @@ const description =
   "Minute One replies to new enquiries on WhatsApp within a minute, answers routine questions, qualifies leads and books the next step for growing teams.";
 
 export const metadata: Metadata = {
-  title: "Minute One: WhatsApp lead-response agent for growing teams",
+  title: "Minute One: WhatsApp lead response for real estate and clinics",
   description,
-  openGraph: { ...baseOpenGraph, title: "Minute One: WhatsApp lead-response agent for growing teams", description },
+  openGraph: { ...baseOpenGraph, title: "Minute One: WhatsApp lead response for real estate and clinics", description },
 };
 
 const features = [
@@ -41,8 +41,9 @@ const flow = [
 const faqs = [
   { q: "Will it annoy prospects like other bots?", a: "It asks one useful question at a time, answers from your approved information and hands over to a person the moment a prospect asks for one." },
   { q: "What if it gives the wrong answer?", a: "It can only answer from information you approve. Anything missing, uncertain or sensitive goes to your team instead of being guessed." },
-  { q: "How do we know it's working?", a: "We agree on the next-step metric before starting — such as consultations, counselling calls, demos, site visits or discovery calls — and report against that baseline every week." },
+  { q: "How do we know it's working?", a: "We agree on the next-step metric before starting, such as consultations, counselling calls, demos, site visits or discovery calls, and report against that baseline every week." },
   { q: "How long does setup take?", a: "Setup covers your approved information, qualification questions, routing and calendar or CRM connection. Timing depends on your accounts and the WhatsApp Business API approval process." },
+  { q: "What happens after the 60 days?", a: "You get a report against the baseline we measured in the audit. The fee that applies if qualified next steps went up is agreed in writing before the pilot starts, so nothing is left to decide on day 61. If they did not go up, you owe nothing." },
 ];
 
 export default function MinuteOne() {
