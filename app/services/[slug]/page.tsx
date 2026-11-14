@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import { Check } from "@/components/Icons";
 import { groupName, serviceBySlug, servicePhoto, services } from "@/lib/services";
-import Photo from "@/components/Photo";
+import Photo, { Cover, hasCover } from "@/components/Photo";
 import { baseOpenGraph, bookingHref, bookingReady, site } from "@/lib/site";
 import Faq from "@/components/fx/Faq";
 import TextRoll from "@/components/fx/TextRoll";
@@ -74,7 +74,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <h1 className="display">{s.name}</h1>
             <p className="lead">{s.intro}</p>
           </div>
-          <Photo name={servicePhoto(s)} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" />
+          {hasCover(s.slug)
+            ? <Cover id={s.slug} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" />
+            : <Photo name={servicePhoto(s)} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" />}
         </div>
       </header>
 
@@ -98,14 +100,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <h2 className="sub-h">Questions</h2>
             <Faq items={s.faqs} />
 
-            {related.length > 0 && (
-              <>
             {(s.group === "automate" || s.group === "ai") && (
               <p className="muted" style={{ marginTop: 20 }}>
                 Not sure it is worth automating? <Link href="/hours-calculator">Estimate the hours it could give back</Link>.
               </p>
             )}
 
+            {related.length > 0 && (
+              <>
                 <h2 className="sub-h">Often paired with</h2>
                 <ul className="chips">
                   {related.map((r) => (

@@ -25,3 +25,11 @@ Files live in `public/images/` as WebP (max 1600 px). Alt text and sizes are in 
 | glass-atrium.webp | photo-1531972111231-7482a960e109 | Spare |
 
 Each is at `https://unsplash.com/photos/<id>` searchable by the ID after `photo-`.
+
+## Generated covers
+
+`public/images/gen/<id>.webp` (1600x900) are AI-generated illustrations, one per service, industry and product, made with Image Studio (`node image-studio/server.mjs`, model qwen/qwen-image-2.1-turbo via OpenRouter) from the prompts in `docs/image-prompts.md`. They replace the stock photo in the header of each `/services/<slug>` and `/industries/<slug>` page; the stock photo is the fallback for any page without a cover. Alt text is in `covers` in `components/Photo.tsx`, and `tests/covers.test.ts` checks every cover has its file.
+
+`public/images/social/` holds share cards for LinkedIn and decks, with the footer stamped on by code. They aren't used on the site.
+
+To change one: edit its prompt, regenerate and approve it in Image Studio, which overwrites the file (and keeps a backup for "Restore previous").

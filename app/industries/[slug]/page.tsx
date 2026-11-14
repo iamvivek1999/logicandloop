@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
-import Photo from "@/components/Photo";
+import Photo, { Cover, hasCover } from "@/components/Photo";
 import Faq from "@/components/fx/Faq";
 import { Check } from "@/components/Icons";
 import { industries, industryBySlug } from "@/lib/industries";
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const ind = industryBySlug((await params).slug);
   if (!ind) return {};
   const description = `${ind.short} ${ind.intro}`.slice(0, 160);
-  return { title: `For ${ind.name.toLowerCase()}`, description, openGraph: { ...baseOpenGraph, title: `${ind.name} | ${site.name}`, description } };
+  return { title: `AI agents and automation for ${ind.name.toLowerCase()}`, description, openGraph: { ...baseOpenGraph, title: `${ind.name} | ${site.name}`, description } };
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -57,7 +57,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <h1 className="display" style={{ marginTop: 18 }}>{ind.h1}</h1>
             <p className="lead">{ind.intro}</p>
           </div>
-          <Photo name={ind.photo} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" alt="" />
+          {hasCover(ind.slug)
+            ? <Cover id={ind.slug} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" />
+            : <Photo name={ind.photo} className="page-head__img" priority sizes="(max-width: 860px) 100vw, 42vw" alt="" />}
         </div>
       </header>
 

@@ -432,6 +432,8 @@ html.lenis, html.lenis body { height: auto; }
 .page-head__img { aspect-ratio: 4 / 3; }
 .page-head__grid .display { font-size: clamp(2.4rem, 1.2rem + 3.4vw, 4.25rem); }
 @media (max-width: 860px) { .page-head__grid { grid-template-columns: 1fr; } .page-head__img { aspect-ratio: 16 / 10; } }
+/* Generated covers have text on them, so they keep their own 16:9 shape and are never cropped. */
+.photo--cover, .page-head__img.photo--cover { aspect-ratio: 16 / 9; align-self: center; }
 
 /* A wide photo between sections */
 .band-photo { padding-block: clamp(32px, 5vw, 56px) 0; }
