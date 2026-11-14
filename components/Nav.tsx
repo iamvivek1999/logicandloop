@@ -13,7 +13,14 @@ const links = [
   { href: "/products/minute-one", label: "Minute One" },
   { href: "/products/loop-os", label: "Loop OS" },
   { href: "/about", label: "About" },
-  { href: "/careers", label: "Careers" },
+];
+
+// What "Loop" opens: the products, and how we run the work.
+const loop = [
+  { href: "/products/minute-one", label: "Minute One", hint: "Every enquiry answered on WhatsApp within a minute", tag: "Product" },
+  { href: "/products/loop-os", label: "Loop OS", hint: "AI agents with approvals and an audit trail", tag: "Product" },
+  { href: "/#process", label: "How we work", hint: "Short loops and a demo on a live link every week", tag: "Process" },
+  { href: "/pricing", label: "Pricing", hint: "Fixed scopes, fixed quotes and monthly plans", tag: "Company" },
 ];
 
 const pages = [
@@ -35,35 +42,39 @@ const I = {
   close: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>,
   arrow: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>,
 };
+const drop = {
+  initial: { opacity: 0, y: -8, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: -6, scale: 0.98 },
+  transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] as const },
+};
+type Panel = "logic" | "loop" | null;
 
 /**
- * Site navigation: three floating pills (brand · links · actions). It slides
- * away while you scroll down and returns on the first scroll up. "Services"
- * opens a mega menu; the search pill opens a search over every page.
+ * Site navigation: three floating pills (brand · links · actions). The middle
+ * pill reads as the brand line, "We write the Logic · you run the Loop": "We"
+ * is the About page, "Logic" opens the services, "Loop" opens the products.
+ * The bar slides away while you scroll down and returns on the first scroll
+ * up; the search pill opens a search over every page.
  */
 export default function Nav() {
   const path = usePathname();
-  const [mega, setMega] = useState(false);
+  const [panel, setPanel] = useState<Panel>(null);
   const [find, setFind] = useState(false);
   const [sheet, setSheet] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const bar = useRef<HTMLElement>(null);
 
-  useEffect(() => { setMega(false); setSheet(false); setFind(false); }, [path]);
+  useEffect(() => { setPanel(null); setSheet(false); setFind(false); }, [path]);
 
-  // The services menu opens on click and closes on a click anywhere outside it.
-  const megaBtn = useRef<HTMLButtonElement>(null);
-  const megaBox = useRef<HTMLDivElement>(null);
+  // A panel closes on a click anywhere outside the bar.
   useEffect(() => {
-    if (!mega) return;
-    const away = (e: PointerEvent) => {
-      const t = e.target as Node;
-      if (megaBox.current?.contains(t) || megaBtn.current?.contains(t)) return;
-      setMega(false);
-    };
+    if (!panel) return;
+    const away = (e: PointerEvent) => { if (!bar.current?.contains(e.target as Node)) setPanel(null); };
     document.addEventListener("pointerdown", away);
     return () => document.removeEventListener("pointerdown", away);
-  }, [mega]);
+  }, [panel]);
   useEffect(() => {
     let last = scrollY;
     const on = () => {
@@ -72,7 +83,7 @@ export default function Nav() {
       if (Math.abs(y - last) < 6) return;
       const down = y > last && y > 160;
       setHidden(down);
-      if (down) setMega(false);
+      if (down) setPanel(null);
       last = y;
     };
     on();
@@ -82,36 +93,43 @@ export default function Nav() {
   useEffect(() => {
     const k = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setFind((f) => !f); }
-      if (e.key === "Escape") { setFind(false); setMega(false); setSheet(false); }
+      if (e.key === "Escape") { setFind(false); setPanel(null); setSheet(false); }
     };
     addEventListener("keydown", k);
     return () => removeEventListener("keydown", k);
   }, []);
 
   const current = (href: string) => path === href || (href === "/services" && path.startsWith("/services"));
+  const toggle = (p: Exclude<Panel, null>) => setPanel((x) => (x === p ? null : p));
+  const closeOnLink = (e: React.MouseEvent) => { if ((e.target as HTMLElement).closest("a")) setPanel(null); };
+  const word = (p: Exclude<Panel, null>, label: string, on: boolean) => (
+    <button className={`snav__l snav__w${panel === p ? " is-open" : ""}`} aria-expanded={panel === p} aria-controls={`snav-${p}`} aria-current={on ? "page" : undefined} onClick={() => toggle(p)}>
+      {label} <span className="snav__caret" aria-hidden="true" />
+    </button>
+  );
 
   return (
     <>
-      <header className={`snav${hidden && !sheet && !find ? " is-hidden" : ""}${scrolled ? " is-scrolled" : ""}`}>
+      <header ref={bar} className={`snav${hidden && !sheet && !find ? " is-hidden" : ""}${scrolled ? " is-scrolled" : ""}`}>
         <Link href="/" className="snav__pill snav__brand" aria-label="Logic & Loop, home">
           <Logo small /> <span>Logic &amp; Loop</span>
         </Link>
-        <nav className="snav__pill snav__links" aria-label="Main">
-          <button ref={megaBtn} className={`snav__l${mega ? " is-open" : ""}`} aria-expanded={mega} aria-controls="snav-mega" aria-current={current("/services") ? "page" : undefined} onClick={() => setMega((m) => !m)}>
-            Services <span className="snav__caret" aria-hidden="true" />
-          </button>
-          {links.map((l) => (
-            <Link key={l.href} href={l.href} className="snav__l" aria-current={current(l.href) ? "page" : undefined}>{l.label}</Link>
-          ))}
+        <nav className="snav__pill snav__links snav__line" aria-label="Main">
+          <Link href="/about" className="snav__l snav__w" aria-current={current("/about") ? "page" : undefined}>We</Link>
+          <i>write the</i>
+          {word("logic", "Logic", path.startsWith("/services"))}
+          <i>· you run the</i>
+          {word("loop", "Loop", path.startsWith("/products"))}
         </nav>
         <div className="snav__pill snav__end">
-          <button className="snav__search" onClick={() => setFind(true)} aria-label="Search the site">{I.search}<span>Search</span></button>
-          <a className="snav__cta" href={bookingHref} data-analytics="booking_click" {...ext}>Book a call</a>
+          <button className="snav__search snav__search--icon" onClick={() => setFind(true)} aria-label="Search the site">{I.search}</button>
+          <a className="snav__cta snav__cta--go" href={bookingHref} data-analytics="booking_click" {...ext}>Let&rsquo;s talk <span aria-hidden="true">{I.arrow}</span></a>
           <button className="snav__menu" aria-label={sheet ? "Close menu" : "Open menu"} aria-expanded={sheet} aria-controls="snav-sheet" onClick={() => setSheet((s) => !s)}>{sheet ? I.close : I.menu}</button>
         </div>
         <AnimatePresence>
-          {mega && (
-            <motion.div ref={megaBox} id="snav-mega" className="snav__mega" onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMega(false); }} initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: 0.98 }} transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}>
+          {panel === "logic" && (
+            <motion.div key="logic" id="snav-logic" className="snav__mega" onClick={closeOnLink} {...drop}>
+              <p className="snav__lede">The <em>logic</em> we write: software, AI and automation, organised the way you buy it.</p>
               {groups.map((g) => (
                 <div key={g.id} className="snav__col">
                   <p className="snav__colh">{g.name}</p>
@@ -125,10 +143,27 @@ export default function Nav() {
               <Link href="/services" className="snav__all">Browse all services {I.arrow}</Link>
             </motion.div>
           )}
+          {panel === "loop" && (
+            <motion.div key="loop" id="snav-loop" className="snav__mega snav__mega--loop" onClick={closeOnLink} {...drop}>
+              <p className="snav__lede">The <em>loop</em> you run: products for the work you repeat, and how we ship it.</p>
+              <ul className="snav__rows">
+                {loop.map((l, n) => (
+                  <li key={l.href}>
+                    <Link href={l.href} aria-current={path === l.href ? "page" : undefined}>
+                      <small>0{n + 1}</small>
+                      <span><b>{l.label}</b><em>{l.hint}</em></span>
+                      <i>{l.tag}</i>
+                      {I.arrow}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
         </AnimatePresence>
         {sheet && (
           <nav id="snav-sheet" className="snav__sheet" aria-label="Menu" data-lenis-prevent>
-            {[{ href: "/services", label: "Services" }, { href: "/industries", label: "Industries" }, ...links, { href: "/faq", label: "FAQ" }].map((l) => (
+            {[{ href: "/services", label: "Services" }, { href: "/industries", label: "Industries" }, ...links, { href: "/pricing", label: "Pricing" }, { href: "/faq", label: "FAQ" }].map((l) => (
               <Link key={l.href} href={l.href} aria-current={current(l.href) ? "page" : undefined}>{l.label}</Link>
             ))}
             <a className="snav__cta snav__cta--wide" href={bookingHref} data-analytics="booking_click" {...ext}>Book a 30-minute call</a>

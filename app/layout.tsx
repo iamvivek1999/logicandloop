@@ -2,6 +2,7 @@ import { ViewTransition } from "react";
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/funnel-display";
 import "@fontsource-variable/funnel-sans";
+import "@fontsource-variable/funnel-sans/wght-italic.css";
 import "./globals.css";
 import "./refresh.css";
 import "./nav.css";
